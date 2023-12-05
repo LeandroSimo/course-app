@@ -1,4 +1,4 @@
-import 'package:teste_vrsoft/app/modules/student/student_page.dart';
+import 'package:teste_vrsoft/app/modules/student/presentation/ui/student_page.dart';
 import 'package:teste_vrsoft/app/modules/student/stores/student_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
