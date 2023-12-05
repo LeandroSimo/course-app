@@ -33,9 +33,9 @@ class StudentRepository {
     return store.getAll() as List<StudentEntity>;
   }
 
-  Future<void> updateStudent(StudentEntity student) async {
+  Future<int> updateStudent(StudentEntity student) async {
     final store = await getStudent();
-    store.put(student);
+    return store.put(student);
   }
 
   Future<void> deleteStudent(StudentEntity student) async {

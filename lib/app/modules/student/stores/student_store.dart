@@ -33,6 +33,18 @@ abstract class _StudentStoreBase with Store {
   }
 
   @action
+  Future<int> updateStudent(StudentEntity student) async {
+    int result = await _studentRepository!.updateStudent(student);
+
+    var index = studentList.indexWhere((element) => element.cod == result);
+    if (index != -1) {
+      studentList[index] = student;
+    }
+
+    return result;
+  }
+
+  @action
   void removeStudent(StudentEntity student) {
     _studentRepository!.deleteStudent(student);
     studentList.remove(student);

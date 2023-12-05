@@ -27,6 +27,14 @@ mixin _$StudentStore on _StudentStoreBase, Store {
         .run(() => super.createStudent(student, func: func));
   }
 
+  late final _$updateStudentAsyncAction =
+      AsyncAction('_StudentStoreBase.updateStudent', context: context);
+
+  @override
+  Future<int> updateStudent(StudentEntity student) {
+    return _$updateStudentAsyncAction.run(() => super.updateStudent(student));
+  }
+
   late final _$_StudentStoreBaseActionController =
       ActionController(name: '_StudentStoreBase', context: context);
 
