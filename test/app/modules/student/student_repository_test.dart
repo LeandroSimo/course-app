@@ -22,7 +22,8 @@ class MockTest extends Mock {
   Future<dynamic> createStudent(StudentEntity student, Function() func) async {
     final store = await getStudent();
 
-    final query = store.query(StudentEntity_.name.equals(student.name)).build();
+    final query =
+        store.query(StudentEntity_.firstName.equals(student.firstName)).build();
     final existingStudents = query.find() as List<StudentEntity>;
 
     if (existingStudents.isNotEmpty) {
@@ -72,21 +73,21 @@ void main() async {
     });
 
     test('Create student successfully', () async {
-      // await mockTest.clearStudents();
-      final student = StudentEntity(name: 'Teste');
+      await mockTest.clearStudents();
+      final student = StudentEntity(firstName: 'Teste', lastName: "");
       await mockTest.createStudent(student, () {});
 
       final studentsList = await mockTest.readStudent();
       expect(studentsList.length, 1);
-      expect(studentsList.first.name, 'Teste');
+      expect(studentsList.first.firstName, 'Teste');
     });
 
     test('Creating a student with an existing name should return a function',
         () async {
-      final existingStudent = StudentEntity(name: 'Teste');
+      final existingStudent = StudentEntity(firstName: 'Teste', lastName: '');
       await mockTest.createStudent(existingStudent, () {});
 
-      final duplicateStudent = StudentEntity(name: 'Teste');
+      final duplicateStudent = StudentEntity(firstName: 'Teste', lastName: '');
       final callback = await mockTest.createStudent(
           duplicateStudent, () => debugPrint("Usuário já existe"));
 

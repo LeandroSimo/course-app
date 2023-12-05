@@ -5,19 +5,24 @@
   "entities": [
     {
       "id": "1:4710541964586809286",
-      "lastPropertyId": "3:6290358748210293944",
+      "lastPropertyId": "5:3209405636593856468",
       "name": "StudentEntity",
       "properties": [
-        {
-          "id": "2:3336071692495045463",
-          "name": "name",
-          "type": 9
-        },
         {
           "id": "3:6290358748210293944",
           "name": "cod",
           "type": 6,
           "flags": 129
+        },
+        {
+          "id": "4:7597510031514659082",
+          "name": "firstName",
+          "type": 9
+        },
+        {
+          "id": "5:3209405636593856468",
+          "name": "lastName",
+          "type": 9
         }
       ],
       "relations": [
@@ -100,7 +105,8 @@
   "retiredPropertyUids": [
     8017629087836351615,
     4642664484048520708,
-    6389210240311308066
+    6389210240311308066,
+    3336071692495045463
   ],
   "retiredRelationUids": [],
   "version": 1

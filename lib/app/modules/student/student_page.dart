@@ -1,5 +1,4 @@
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
 import 'package:teste_vrsoft/app/modules/student/stores/student_store.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +18,11 @@ class StudentPage extends StatefulWidget {
 class StudentPageState extends State<StudentPage> {
   StudentStore get controller => widget.controller;
 
-  TextEditingController nameController = TextEditingController();
-  TextEditingController nameEditController = TextEditingController();
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+
+  TextEditingController firstNameEditController = TextEditingController();
+  TextEditingController lastNameEditController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,13 +36,16 @@ class StudentPageState extends State<StudentPage> {
             return Column(
               children: <Widget>[
                 TextField(
-                  controller: nameController,
-                  // onChanged: widget.controller.setName,
+                  controller: firstNameController,
+                ),
+                TextField(
+                  controller: lastNameController,
                 ),
                 ElevatedButton(
                   onPressed: () => controller.createStudent(
                     StudentEntity(
-                      name: nameController.text,
+                      firstName: firstNameController.text,
+                      lastName: lastNameController.text,
                     ),
                     func: () {
                       return showDialog(
@@ -61,23 +66,50 @@ class StudentPageState extends State<StudentPage> {
                     itemBuilder: (_, index) {
                       final student = controller.studentList[index];
                       return ListTile(
-                        title: Text(student.name),
+                        leading: CircleAvatar(
+                          radius: 25,
+                          child: Text(
+                            "${student.firstName[0].substring(0)}${student.lastName[0].substring(0)}",
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                        title: Text(
+                          student.firstName,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            // fontSize: 18,
+                          ),
+                        ),
+                        subtitle: Text(student.lastName),
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             IconButton(
-                              icon: Icon(Icons.edit),
+                              icon: const Icon(Icons.edit),
                               onPressed: () {
-                                nameEditController.value = TextEditingValue(
-                                  text: student.name,
+                                firstNameEditController.value =
+                                    TextEditingValue(
+                                  text: student.firstName,
                                 );
+                                lastNameEditController.value =
+                                    TextEditingValue(text: student.lastName);
+
                                 showDialog(
                                   context: context,
                                   builder: (context) {
                                     return AlertDialog(
-                                      content: TextField(
-                                        controller: nameEditController,
-                                        // onChanged: widget.controller.setName,
+                                      content: Column(
+                                        children: [
+                                          TextField(
+                                            controller: firstNameEditController,
+                                          ),
+                                          TextField(
+                                            controller: lastNameEditController,
+                                          ),
+                                        ],
                                       ),
                                       actions: [
                                         ElevatedButton(
@@ -85,7 +117,11 @@ class StudentPageState extends State<StudentPage> {
                                             controller.updateStudent(
                                               StudentEntity(
                                                 cod: student.cod,
-                                                name: nameEditController.text,
+                                                firstName:
+                                                    firstNameEditController
+                                                        .text,
+                                                lastName:
+                                                    lastNameEditController.text,
                                               ),
                                             );
                                             Navigator.pop(context);
