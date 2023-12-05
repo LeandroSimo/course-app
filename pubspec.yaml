@@ -1,0 +1,30 @@
+name: teste_vrsoft
+description: "A new Flutter project."
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ">=3.2.2 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_mobx: ^2.2.0
+  flutter_modular: ^6.3.2
+  mobx: ^2.2.1
+  objectbox: ^2.3.1
+  objectbox_flutter_libs: any
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+  mobx_codegen: ^2.4.0
+  build_runner: ^2.1.4
+  objectbox_generator: any
+
+flutter:
+  uses-material-design: true
+
+objectbox:
+  output_dir: /app/database

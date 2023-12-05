@@ -1,0 +1,107 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:4710541964586809286",
+      "lastPropertyId": "3:6290358748210293944",
+      "name": "StudentEntity",
+      "properties": [
+        {
+          "id": "2:3336071692495045463",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:6290358748210293944",
+          "name": "cod",
+          "type": 6,
+          "flags": 129
+        }
+      ],
+      "relations": [
+        {
+          "id": "2:7834042361211088917",
+          "name": "courses",
+          "targetId": "2:5447750611810297338"
+        }
+      ]
+    },
+    {
+      "id": "2:5447750611810297338",
+      "lastPropertyId": "3:3849693213266408520",
+      "name": "CourseEntity",
+      "properties": [
+        {
+          "id": "1:3275453860613862543",
+          "name": "cod",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:7622226953013557420",
+          "name": "description",
+          "type": 9
+        },
+        {
+          "id": "3:3849693213266408520",
+          "name": "schedule",
+          "type": 9
+        }
+      ],
+      "relations": [
+        {
+          "id": "1:50995270637901096",
+          "name": "students",
+          "targetId": "1:4710541964586809286"
+        }
+      ]
+    },
+    {
+      "id": "3:8638969203700481255",
+      "lastPropertyId": "5:3674850139567099958",
+      "name": "CourseStudentEntity",
+      "properties": [
+        {
+          "id": "1:634334463373115726",
+          "name": "cod",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "4:7080880192206715003",
+          "name": "studentId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "1:6357245189879384918",
+          "relationTarget": "StudentEntity"
+        },
+        {
+          "id": "5:3674850139567099958",
+          "name": "courseId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "2:610353064531817816",
+          "relationTarget": "CourseEntity"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "3:8638969203700481255",
+  "lastIndexId": "2:610353064531817816",
+  "lastRelationId": "2:7834042361211088917",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [
+    8017629087836351615,
+    4642664484048520708,
+    6389210240311308066
+  ],
+  "retiredRelationUids": [],
+  "version": 1
+}
