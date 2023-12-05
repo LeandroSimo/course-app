@@ -22,6 +22,9 @@ dev_dependencies:
   mobx_codegen: ^2.4.0
   build_runner: ^2.1.4
   objectbox_generator: any
+  test: ^1.24.9
+  path_provider: ^2.0.2
+  mocktail: ^1.0.1
 
 flutter:
   uses-material-design: true

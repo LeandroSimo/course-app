@@ -1,4 +1,3 @@
-import 'package:mobx/mobx.dart';
 import 'package:teste_vrsoft/app/database/objectbox.g.dart';
 import 'package:teste_vrsoft/app/database/student_objectbox.dart';
 import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';

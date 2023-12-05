@@ -16,9 +16,6 @@ abstract class _StudentStoreBase with Store {
 
   ObservableList<StudentEntity> studentList = ObservableList<StudentEntity>();
 
-  @observable
-  String name = '';
-
   @action
   Future<List<StudentEntity>> getAllStudent() async {
     return await _studentRepository!.readStudent();
