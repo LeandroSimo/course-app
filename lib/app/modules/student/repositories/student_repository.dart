@@ -1,3 +1,4 @@
+import 'package:mobx/mobx.dart';
 import 'package:teste_vrsoft/app/database/objectbox.g.dart';
 import 'package:teste_vrsoft/app/database/student_objectbox.dart';
 import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
@@ -14,9 +15,17 @@ class StudentRepository {
     return store.box<StudentEntity>();
   }
 
-  Future<int> createStudent(StudentEntity student) async {
+  Future<dynamic> createStudent(StudentEntity student, Function() func) async {
     final store = await getStudent();
 
+    final query = store.query(StudentEntity_.name.equals(student.name)).build();
+    final existingStudents = query.find() as List<StudentEntity>;
+
+    if (existingStudents.isNotEmpty) {
+      query.close();
+      return func();
+    }
+    query.close();
     return store.put(student);
   }
 
@@ -33,14 +42,5 @@ class StudentRepository {
   Future<void> deleteStudent(StudentEntity student) async {
     final store = await getStudent();
     store.remove(student.cod);
-  }
-
-  Future<bool> studentExists(String studentName) async {
-    final studentBox = await getStudent();
-    return studentBox
-        .query(StudentEntity_.name.equals(studentName))
-        .build()
-        .find()
-        .isNotEmpty;
   }
 }

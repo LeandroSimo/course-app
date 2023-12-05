@@ -40,6 +40,18 @@ class StudentPageState extends State<StudentPage> {
                   StudentEntity(
                     name: nameController.text,
                   ),
+                  func: () {
+                    return showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          // Retrieve the text the user has entered by using the
+                          // TextEditingController.
+                          content: Text("Aluno já cadastrado"),
+                        );
+                      },
+                    );
+                  },
                 ),
                 child: const Text("Adicionar Aluno"),
               ),

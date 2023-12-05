@@ -25,16 +25,12 @@ abstract class _StudentStoreBase with Store {
   }
 
   @action
-  Future<int> createStudent(StudentEntity student) async {
-    int result = await _studentRepository!.createStudent(student);
-    bool studentExists = await _studentRepository!.studentExists(student.name);
-    print("VALOR SE EXISTE 1: $studentExists");
-
-    if (await _studentRepository!.studentExists(student.name)) {
-      throw Exception("Já existe um aluno com o nome ${student.name}");
+  Future<dynamic> createStudent(StudentEntity student,
+      {required Function() func}) async {
+    dynamic result = await _studentRepository!.createStudent(student, func);
+    if (result is int) {
+      studentList.add(student);
     }
-    _studentRepository!.createStudent(student);
-    studentList.add(student);
 
     return result;
   }
