@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'home_store.dart';
+import 'package:teste_vrsoft/app/database/student_objectbox.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
@@ -12,14 +12,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late final HomeStore store;
-
-  @override
-  void initState() {
-    super.initState();
-    store = Modular.get<HomeStore>();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,13 +21,13 @@ class _HomePageState extends State<HomePage> {
       body: Observer(
         builder: (context) => Center(
             child: Text(
-          '${store.counter}',
+          '',
           style: TextStyle(fontSize: 30),
         )),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          store.increment();
+          Modular.to.pushNamed('/student');
         },
         child: Icon(Icons.add),
       ),

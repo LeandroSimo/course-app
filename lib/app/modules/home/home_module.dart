@@ -1,9 +1,15 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'home_store.dart';
+import 'package:teste_vrsoft/app/modules/home/stores/home_store.dart';
+import 'package:teste_vrsoft/app/modules/student/student_module.dart';
 
-import 'home_page.dart';
+import 'presentation/ui/home_page.dart';
 
 class HomeModule extends Module {
+  @override
+  List<Module> get imports => [
+        StudentModule(),
+      ];
+
   @override
   void binds(Injector i) {
     i.add(HomeStore.new);
@@ -11,6 +17,7 @@ class HomeModule extends Module {
 
   @override
   void routes(RouteManager r) {
-    r.child('/', child: (_) => HomePage());
+    r.child('/', child: (_) => const HomePage());
+    r.module('/student', module: StudentModule());
   }
 }

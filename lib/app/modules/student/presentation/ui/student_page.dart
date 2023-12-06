@@ -1,4 +1,5 @@
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
 import 'package:teste_vrsoft/app/modules/student/presentation/ui/add_student_page.dart';
 import 'package:teste_vrsoft/app/modules/student/presentation/widgets/student_list_tile.dart';
@@ -40,13 +41,27 @@ class StudentPageState extends State<StudentPage> {
             appBar: AppBar(
               automaticallyImplyLeading: false,
               backgroundColor: Colors.transparent,
-              title: Text(
-                widget.title,
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w800,
-                  color: Colors.purple.shade900,
-                ),
+              title: Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Modular.to.pop();
+                      Modular.dispose();
+                    },
+                    icon: const Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.purple,
+                    ),
+                  ),
+                  Text(
+                    widget.title,
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.purple.shade900,
+                    ),
+                  ),
+                ],
               ),
               actions: [
                 Padding(
