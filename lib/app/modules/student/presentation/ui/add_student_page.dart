@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teste_vrsoft/app/modules/student/shared/validator/validator.dart';
 
 class AddStudentpage extends StatefulWidget {
   final Function() func;
@@ -15,7 +16,7 @@ class AddStudentpage extends StatefulWidget {
   State<AddStudentpage> createState() => _AddStudentpageState();
 }
 
-class _AddStudentpageState extends State<AddStudentpage> {
+class _AddStudentpageState extends State<AddStudentpage> with StudentValidator {
   final _form = GlobalKey<FormState>();
 
   @override
@@ -74,12 +75,7 @@ class _AddStudentpageState extends State<AddStudentpage> {
                     ),
                     cursorColor: Colors.white,
                     style: const TextStyle(color: Colors.white),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Informe o título da tarefa';
-                      }
-                      return null;
-                    },
+                    validator: (value) => firstNameValidate(value),
                   ),
                   const SizedBox(height: 16),
                   TextFormField(
@@ -96,12 +92,7 @@ class _AddStudentpageState extends State<AddStudentpage> {
                     ),
                     cursorColor: Colors.white,
                     style: const TextStyle(color: Colors.white),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Informe o título da tarefa';
-                      }
-                      return null;
-                    },
+                    validator: (value) => lastNameValidate(value),
                   ),
                 ],
               ),
@@ -112,12 +103,15 @@ class _AddStudentpageState extends State<AddStudentpage> {
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(4), // Define o raio dos cantos
+                      borderRadius: BorderRadius.circular(4),
                     ),
                   ),
                 ),
-                onPressed: widget.func,
+                onPressed: () {
+                  if (_form.currentState!.validate()) {
+                    widget.func();
+                  }
+                },
                 child: Text(
                   'Adicionar Aluno',
                   style: TextStyle(

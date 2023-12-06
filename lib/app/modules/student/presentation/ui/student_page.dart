@@ -91,10 +91,27 @@ class StudentPageState extends State<StudentPage> {
                 ),
               ],
             ),
-            body: controller.studentList.isEmpty
-                ? Container(
-                    color: Colors.indigo.shade100,
-                    child: const Center(
+            body: Container(
+              padding: EdgeInsets.only(
+                top: _size.height * 0.02,
+                left: 2,
+                right: 2,
+              ),
+              color: Theme.of(context).colorScheme.primaryContainer,
+              child: controller.studentList.isNotEmpty
+                  ? ListView.builder(
+                      itemCount: controller.studentList.length,
+                      itemBuilder: (_, index) {
+                        final student = controller.studentList[index];
+                        return StudentListTile(
+                          student: student,
+                          firstNameEditController: firstNameEditController,
+                          lastNameEditController: lastNameEditController,
+                          controller: controller,
+                        );
+                      },
+                    )
+                  : const Center(
                       child: Text(
                         "Nenhum aluno cadastrado",
                         style: TextStyle(
@@ -103,25 +120,7 @@ class StudentPageState extends State<StudentPage> {
                         ),
                       ),
                     ),
-                  )
-                : Expanded(
-                    child: Container(
-                      padding: EdgeInsets.only(top: _size.height * 0.02),
-                      color: Theme.of(context).colorScheme.primaryContainer,
-                      child: ListView.builder(
-                        itemCount: controller.studentList.length,
-                        itemBuilder: (_, index) {
-                          final student = controller.studentList[index];
-                          return StudentListTile(
-                            student: student,
-                            firstNameEditController: firstNameEditController,
-                            lastNameEditController: lastNameEditController,
-                            controller: controller,
-                          );
-                        },
-                      ),
-                    ),
-                  ),
+            ),
           );
         },
       ),
