@@ -24,14 +24,23 @@ class StudentSearchDelegate extends SearchDelegate<StudentEntity> {
 
   @override
   Widget buildLeading(BuildContext context) {
-    final buildLeanding = controller.studentList
-        .where((element) =>
-            element.firstName.toLowerCase().contains(query.toLowerCase()) ||
-            element.lastName.toLowerCase().contains(query.toLowerCase()))
-        .toList();
+    String firstName = '';
+    String lastName = '';
 
-    String firstName = buildLeanding[0].firstName;
-    String lastName = buildLeanding[0].lastName;
+    if (controller.studentList.isNotEmpty) {
+      final buildLeanding = controller.studentList
+          .where((element) =>
+              element.firstName.toLowerCase().contains(query.toLowerCase()) ||
+              element.lastName.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+
+      if (buildLeanding.isNotEmpty &&
+          buildLeanding[0].firstName.isNotEmpty &&
+          buildLeanding[0].lastName.isNotEmpty) {
+        firstName = buildLeanding[0].firstName;
+        lastName = buildLeanding[0].lastName;
+      }
+    }
 
     return IconButton(
       onPressed: () {
@@ -43,58 +52,68 @@ class StudentSearchDelegate extends SearchDelegate<StudentEntity> {
 
   @override
   Widget buildResults(BuildContext context) {
+    if (query.length >= 3) {
+      return Container(
+        padding: const EdgeInsets.only(top: 8),
+        color: Theme.of(context).colorScheme.primaryContainer,
+        child: ListView.builder(
+          itemCount: controller.studentList.length,
+          itemBuilder: (_, index) {
+            final student = controller.studentList[index];
+            if (student.firstName.toLowerCase().contains(query.toLowerCase()) ||
+                student.lastName.toLowerCase().contains(query.toLowerCase())) {
+              return StudentListTile(
+                student: student,
+                firstNameEditController: TextEditingController(),
+                lastNameEditController: TextEditingController(),
+                controller: controller,
+              );
+            } else {
+              return const SizedBox.shrink();
+            }
+          },
+        ),
+      );
+    }
     return Container(
-      padding: const EdgeInsets.only(top: 8),
       color: Theme.of(context).colorScheme.primaryContainer,
-      child: ListView.builder(
-        itemCount: controller.studentList.length,
-        itemBuilder: (_, index) {
-          final student = controller.studentList[index];
-          if (student.firstName.toLowerCase().contains(query.toLowerCase()) ||
-              student.lastName.toLowerCase().contains(query.toLowerCase())) {
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    if (query.length >= 3) {
+      final suggestionList = query.isEmpty
+          ? controller.studentList
+          : controller.studentList.where((element) {
+              final fullName =
+                  '${element.firstName} ${element.lastName}'.toLowerCase();
+              final queryLower = query.toLowerCase();
+
+              final filterList = queryLower.split(' ');
+
+              return filterList.every((filter) => fullName.contains(filter));
+            }).toList();
+
+      return Container(
+        padding: const EdgeInsets.only(top: 8),
+        color: Theme.of(context).colorScheme.primaryContainer,
+        child: ListView.builder(
+          itemCount: suggestionList.length,
+          itemBuilder: (_, index) {
+            final student = suggestionList[index];
             return StudentListTile(
               student: student,
               firstNameEditController: TextEditingController(),
               lastNameEditController: TextEditingController(),
               controller: controller,
             );
-          } else {
-            return const SizedBox.shrink();
-          }
-        },
-      ),
-    );
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    final suggestionList = query.isEmpty
-        ? controller.studentList
-        : controller.studentList.where((element) {
-            final fullName =
-                '${element.firstName} ${element.lastName}'.toLowerCase();
-            final queryLower = query.toLowerCase();
-
-            final filterList = queryLower.split(' ');
-
-            return filterList.every((filter) => fullName.contains(filter));
-          }).toList();
-
+          },
+        ),
+      );
+    }
     return Container(
-      padding: const EdgeInsets.only(top: 8),
       color: Theme.of(context).colorScheme.primaryContainer,
-      child: ListView.builder(
-        itemCount: suggestionList.length,
-        itemBuilder: (_, index) {
-          final student = suggestionList[index];
-          return StudentListTile(
-            student: student,
-            firstNameEditController: TextEditingController(),
-            lastNameEditController: TextEditingController(),
-            controller: controller,
-          );
-        },
-      ),
     );
   }
 }
