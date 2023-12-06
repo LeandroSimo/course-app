@@ -67,6 +67,7 @@ class StudentSearchDelegate extends SearchDelegate<StudentEntity> {
                 firstNameEditController: TextEditingController(),
                 lastNameEditController: TextEditingController(),
                 controller: controller,
+                func: () {},
               );
             } else {
               return const SizedBox.shrink();
@@ -107,6 +108,7 @@ class StudentSearchDelegate extends SearchDelegate<StudentEntity> {
               firstNameEditController: TextEditingController(),
               lastNameEditController: TextEditingController(),
               controller: controller,
+              func: () {},
             );
           },
         ),

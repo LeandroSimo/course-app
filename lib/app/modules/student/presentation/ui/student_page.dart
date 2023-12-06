@@ -42,26 +42,22 @@ class StudentPageState extends State<StudentPage> {
             appBar: AppBar(
               automaticallyImplyLeading: false,
               backgroundColor: Colors.transparent,
-              title: Row(
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      Modular.to.pop();
-                    },
-                    icon: const Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.purple,
-                    ),
-                  ),
-                  Text(
-                    widget.title,
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w800,
-                      color: Colors.purple.shade900,
-                    ),
-                  ),
-                ],
+              leading: IconButton(
+                onPressed: () {
+                  Modular.to.pop();
+                },
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.purple,
+                ),
+              ),
+              title: Text(
+                widget.title,
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w800,
+                  color: Colors.purple.shade900,
+                ),
               ),
               actions: [
                 Padding(
@@ -114,6 +110,7 @@ class StudentPageState extends State<StudentPage> {
                           firstNameEditController: firstNameEditController,
                           lastNameEditController: lastNameEditController,
                           controller: controller,
+                          func: () {},
                         );
                       },
                     )

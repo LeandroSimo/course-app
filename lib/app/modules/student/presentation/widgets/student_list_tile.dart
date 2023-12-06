@@ -9,58 +9,63 @@ class StudentListTile extends StatelessWidget {
     required this.firstNameEditController,
     required this.lastNameEditController,
     required this.controller,
+    required this.func,
   });
 
   final StudentEntity student;
   final TextEditingController firstNameEditController;
   final TextEditingController lastNameEditController;
   final StudentStore controller;
+  final Function() func;
 
   @override
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size;
-    return Card(
-      elevation: 5,
-      child: ListTile(
-        leading: CircleAvatar(
-          radius: 25,
-          child: Text(
-            "${student.firstName[0].substring(0).toUpperCase()}${student.lastName[0].substring(0).toUpperCase()}",
+    return GestureDetector(
+      onTap: func,
+      child: Card(
+        elevation: 5,
+        child: ListTile(
+          leading: CircleAvatar(
+            radius: 25,
+            child: Text(
+              "${student.firstName[0].substring(0).toUpperCase()}${student.lastName[0].substring(0).toUpperCase()}",
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+          title: Text(
+            student.firstName,
             style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w700,
+              fontWeight: FontWeight.bold,
+              // fontSize: 18,
             ),
           ),
-        ),
-        title: Text(
-          student.firstName,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            // fontSize: 18,
+          subtitle: Text(student.lastName),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              IconButton(
+                icon: const Icon(Icons.edit),
+                onPressed: () {
+                  firstNameEditController.value = TextEditingValue(
+                    text: student.firstName,
+                  );
+                  lastNameEditController.value =
+                      TextEditingValue(text: student.lastName);
+                  _showAlertDialog(context, _size);
+                },
+              ),
+              IconButton(
+                onPressed: () {
+                  controller.removeStudent(student);
+                },
+                icon: const Icon(Icons.delete),
+              ),
+            ],
           ),
-        ),
-        subtitle: Text(student.lastName),
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            IconButton(
-              icon: const Icon(Icons.edit),
-              onPressed: () {
-                firstNameEditController.value = TextEditingValue(
-                  text: student.firstName,
-                );
-                lastNameEditController.value =
-                    TextEditingValue(text: student.lastName);
-                _showAlertDialog(context, _size);
-              },
-            ),
-            IconButton(
-              onPressed: () {
-                controller.removeStudent(student);
-              },
-              icon: const Icon(Icons.delete),
-            ),
-          ],
         ),
       ),
     );
