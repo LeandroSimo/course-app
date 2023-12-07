@@ -7,8 +7,8 @@ class CourseStudentEntity {
   @Id(assignable: true)
   final int cod;
 
-  late ToOne<StudentEntity> student;
-  late ToOne<CourseEntity> course;
+  late final ToOne<StudentEntity> student;
+  late final ToOne<CourseEntity> course;
 
   CourseStudentEntity({
     this.cod = 0,

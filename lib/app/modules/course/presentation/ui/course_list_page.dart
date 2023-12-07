@@ -22,12 +22,14 @@ class CourseListPageState extends State<CourseListPage> {
   @override
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size;
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
           elevation: 2,
+          centerTitle: !arguments,
           leading: IconButton(
             onPressed: () {
               Modular.to.pushNamedAndRemoveUntil("/", (_) => false);
@@ -46,20 +48,22 @@ class CourseListPageState extends State<CourseListPage> {
             ),
           ),
           actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: ElevatedButton(
-                child: const Text("Adicionar"),
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                ),
-                onPressed: () {
-                  Modular.to.pushNamed("/course/add");
-                },
-              ),
-            ),
+            arguments
+                ? Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: ElevatedButton(
+                      child: const Text("Adicionar"),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                      ),
+                      onPressed: () {
+                        Modular.to.pushNamed("/course/add");
+                      },
+                    ),
+                  )
+                : const SizedBox(),
           ],
         ),
         body: Observer(
