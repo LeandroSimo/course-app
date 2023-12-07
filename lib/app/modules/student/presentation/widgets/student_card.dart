@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
 import 'package:teste_vrsoft/app/modules/student/stores/student_store.dart';
 
-class StudentListTile extends StatelessWidget {
-  const StudentListTile({
+class StudentCard extends StatelessWidget {
+  const StudentCard({
     super.key,
     required this.student,
     required this.firstNameEditController,

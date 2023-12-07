@@ -96,6 +96,9 @@ class CourseList extends StatelessWidget {
         return '${parts[0][0]}${parts[1][0]}';
       }
     }
+    if (originalName.length > 4) {
+      return originalName.substring(0, 4);
+    }
     return originalName;
   }
 }

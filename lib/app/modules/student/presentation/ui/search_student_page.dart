@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
-import 'package:teste_vrsoft/app/modules/student/presentation/widgets/student_list_tile.dart';
+import 'package:teste_vrsoft/app/modules/student/presentation/widgets/student_card.dart';
 import 'package:teste_vrsoft/app/modules/student/stores/student_store.dart';
 
 class StudentSearchDelegate extends SearchDelegate<StudentEntity> {
@@ -62,7 +62,7 @@ class StudentSearchDelegate extends SearchDelegate<StudentEntity> {
             final student = controller.studentList[index];
             if (student.firstName.toLowerCase().contains(query.toLowerCase()) ||
                 student.lastName.toLowerCase().contains(query.toLowerCase())) {
-              return StudentListTile(
+              return StudentCard(
                 student: student,
                 firstNameEditController: TextEditingController(),
                 lastNameEditController: TextEditingController(),
@@ -103,7 +103,7 @@ class StudentSearchDelegate extends SearchDelegate<StudentEntity> {
           itemCount: suggestionList.length,
           itemBuilder: (_, index) {
             final student = suggestionList[index];
-            return StudentListTile(
+            return StudentCard(
               student: student,
               firstNameEditController: TextEditingController(),
               lastNameEditController: TextEditingController(),

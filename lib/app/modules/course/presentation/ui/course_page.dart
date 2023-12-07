@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:teste_vrsoft/app/modules/course/presentation/widgets/course_card.dart';
 import 'package:teste_vrsoft/app/modules/course/stores/course_store.dart';
 
 class CoursePage extends StatefulWidget {
@@ -25,6 +26,7 @@ class CoursePageState extends State<CoursePage> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
+          elevation: 2,
           leading: IconButton(
             onPressed: () {
               Modular.to.pushNamedAndRemoveUntil("/", (_) => false);
@@ -59,66 +61,30 @@ class CoursePageState extends State<CoursePage> {
             ),
           ],
         ),
-        body: Container(
-            padding: EdgeInsets.only(
-              top: _size.height * 0.02,
-              left: 2,
-              right: 2,
-            ),
-            color: Theme.of(context).colorScheme.primaryContainer,
-            child:
-                //  _courseStore.courseList.isNotEmpty
-                //     ?
-                Observer(builder: (context) {
-              return ListView.builder(
-                itemCount: _courseStore.courseList.length,
-                itemBuilder: (_, index) {
-                  final course = _courseStore.courseList[index];
+        body: Observer(builder: (context) {
+          return Container(
+            color: Theme.of(context).colorScheme.secondaryContainer,
+            child: _courseStore.courseList.isNotEmpty
+                ? ListView.builder(
+                    itemCount: _courseStore.courseList.length,
+                    itemBuilder: (_, index) {
+                      final course = _courseStore.courseList[index];
 
-                  // final color = _courseStore.courseList.isNotEmpty
-                  //     ? int.parse(course.courseBackGroundColor
-                  //         .toString()
-                  //         .replaceAll('#', '0xFF'))
-                  //     : 0xFF000000;
-                  final _courseName = _checkCourseName(course.name.toString());
-
-                  return Card(
-                    elevation: 4,
-                    child: Container(
-                      width: _size.width * 0.22,
-                      height: _size.height * 0.12,
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.background,
-                        borderRadius: BorderRadius.circular(8),
+                      return CardCourse(course: course, size: _size);
+                    },
+                  )
+                : const Center(
+                    child: Text(
+                      "Nenhum curso cadastrado",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
-                      child: Text(_courseName),
                     ),
-                  );
-                },
-              );
-            })
-            // : const Center(
-            //     child: Text(
-            //       "Nenhum curso cadastrado",
-            //       style: TextStyle(
-            //         fontSize: 18,
-            //         fontWeight: FontWeight.bold,
-            //       ),
-            //     ),
-            //   ),
-            ),
+                  ),
+          );
+        }),
       ),
     );
-  }
-
-  String _checkCourseName(String originalName) {
-    if (originalName.contains(' ')) {
-      final parts = originalName.split(' ');
-      if (parts.length >= 2) {
-        return '${parts[0][0]}${parts[1][0]}';
-      }
-    }
-    return originalName;
   }
 }

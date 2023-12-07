@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Modular.to.pushNamed('/course');
+          Modular.to.pushNamed('/course/');
         },
         child: Icon(Icons.add),
       ),

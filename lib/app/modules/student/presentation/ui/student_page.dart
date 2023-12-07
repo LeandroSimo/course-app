@@ -3,7 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
 import 'package:teste_vrsoft/app/modules/student/presentation/ui/add_student_page.dart';
 import 'package:teste_vrsoft/app/modules/student/presentation/ui/search_student_page.dart';
-import 'package:teste_vrsoft/app/modules/student/presentation/widgets/student_list_tile.dart';
+import 'package:teste_vrsoft/app/modules/student/presentation/widgets/student_card.dart';
 import 'package:teste_vrsoft/app/modules/student/stores/student_store.dart';
 import 'package:flutter/material.dart';
 
@@ -105,7 +105,7 @@ class StudentPageState extends State<StudentPage> {
                       itemCount: controller.studentList.length,
                       itemBuilder: (_, index) {
                         final student = controller.studentList[index];
-                        return StudentListTile(
+                        return StudentCard(
                           student: student,
                           firstNameEditController: firstNameEditController,
                           lastNameEditController: lastNameEditController,

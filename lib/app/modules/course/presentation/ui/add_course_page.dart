@@ -20,8 +20,7 @@ class _AddCoursePageState extends State<AddCoursePage> {
   TextEditingController nameController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   TextEditingController scheduleController = TextEditingController();
-  TextEditingController courseBackGroundColorController =
-      TextEditingController();
+  TextEditingController levelController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +42,7 @@ class _AddCoursePageState extends State<AddCoursePage> {
             ),
           ),
           title: Text(
-            'Adicionar Curso',
+            'Novo Curso',
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.w800,
@@ -131,7 +130,7 @@ class _AddCoursePageState extends State<AddCoursePage> {
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
-                      controller: courseBackGroundColorController,
+                      controller: levelController,
                       decoration: const InputDecoration(
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.black),
@@ -139,7 +138,7 @@ class _AddCoursePageState extends State<AddCoursePage> {
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.black),
                         ),
-                        labelText: 'Cor de fundo',
+                        labelText: 'Nível do curso',
                         labelStyle: TextStyle(color: Colors.black),
                       ),
                       cursorColor: Colors.black,
@@ -167,8 +166,7 @@ class _AddCoursePageState extends State<AddCoursePage> {
                                 name: nameController.text,
                                 description: descriptionController.text,
                                 schedule: scheduleController.text,
-                                courseBackGroundColor:
-                                    courseBackGroundColorController.text,
+                                level: levelController.text,
                               ),
                             );
                             Modular.to.pushNamedAndRemoveUntil(
