@@ -12,9 +12,7 @@ class CourseModule extends Module {
   void routes(RouteManager r) {
     r.child(
       '/',
-      child: (_) => const CoursePage(
-          // controller: Modular.get()
-          ),
+      child: (_) => CoursePage(courseStore: Modular.get()),
     );
   }
 }
