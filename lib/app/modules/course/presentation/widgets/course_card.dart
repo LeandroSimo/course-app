@@ -32,8 +32,8 @@ class CardCourse extends StatelessWidget {
               Card(
                 elevation: 4,
                 child: Container(
-                  width: size.width * 0.12,
-                  height: size.height * 0.06,
+                  width: size.width * 0.13,
+                  height: size.height * 0.07,
                   decoration: BoxDecoration(
                     color: Colors.purple.shade900,
                     borderRadius: BorderRadius.circular(6),

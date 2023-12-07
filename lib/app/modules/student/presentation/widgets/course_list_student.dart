@@ -13,8 +13,8 @@ class CourseList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: size.height * 0.18,
-      child: courses.length > 0
+      height: size.height * 0.19,
+      child: courses.isNotEmpty
           ? ListView.builder(
               itemExtent: size.width * 0.30,
               shrinkWrap: true,

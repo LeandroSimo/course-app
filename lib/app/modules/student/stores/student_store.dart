@@ -22,13 +22,9 @@ abstract class _StudentStoreBase with Store {
   }
 
   @action
-  Future<dynamic> createStudent(StudentEntity student,
-      {required Function() func}) async {
-    dynamic result = await _studentRepository!.createStudent(student, func);
-    if (result is int) {
-      studentList.add(student);
-    }
-
+  Future<dynamic> createStudent(StudentEntity student) async {
+    final result = await _studentRepository!.createStudent(student);
+    studentList.add(student);
     return result;
   }
 

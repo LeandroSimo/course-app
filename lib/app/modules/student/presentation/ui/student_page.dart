@@ -28,7 +28,6 @@ class StudentPageState extends State<StudentPage> {
   TextEditingController firstNameEditController = TextEditingController();
   TextEditingController lastNameEditController = TextEditingController();
 
-  final _form = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -80,7 +79,6 @@ class StudentPageState extends State<StudentPage> {
                                 firstName: firstNameController.text,
                                 lastName: lastNameController.text,
                               ),
-                              func: _showAlertDialog(context, _size),
                             );
                             Navigator.pop(context);
                             lastNameController.clear();
@@ -143,51 +141,6 @@ class StudentPageState extends State<StudentPage> {
           );
         },
       ),
-    );
-  }
-
-  _showAlertDialog(BuildContext context, Size size) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          content: Container(
-            height: size.height * 0.2,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Icon(
-                      Icons.warning_amber_rounded,
-                      color: Theme.of(context).colorScheme.primary,
-                      size: 40,
-                    ),
-                    IconButton(
-                      onPressed: () => Navigator.pop(context),
-                      icon: const Icon(
-                        Icons.close,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
-                const Spacer(),
-                const Text(
-                  'Aluno já cadastrado!',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black,
-                  ),
-                ),
-                const Spacer(),
-              ],
-            ),
-          ),
-        );
-      },
     );
   }
 }

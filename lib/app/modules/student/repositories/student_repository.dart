@@ -14,18 +14,8 @@ class StudentRepository {
     return store.box<StudentEntity>();
   }
 
-  Future<dynamic> createStudent(StudentEntity student, Function() func) async {
+  Future<int> createStudent(StudentEntity student) async {
     final store = await getStudent();
-
-    final query =
-        store.query(StudentEntity_.firstName.equals(student.firstName)).build();
-    final existingStudents = query.find() as List<StudentEntity>;
-
-    if (existingStudents.isNotEmpty) {
-      query.close();
-      return func();
-    }
-    query.close();
     return store.put(student);
   }
 
