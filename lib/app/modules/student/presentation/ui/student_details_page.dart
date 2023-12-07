@@ -75,7 +75,7 @@ class _StudentDetailsPageState extends State<StudentDetailsPage> {
           centerTitle: true,
           leading: IconButton(
             onPressed: () {
-              Modular.to.pushNamedAndRemoveUntil("/student/", (p0) => false);
+              Modular.to.pushNamedAndRemoveUntil("/student/", (_) => false);
             },
             icon: const Icon(
               Icons.arrow_back_ios,

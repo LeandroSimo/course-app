@@ -9,12 +9,11 @@ class CourseStore = _CourseStoreBase with _$CourseStore;
 abstract class _CourseStoreBase with Store {
   CourseRepository? _courseRepository;
 
-  ObservableList<CourseEntity> courseList = ObservableList<CourseEntity>();
-
   _CourseStoreBase() {
     _courseRepository = CourseRepository();
     getAllCourse().then((value) => courseList.addAll(value));
   }
+  ObservableList<CourseEntity> courseList = ObservableList<CourseEntity>();
 
   @action
   Future<List<CourseEntity>> getAllCourse() async {
@@ -23,7 +22,9 @@ abstract class _CourseStoreBase with Store {
 
   @action
   Future<int> createCourse(CourseEntity course) async {
-    return await _courseRepository!.createCourse(course);
+    final result = await _courseRepository!.createCourse(course);
+    courseList.add(course);
+    return result;
   }
 
   @action

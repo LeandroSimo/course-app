@@ -4,11 +4,11 @@ import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
 @Entity()
 class CourseEntity {
   @Id(assignable: true)
-  final int cod;
-  final String name;
-  final String description;
-  final String schedule;
-  final String courseBackGroundColor;
+  int cod;
+  String name;
+  String description;
+  String schedule;
+  String courseBackGroundColor;
 
   final students = ToMany<StudentEntity>();
 

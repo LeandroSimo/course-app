@@ -44,7 +44,7 @@ class StudentPageState extends State<StudentPage> {
               backgroundColor: Colors.transparent,
               leading: IconButton(
                 onPressed: () {
-                  Modular.to.pushNamedAndRemoveUntil("/", (p0) => false);
+                  Modular.to.pushNamedAndRemoveUntil("/", (_) => false);
                 },
                 icon: const Icon(
                   Icons.arrow_back_ios,

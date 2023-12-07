@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:teste_vrsoft/app/modules/course/presentation/ui/add_course_page.dart';
 import 'package:teste_vrsoft/app/modules/course/presentation/ui/course_page.dart';
 import 'package:teste_vrsoft/app/modules/course/stores/course_store.dart';
 
@@ -10,9 +11,7 @@ class CourseModule extends Module {
 
   @override
   void routes(RouteManager r) {
-    r.child(
-      '/',
-      child: (_) => CoursePage(courseStore: Modular.get()),
-    );
+    r.child('/', child: (_) => CoursePage(courseStore: Modular.get()));
+    r.child('/add', child: (_) => AddCoursePage(courseStore: Modular.get()));
   }
 }
