@@ -5,18 +5,19 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:teste_vrsoft/app/modules/course/presentation/widgets/course_card.dart';
 import 'package:teste_vrsoft/app/modules/course/stores/course_store.dart';
 
-class CoursePage extends StatefulWidget {
+class CourseListPage extends StatefulWidget {
   final CourseStore courseStore;
-  const CoursePage({
+  const CourseListPage({
     Key? key,
     required this.courseStore,
   }) : super(key: key);
   @override
-  CoursePageState createState() => CoursePageState();
+  CourseListPageState createState() => CourseListPageState();
 }
 
-class CoursePageState extends State<CoursePage> {
+class CourseListPageState extends State<CourseListPage> {
   CourseStore get _courseStore => widget.courseStore;
+  final arguments = Modular.args.data;
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +77,10 @@ class CoursePageState extends State<CoursePage> {
                           onTap: () {
                             Modular.to.pushNamed(
                               "/course/details",
-                              arguments: course,
+                              arguments: {
+                                "course": course,
+                                "isTrue": arguments,
+                              },
                             );
                           },
                         );

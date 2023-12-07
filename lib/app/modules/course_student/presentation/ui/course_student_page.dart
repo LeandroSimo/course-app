@@ -4,18 +4,18 @@ import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
 import 'package:teste_vrsoft/app/modules/student/presentation/widgets/course_list_student.dart';
 import 'package:teste_vrsoft/app/modules/student/presentation/widgets/grid_view_courses_progress.dart';
 
-class StudentDetailsPage extends StatefulWidget {
-  final StudentEntity student;
-  const StudentDetailsPage({
+class CourseStudentPage extends StatefulWidget {
+  final StudentEntity? student;
+  const CourseStudentPage({
     super.key,
-    required this.student,
+    this.student,
   });
 
   @override
-  State<StudentDetailsPage> createState() => _StudentDetailsPageState();
+  State<CourseStudentPage> createState() => _CourseStudentPageState();
 }
 
-class _StudentDetailsPageState extends State<StudentDetailsPage> {
+class _CourseStudentPageState extends State<CourseStudentPage> {
   final List<Map> _courses = [
     {
       "name": "Java Script",
@@ -73,15 +73,6 @@ class _StudentDetailsPageState extends State<StudentDetailsPage> {
           automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
           centerTitle: true,
-          leading: IconButton(
-            onPressed: () {
-              Modular.to.pushNamedAndRemoveUntil("/student/", (_) => false);
-            },
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: Colors.purple,
-            ),
-          ),
           title: Text(
             'Perfil',
             style: TextStyle(
@@ -108,7 +99,10 @@ class _StudentDetailsPageState extends State<StudentDetailsPage> {
                   ),
                   IconButton(
                     onPressed: () {
-                      Modular.to.pushNamed('/student/courses');
+                      Modular.to.pushNamed(
+                        '/course/',
+                        arguments: false,
+                      );
                     },
                     icon: const Icon(
                       Icons.add_box,

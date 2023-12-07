@@ -3,17 +3,22 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:teste_vrsoft/app/modules/course/entities/course_entity.dart';
 
 class CourseDetails extends StatefulWidget {
-  final CourseEntity course;
-  const CourseDetails({super.key, required this.course});
+  const CourseDetails({
+    super.key,
+  });
 
   @override
   State<CourseDetails> createState() => _CourseDetailsState();
 }
 
 class _CourseDetailsState extends State<CourseDetails> {
+  final arguments = Modular.args.data;
   @override
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size;
+    final CourseEntity _course = arguments["course"];
+    final bool _isTrue = arguments["isTrue"];
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -59,7 +64,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                 ),
                 const SizedBox(height: 15),
                 Text(
-                  widget.course.name,
+                  _course.name,
                   style: const TextStyle(
                     fontSize: 27,
                     fontWeight: FontWeight.w600,
@@ -67,7 +72,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  widget.course.description,
+                  _course.description,
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w400,
@@ -84,15 +89,17 @@ class _CourseDetailsState extends State<CourseDetails> {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.edit),
-                    )
+                    _isTrue
+                        ? IconButton(
+                            onPressed: () {},
+                            icon: const Icon(Icons.edit),
+                          )
+                        : const SizedBox(),
                   ],
                 ),
                 // const SizedBox(height: 5),
                 Text(
-                  widget.course.schedule,
+                  _course.schedule,
                   style: const TextStyle(
                     fontSize: 18,
                   ),
@@ -108,14 +115,16 @@ class _CourseDetailsState extends State<CourseDetails> {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.edit),
-                    ),
+                    _isTrue
+                        ? IconButton(
+                            onPressed: () {},
+                            icon: Icon(Icons.edit),
+                          )
+                        : const SizedBox(),
                   ],
                 ),
                 Text(
-                  widget.course.level,
+                  _course.level,
                   style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w400,

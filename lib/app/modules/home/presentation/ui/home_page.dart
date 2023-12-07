@@ -20,10 +20,13 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Observer(
         builder: (context) => Center(
-            child: Text(
-          '',
-          style: TextStyle(fontSize: 30),
-        )),
+          child: ElevatedButton(
+            onPressed: () async {
+              Modular.to.pushNamed('/student/');
+            },
+            child: Text('Student'),
+          ),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
