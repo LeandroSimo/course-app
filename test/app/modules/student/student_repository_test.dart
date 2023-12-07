@@ -8,10 +8,10 @@ import 'package:path_provider/path_provider.dart';
 import 'package:flutter/services.dart';
 
 class MockTest extends Mock {
-  late StudentObjectBox _studentObjectBox;
+  late CourseStudentObjectBox _studentObjectBox;
 
   MockTest() {
-    _studentObjectBox = StudentObjectBox();
+    _studentObjectBox = CourseStudentObjectBox();
   }
 
   Future<Box> getStudent() async {

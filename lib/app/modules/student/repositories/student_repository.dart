@@ -3,10 +3,10 @@ import 'package:teste_vrsoft/app/database/student_objectbox.dart';
 import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
 
 class StudentRepository {
-  late StudentObjectBox _studentObjectBox;
+  late CourseStudentObjectBox _studentObjectBox;
 
   StudentRepository() {
-    _studentObjectBox = StudentObjectBox();
+    _studentObjectBox = CourseStudentObjectBox();
   }
 
   Future<Box> getStudent() async {

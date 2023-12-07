@@ -1,5 +1,20 @@
-import 'package:teste_vrsoft/app/modules/course/course_page.dart';
-import 'package:teste_vrsoft/app/modules/course/course_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:teste_vrsoft/app/modules/course/presentation/ui/course_page.dart';
+import 'package:teste_vrsoft/app/modules/course/stores/course_store.dart';
 
-class CourseModule extends Module {}
+class CourseModule extends Module {
+  @override
+  void binds(Injector i) {
+    i.add(CourseStore.new);
+  }
+
+  @override
+  void routes(RouteManager r) {
+    r.child(
+      '/',
+      child: (_) => const CoursePage(
+          // controller: Modular.get()
+          ),
+    );
+  }
+}

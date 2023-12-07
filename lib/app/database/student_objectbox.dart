@@ -1,7 +1,7 @@
 import 'package:objectbox/objectbox.dart';
 import 'objectbox.g.dart';
 
-class StudentObjectBox {
+class CourseStudentObjectBox {
   static Store? _store;
 
   Future<Store> getStore() async {

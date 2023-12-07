@@ -9,31 +9,39 @@ part of 'course_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$CourseStore on _CourseStoreBase, Store {
-  late final _$valueAtom =
-      Atom(name: '_CourseStoreBase.value', context: context);
+  late final _$getAllStudentAsyncAction =
+      AsyncAction('_CourseStoreBase.getAllStudent', context: context);
 
   @override
-  int get value {
-    _$valueAtom.reportRead();
-    return super.value;
+  Future<List<CourseEntity>> getAllStudent() {
+    return _$getAllStudentAsyncAction.run(() => super.getAllStudent());
   }
 
+  late final _$createCourseAsyncAction =
+      AsyncAction('_CourseStoreBase.createCourse', context: context);
+
   @override
-  set value(int value) {
-    _$valueAtom.reportWrite(value, super.value, () {
-      super.value = value;
-    });
+  Future<int> createCourse(CourseEntity course) {
+    return _$createCourseAsyncAction.run(() => super.createCourse(course));
+  }
+
+  late final _$updateCourseAsyncAction =
+      AsyncAction('_CourseStoreBase.updateCourse', context: context);
+
+  @override
+  Future<int> updateCourse(CourseEntity course) {
+    return _$updateCourseAsyncAction.run(() => super.updateCourse(course));
   }
 
   late final _$_CourseStoreBaseActionController =
       ActionController(name: '_CourseStoreBase', context: context);
 
   @override
-  void increment() {
+  void removeCourse(CourseEntity course) {
     final _$actionInfo = _$_CourseStoreBaseActionController.startAction(
-        name: '_CourseStoreBase.increment');
+        name: '_CourseStoreBase.removeCourse');
     try {
-      return super.increment();
+      return super.removeCourse(course);
     } finally {
       _$_CourseStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -42,7 +50,7 @@ mixin _$CourseStore on _CourseStoreBase, Store {
   @override
   String toString() {
     return '''
-value: ${value}
+
     ''';
   }
 }
