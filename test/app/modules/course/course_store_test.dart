@@ -19,30 +19,33 @@ void main() {
 
   test('Testing the createCourse method', () async {
     final course = CourseEntity(
-        name: "Java Script",
-        description: "Curso de Java Script",
-        schedule: "Segunda a Sexta",
-        courseBackGroundColor: "#000000");
+      name: "Java Script",
+      description: "Curso de Java Script",
+      schedule: "Segunda a Sexta",
+      level: "Básico",
+    );
     when(() => store.createCourse(course)).thenAnswer((_) async => 1);
     expect(await store.createCourse(course), isA<int>());
   });
 
   test('Testing the updateCourse method', () async {
     final course = CourseEntity(
-        name: "Java Script",
-        description: "Curso de Java Script",
-        schedule: "Segunda a Sexta",
-        courseBackGroundColor: "#000000");
+      name: "Java Script",
+      description: "Curso de Java Script",
+      schedule: "Segunda a Sexta",
+      level: "Básico",
+    );
     when(() => store.updateCourse(course)).thenAnswer((_) async => 1);
     expect(await store.updateCourse(course), isA<int>());
   });
 
   test('Testing the removeCourse method', () async {
     final course = CourseEntity(
-        name: "Java Script",
-        description: "Curso de Java Script",
-        schedule: "Segunda a Sexta",
-        courseBackGroundColor: "#000000");
+      name: "Java Script",
+      description: "Curso de Java Script",
+      schedule: "Segunda a Sexta",
+      level: "Básico",
+    );
     store.removeCourse(course);
   });
 }

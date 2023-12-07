@@ -61,29 +61,39 @@ class CoursePageState extends State<CoursePage> {
             ),
           ],
         ),
-        body: Observer(builder: (context) {
-          return Container(
-            color: Theme.of(context).colorScheme.secondaryContainer,
-            child: _courseStore.courseList.isNotEmpty
-                ? ListView.builder(
-                    itemCount: _courseStore.courseList.length,
-                    itemBuilder: (_, index) {
-                      final course = _courseStore.courseList[index];
-
-                      return CardCourse(course: course, size: _size);
-                    },
-                  )
-                : const Center(
-                    child: Text(
-                      "Nenhum curso cadastrado",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+        body: Observer(
+          builder: (context) {
+            return Container(
+              color: Theme.of(context).colorScheme.secondaryContainer,
+              child: _courseStore.courseList.isNotEmpty
+                  ? ListView.builder(
+                      itemCount: _courseStore.courseList.length,
+                      itemBuilder: (_, index) {
+                        final course = _courseStore.courseList[index];
+                        return CardCourse(
+                          course: course,
+                          size: _size,
+                          onTap: () {
+                            Modular.to.pushNamed(
+                              "/course/details",
+                              arguments: course,
+                            );
+                          },
+                        );
+                      },
+                    )
+                  : const Center(
+                      child: Text(
+                        "Nenhum curso cadastrado",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                  ),
-          );
-        }),
+            );
+          },
+        ),
       ),
     );
   }

@@ -4,102 +4,106 @@ import 'package:teste_vrsoft/app/modules/course/entities/course_entity.dart';
 class CardCourse extends StatelessWidget {
   final CourseEntity course;
   final Size size;
+  final Function() onTap;
   const CardCourse({
     super.key,
     required this.course,
     required this.size,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     final _courseName = _checkCourseName(course.name.toString().toUpperCase());
-    return Column(
-      children: [
-        Container(
-          height: size.height * 0.18,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            border: Border(
-              bottom: BorderSide(
-                width: 1,
-                color: Colors.grey.shade400,
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border(
+                bottom: BorderSide(
+                  width: 1,
+                  color: Colors.grey.shade400,
+                ),
               ),
             ),
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Card(
-                elevation: 4,
-                child: Container(
-                  width: size.width * 0.13,
-                  height: size.height * 0.07,
-                  decoration: BoxDecoration(
-                    color: Colors.purple.shade900,
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  child: Center(
-                    child: Text(
-                      _courseName,
-                      style: const TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Card(
+                  elevation: 4,
+                  child: Container(
+                    width: size.width * 0.13,
+                    height: size.height * 0.07,
+                    decoration: BoxDecoration(
+                      color: Colors.purple.shade900,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: Center(
+                      child: Text(
+                        _courseName,
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        course.name,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w900,
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          course.name,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w900,
+                          ),
                         ),
-                      ),
-                      Text(
-                        course.schedule.toString(),
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
+                        Text(
+                          course.schedule.toString(),
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                      ),
-                      Text(
-                        course.level.toString(),
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey,
+                        Text(
+                          course.level.toString(),
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
+                          ),
                         ),
-                      ),
-                      Text(
-                        "${course.students.length.toString()} Alunos matriculados",
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey,
+                        Text(
+                          "${course.students.length.toString()} Alunos matriculados",
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
+                          ),
                         ),
-                      ),
-                      const Text(
-                        "GRÁTIS",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w900,
+                        const Text(
+                          "GRÁTIS",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w900,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
