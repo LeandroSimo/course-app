@@ -13,11 +13,11 @@ abstract class _CourseStoreBase with Store {
 
   _CourseStoreBase() {
     _courseRepository = CourseRepository();
-    getAllStudent().then((value) => courseList.addAll(value));
+    getAllCourse().then((value) => courseList.addAll(value));
   }
 
   @action
-  Future<List<CourseEntity>> getAllStudent() async {
+  Future<List<CourseEntity>> getAllCourse() async {
     return await _courseRepository!.readCourse();
   }
 

@@ -9,28 +9,28 @@ class CourseRepository {
     _studentObjectBox = CourseStudentObjectBox();
   }
 
-  Future<Box> getStudent() async {
+  Future<Box> getCourse() async {
     final store = await _studentObjectBox.getStore();
     return store.box<CourseEntity>();
   }
 
   Future<int> createCourse(CourseEntity course) async {
-    final store = await getStudent();
+    final store = await getCourse();
     return store.put(course);
   }
 
   Future<List<CourseEntity>> readCourse() async {
-    final store = await getStudent();
+    final store = await getCourse();
     return store.getAll() as List<CourseEntity>;
   }
 
   Future<int> updateCourse(CourseEntity course) async {
-    final store = await getStudent();
+    final store = await getCourse();
     return store.put(course);
   }
 
   Future<void> deleteCourse(CourseEntity course) async {
-    final store = await getStudent();
+    final store = await getCourse();
     store.remove(course.cod);
   }
 }
