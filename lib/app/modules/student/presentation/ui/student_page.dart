@@ -44,7 +44,7 @@ class StudentPageState extends State<StudentPage> {
               backgroundColor: Colors.transparent,
               leading: IconButton(
                 onPressed: () {
-                  Modular.to.pop();
+                  Modular.to.pushNamedAndRemoveUntil("/", (p0) => false);
                 },
                 icon: const Icon(
                   Icons.arrow_back_ios,
@@ -110,7 +110,12 @@ class StudentPageState extends State<StudentPage> {
                           firstNameEditController: firstNameEditController,
                           lastNameEditController: lastNameEditController,
                           controller: controller,
-                          func: () {},
+                          func: () {
+                            Modular.to.navigate(
+                              "/student/details",
+                              arguments: student,
+                            );
+                          },
                         );
                       },
                     )

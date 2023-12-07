@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
 import 'package:teste_vrsoft/app/modules/student/presentation/widgets/course_list_student.dart';
+import 'package:teste_vrsoft/app/modules/student/presentation/widgets/grid_view_courses_progress.dart';
 
 class StudentDetailsPage extends StatefulWidget {
-  const StudentDetailsPage({super.key});
+  final StudentEntity student;
+  const StudentDetailsPage({
+    super.key,
+    required this.student,
+  });
 
   @override
   State<StudentDetailsPage> createState() => _StudentDetailsPageState();
@@ -69,7 +75,7 @@ class _StudentDetailsPageState extends State<StudentDetailsPage> {
           centerTitle: true,
           leading: IconButton(
             onPressed: () {
-              Modular.to.pop();
+              Modular.to.pushNamedAndRemoveUntil("/student/", (p0) => false);
             },
             icon: const Icon(
               Icons.arrow_back_ios,
@@ -134,119 +140,5 @@ class _StudentDetailsPageState extends State<StudentDetailsPage> {
         ),
       ),
     );
-  }
-}
-
-class GridViewCoursesProgress extends StatelessWidget {
-  const GridViewCoursesProgress({
-    super.key,
-    required this.size,
-    required this.coursesProgress,
-  });
-
-  final Size size;
-  final List coursesProgress;
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 8,
-          mainAxisSpacing: 8,
-        ),
-        itemCount: coursesProgress.length,
-        itemBuilder: (_, index) {
-          final course = coursesProgress[index];
-
-          final color = coursesProgress[index].isNotEmpty
-              ? int.parse(course['color'].toString().replaceAll('#', '0xFF'))
-              : 0xFF000000;
-          final _coursesProgress = _checkCourseName(course['name'].toString());
-          final _percent = course['percent'];
-          final progress = course['progress'].toString();
-
-          return Card(
-            elevation: 4,
-            child: Container(
-              width: size.width * 0.22,
-              height: size.height * 0.12,
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.background,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text(
-                    _coursesProgress,
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.w600,
-                      color: Color(color),
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Progresso",
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.purple.shade900,
-                        ),
-                      ),
-                      const SizedBox(width: 4),
-                      Text.rich(
-                        TextSpan(
-                          text: progress,
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.orange.shade700,
-                          ),
-                          children: [
-                            TextSpan(
-                              text: "/35",
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.purple.shade900,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  LinearProgressIndicator(
-                    value: _percent,
-                    minHeight: 10,
-                    backgroundColor: Colors.grey.shade300,
-                    borderRadius: BorderRadius.circular(8),
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                      Colors.orange.shade400,
-                    ),
-                  )
-                ],
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  String _checkCourseName(String originalName) {
-    if (originalName.contains(' ')) {
-      final parts = originalName.split(' ');
-      if (parts.length >= 2) {
-        return '${parts[0][0]}${parts[1][0]}';
-      }
-    }
-    return originalName;
   }
 }
