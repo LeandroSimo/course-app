@@ -23,7 +23,6 @@ class CardAdm extends StatelessWidget {
         height: _size.height * 0.3,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: Colors.white,
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.5),

@@ -206,7 +206,7 @@ class LoginPageState extends State<LoginPage> with LoginValidator {
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w900,
-                      color: Colors.white,
+                      color: isRegistered ? Colors.white : Colors.grey,
                     ),
                   ),
                   onPressed: !isRegistered

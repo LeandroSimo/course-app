@@ -30,6 +30,8 @@ class StudentPageState extends State<StudentPage> {
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
+  final arguments = Modular.args.data;
+
   @override
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size;
@@ -43,7 +45,11 @@ class StudentPageState extends State<StudentPage> {
               backgroundColor: Colors.transparent,
               leading: IconButton(
                 onPressed: () {
-                  Modular.to.pushNamedAndRemoveUntil("/", (_) => false);
+                  Modular.to.pushNamedAndRemoveUntil(
+                    "/redirect",
+                    (_) => false,
+                    arguments: arguments,
+                  );
                 },
                 icon: const Icon(
                   Icons.arrow_back_ios,
