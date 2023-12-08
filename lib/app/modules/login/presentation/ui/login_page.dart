@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:gap/gap.dart';
 import 'package:teste_vrsoft/app/modules/login/shared/validator/login_validator.dart';
-import 'package:teste_vrsoft/app/modules/login/stores/login_store.dart';
 import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
 import 'package:teste_vrsoft/app/modules/student/stores/student_store.dart';
 
@@ -36,7 +34,7 @@ class LoginPageState extends State<LoginPage> with LoginValidator {
       if (isAdm) {
         if (_controllerUser.text == "admin" &&
             _controllerPassword.text == "admin") {
-          Navigator.pushNamed(context, '/home');
+          Modular.to.navigate('/course/', arguments: true);
           clearTextEditingControllers();
         }
       }
@@ -46,11 +44,8 @@ class LoginPageState extends State<LoginPage> with LoginValidator {
           lastName: _controllerLastNameRegister.text,
         );
         studentStore.createStudent(student);
-
         Modular.to.pushNamedAndRemoveUntil('/home/', (_) => false,
             arguments: student);
-        print("VALOR DO CADASTRO: ${student.firstName}");
-        print("VALOR DO CADASTRO: ${student.lastName}");
         clearTextEditingControllers();
       }
       // else {

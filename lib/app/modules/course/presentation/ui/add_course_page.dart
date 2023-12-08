@@ -34,7 +34,11 @@ class _AddCoursePageState extends State<AddCoursePage> {
           centerTitle: true,
           leading: IconButton(
             onPressed: () {
-              Modular.to.pop();
+              Modular.to.pushNamedAndRemoveUntil(
+                "/course/",
+                (_) => false,
+                arguments: true,
+              );
             },
             icon: const Icon(
               Icons.arrow_back_ios,
@@ -170,7 +174,10 @@ class _AddCoursePageState extends State<AddCoursePage> {
                               ),
                             );
                             Modular.to.pushNamedAndRemoveUntil(
-                                '/course/', (_) => false);
+                              '/course/',
+                              (_) => false,
+                              arguments: true,
+                            );
                             // if (form.currentState!.validate()) {
                             // }
                           },

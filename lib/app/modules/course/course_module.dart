@@ -12,7 +12,8 @@ class CourseModule extends Module {
 
   @override
   void routes(RouteManager r) {
-    r.child('/', child: (_) => CourseListPage(courseStore: Modular.get()));
+    r.child(Modular.initialRoute,
+        child: (_) => CourseListPage(courseStore: Modular.get()));
     r.child('/add', child: (_) => AddCoursePage(courseStore: Modular.get()));
     r.child('/details', child: (_) => const CourseDetails());
   }

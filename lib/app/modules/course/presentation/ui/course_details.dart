@@ -3,7 +3,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:teste_vrsoft/app/modules/course/entities/course_entity.dart';
 
 class CourseDetails extends StatefulWidget {
-  // final CourseStore courseStore;
   const CourseDetails({
     super.key,
   });
@@ -17,15 +16,19 @@ class _CourseDetailsState extends State<CourseDetails> {
   @override
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size;
-    final CourseEntity _course = arguments["course"];
-    final bool _isTrue = arguments["isTrue"];
+    final CourseEntity _course = arguments["course"] as CourseEntity;
+    final bool _isTrue = arguments["isTrue"] as bool;
 
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
             onPressed: () {
-              Modular.to.pop(context);
+              Modular.to.pushNamedAndRemoveUntil(
+                '/course/',
+                (_) => false,
+                arguments: _isTrue,
+              );
             },
             icon: const Icon(
               Icons.arrow_back_ios,

@@ -99,7 +99,7 @@ class _CourseStudentPageState extends State<CourseStudentPage> {
                   ),
                   IconButton(
                     onPressed: () {
-                      Modular.to.pushNamed(
+                      Modular.to.navigate(
                         '/home/course/',
                         arguments: false,
                       );

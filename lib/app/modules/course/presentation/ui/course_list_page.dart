@@ -30,15 +30,18 @@ class CourseListPageState extends State<CourseListPage> {
           backgroundColor: Colors.transparent,
           elevation: 2,
           centerTitle: !arguments,
-          leading: IconButton(
-            onPressed: () {
-              Modular.to.pushNamedAndRemoveUntil("/", (_) => false);
-            },
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: Colors.purple,
-            ),
-          ),
+          leading: arguments
+              ? IconButton(
+                  onPressed: () {
+                    Modular.to.pushNamedAndRemoveUntil(
+                        Modular.initialRoute, (_) => false);
+                  },
+                  icon: const Icon(
+                    Icons.login_outlined,
+                    color: Colors.purple,
+                  ),
+                )
+              : const SizedBox(),
           title: Text(
             "Cursos",
             style: TextStyle(
@@ -59,7 +62,7 @@ class CourseListPageState extends State<CourseListPage> {
                         ),
                       ),
                       onPressed: () {
-                        Modular.to.pushNamed("/course/add");
+                        Modular.to.navigate("/course/add");
                       },
                     ),
                   )
@@ -79,8 +82,8 @@ class CourseListPageState extends State<CourseListPage> {
                           course: course,
                           size: _size,
                           onTap: () {
-                            Modular.to.pushNamed(
-                              "/home/course/details/",
+                            Modular.to.navigate(
+                              "/course/details",
                               arguments: {
                                 "course": course,
                                 "isTrue": arguments,
