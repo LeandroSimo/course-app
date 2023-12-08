@@ -34,7 +34,10 @@ class CourseListPageState extends State<CourseListPage> {
               ? IconButton(
                   onPressed: () {
                     Modular.to.pushNamedAndRemoveUntil(
-                        Modular.initialRoute, (_) => false);
+                      '/redirect',
+                      (_) => false,
+                      arguments: arguments,
+                    );
                   },
                   icon: const Icon(
                     Icons.login_outlined,

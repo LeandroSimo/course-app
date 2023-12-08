@@ -34,7 +34,7 @@ class LoginPageState extends State<LoginPage> with LoginValidator {
       if (isAdm) {
         if (_controllerUser.text == "admin" &&
             _controllerPassword.text == "admin") {
-          Modular.to.navigate('/course/', arguments: true);
+          Modular.to.navigate('/redirect', arguments: true);
           clearTextEditingControllers();
         }
       }
