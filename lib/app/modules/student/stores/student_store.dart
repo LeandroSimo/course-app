@@ -1,5 +1,6 @@
 import 'package:mobx/mobx.dart';
 import 'package:teste_vrsoft/app/modules/course/entities/course_entity.dart';
+import 'package:teste_vrsoft/app/modules/student/dto/student_dto.dart';
 import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
 import 'package:teste_vrsoft/app/modules/student/repositories/student_repository.dart';
 

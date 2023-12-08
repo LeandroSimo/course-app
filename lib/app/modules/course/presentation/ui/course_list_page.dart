@@ -80,7 +80,7 @@ class CourseListPageState extends State<CourseListPage> {
                           size: _size,
                           onTap: () {
                             Modular.to.pushNamed(
-                              "/course/details",
+                              "/home/course/details/",
                               arguments: {
                                 "course": course,
                                 "isTrue": arguments,

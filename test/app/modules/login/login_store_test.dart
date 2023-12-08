@@ -7,10 +7,4 @@ void main() {
   setUpAll(() {
     store = LoginStore();
   });
-
-  test('increment count', () async {
-    expect(store.value, equals(0));
-    store.increment();
-    expect(store.value, equals(1));
-  });
 }

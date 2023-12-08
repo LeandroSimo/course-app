@@ -1,12 +1,12 @@
 import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
 
 class StudentDto {
-  int cod;
+  int? cod;
   String firstName;
   String lastName;
 
   StudentDto({
-    required this.cod,
+    this.cod,
     required this.firstName,
     required this.lastName,
   });
