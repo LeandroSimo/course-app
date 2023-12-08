@@ -35,8 +35,8 @@ class StudentRepository {
     store.remove(student.cod);
   }
 
-  Future<void> addCourserToStudent(
-      StudentEntity student, CourseEntity course) async {
-    student.saveToCourseStudentTable(course);
+  Future<void> addCourserToStudent(CourseEntity course,
+      {StudentEntity? student}) async {
+    student!.addCourseToStudent(course);
   }
 }

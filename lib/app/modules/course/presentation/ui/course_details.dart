@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:teste_vrsoft/app/modules/course/entities/course_entity.dart';
 
 class CourseDetails extends StatefulWidget {
+  // final CourseStore courseStore;
   const CourseDetails({
     super.key,
   });
@@ -144,7 +145,9 @@ class _CourseDetailsState extends State<CourseDetails> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          // widget.courseStore.addStudentToCourse(student, _course)
+                        },
                         child: const Text(
                           'Matricular-se',
                           style: TextStyle(

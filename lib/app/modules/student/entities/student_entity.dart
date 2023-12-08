@@ -1,6 +1,5 @@
 import 'package:objectbox/objectbox.dart';
 import 'package:teste_vrsoft/app/database/objectbox.g.dart';
-import 'package:teste_vrsoft/app/database/student_objectbox.dart';
 import 'package:teste_vrsoft/app/modules/course/entities/course_entity.dart';
 import 'package:teste_vrsoft/app/modules/course_student/entities/couse_student_entity.dart';
 
@@ -25,11 +24,13 @@ class StudentEntity {
     return courses.length > 3;
   }
 
-  bool enrollInCourse(CourseEntity course) {
+  bool addCourseToStudent(CourseEntity course) {
     if (!exceededLimit() &&
         !courses.contains(course) &&
         !course.isFullClass()) {
       courses.add(course);
+      course.addStudentToCourse(this);
+      course.saveToCourseStudentTable(this);
       return true;
     }
     return false;
@@ -40,7 +41,6 @@ class StudentEntity {
       student: ToOne<StudentEntity>()..target = this,
       course: ToOne<CourseEntity>()..target = course,
     );
-    enrollInCourse(course);
     _store.box<CourseStudentEntity>().put(courseStudentEntity);
   }
 }

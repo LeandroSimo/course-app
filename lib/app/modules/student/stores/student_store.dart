@@ -23,7 +23,7 @@ abstract class _StudentStoreBase with Store {
   }
 
   @action
-  Future<dynamic> createStudent(StudentEntity student) async {
+  Future<int> createStudent(StudentEntity student) async {
     final result = await _studentRepository!.createStudent(student);
     studentList.add(student);
     return result;
@@ -48,8 +48,7 @@ abstract class _StudentStoreBase with Store {
   }
 
   @action
-  Future<void> addCourseToStudent(
-      StudentEntity student, CourseEntity course) async {
-    await _studentRepository!.addCourserToStudent(student, course);
+  Future<void> addCourseToStudent(CourseEntity course) async {
+    await _studentRepository!.addCourserToStudent(course);
   }
 }

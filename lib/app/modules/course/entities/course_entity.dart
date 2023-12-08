@@ -32,11 +32,13 @@ class CourseEntity {
     return students.length < 5;
   }
 
-  bool addStudent(StudentEntity student) {
+  bool addStudentToCourse(StudentEntity student) {
     if (!isFullClass() &&
         !students.contains(student) &&
         !student.exceededLimit()) {
       students.add(student);
+      student.addCourseToStudent(this);
+      student.saveToCourseStudentTable(this);
       return true;
     }
     return false;
@@ -47,7 +49,6 @@ class CourseEntity {
       student: ToOne<StudentEntity>()..target = student,
       course: ToOne<CourseEntity>()..target = this,
     );
-    addStudent(student);
     _store.box<CourseStudentEntity>().put(courseStudentEntity);
   }
 }

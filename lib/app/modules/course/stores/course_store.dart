@@ -47,8 +47,7 @@ abstract class _CourseStoreBase with Store {
   }
 
   @action
-  Future<void> addStudentToCourse(
-      StudentEntity student, CourseEntity course) async {
-    await _courseRepository!.addStudentToCourse(student, course);
+  Future<void> addStudentToCourse(StudentEntity student) async {
+    await _courseRepository!.addStudentToCourse(student);
   }
 }

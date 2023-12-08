@@ -11,7 +11,7 @@ class CourseStudentEntity {
   late final ToOne<CourseEntity> course;
 
   CourseStudentEntity({
-    this.cod = 0,
+    this.cod = 1,
     required this.student,
     required this.course,
   });

@@ -21,7 +21,7 @@ mixin _$StudentStore on _StudentStoreBase, Store {
       AsyncAction('_StudentStoreBase.createStudent', context: context);
 
   @override
-  Future<dynamic> createStudent(StudentEntity student) {
+  Future<int> createStudent(StudentEntity student) {
     return _$createStudentAsyncAction.run(() => super.createStudent(student));
   }
 
@@ -37,9 +37,9 @@ mixin _$StudentStore on _StudentStoreBase, Store {
       AsyncAction('_StudentStoreBase.addCourseToStudent', context: context);
 
   @override
-  Future<void> addCourseToStudent(StudentEntity student, CourseEntity course) {
+  Future<void> addCourseToStudent(CourseEntity course) {
     return _$addCourseToStudentAsyncAction
-        .run(() => super.addCourseToStudent(student, course));
+        .run(() => super.addCourseToStudent(course));
   }
 
   late final _$_StudentStoreBaseActionController =
