@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import 'package:teste_vrsoft/app/modules/course/entities/course_entity.dart';
 import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
 import 'package:teste_vrsoft/app/modules/student/repositories/student_repository.dart';
 
@@ -44,5 +45,11 @@ abstract class _StudentStoreBase with Store {
   void removeStudent(StudentEntity student) {
     _studentRepository!.deleteStudent(student);
     studentList.remove(student);
+  }
+
+  @action
+  Future<void> addCourseToStudent(
+      StudentEntity student, CourseEntity course) async {
+    await _studentRepository!.addCourserToStudent(student, course);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:teste_vrsoft/app/database/objectbox.g.dart';
 import 'package:teste_vrsoft/app/database/student_objectbox.dart';
+import 'package:teste_vrsoft/app/modules/course/entities/course_entity.dart';
 import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
 
 class StudentRepository {
@@ -32,5 +33,10 @@ class StudentRepository {
   Future<void> deleteStudent(StudentEntity student) async {
     final store = await getStudent();
     store.remove(student.cod);
+  }
+
+  Future<void> addCourserToStudent(
+      StudentEntity student, CourseEntity course) async {
+    student.saveToCourseStudentTable(course);
   }
 }
