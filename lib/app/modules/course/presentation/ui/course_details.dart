@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:teste_vrsoft/app/modules/course/entities/course_entity.dart';
+import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
+import 'package:teste_vrsoft/app/modules/student/stores/student_store.dart';
 
 class CourseDetails extends StatefulWidget {
+  final StudentStore studentStore;
   const CourseDetails({
     super.key,
+    required this.studentStore,
   });
 
   @override
@@ -12,12 +16,24 @@ class CourseDetails extends StatefulWidget {
 }
 
 class _CourseDetailsState extends State<CourseDetails> {
+  StudentStore get _studentStore => widget.studentStore;
   final arguments = Modular.args.data;
   @override
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size;
+
     final CourseEntity course = arguments["course"] as CourseEntity;
     final bool isAdm = arguments["isAdm"] as bool;
+    final StudentEntity studentEntity = arguments["student"] ??
+        StudentEntity(
+          firstName: "",
+          lastName: "",
+          cod: 0,
+        );
+
+    final student = _studentStore.studentList.firstWhere(
+        (element) => element.cod == studentEntity.cod,
+        orElse: () => studentEntity);
 
     return SafeArea(
       child: Scaffold(
@@ -27,7 +43,10 @@ class _CourseDetailsState extends State<CourseDetails> {
               Modular.to.pushNamedAndRemoveUntil(
                 '/course/',
                 (_) => false,
-                arguments: {"isAdm": isAdm},
+                arguments: {
+                  "isAdm": isAdm,
+                  "student": student,
+                },
               );
             },
             icon: const Icon(

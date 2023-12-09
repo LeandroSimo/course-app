@@ -9,8 +9,8 @@ class HomeModule extends Module {
   @override
   void exportedBinds(Injector i) {
     i.add(HomeStore.new);
-    i.addSingleton(CourseStore.new);
-    i.addSingleton(StudentStore.new);
+    i.addLazySingleton(CourseStore.new);
+    i.addLazySingleton(StudentStore.new);
   }
 
   @override

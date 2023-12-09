@@ -5,11 +5,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class StudentModule extends Module {
   @override
-  void exportedBinds(Injector i) {
-    i.addInstance(StudentStore.new);
-  }
-
-  @override
   void binds(Injector i) {
     i.add(StudentStore.new);
   }

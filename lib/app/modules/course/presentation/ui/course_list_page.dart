@@ -117,6 +117,7 @@ class CourseListPageState extends State<CourseListPage> {
                             Modular.to.navigate(
                               "/course/details",
                               arguments: {
+                                "student": student,
                                 "course": course,
                                 "isAdm": isAdm,
                               },
