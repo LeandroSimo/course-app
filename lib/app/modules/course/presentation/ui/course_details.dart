@@ -193,7 +193,15 @@ class _CourseDetailsState extends State<CourseDetails> {
                           ),
                         ),
                         onPressed: () {
-                          // widget.courseStore.addStudentToCourse(student, _course)
+                          _studentStore.addCourseToStudent(course);
+                          Modular.to.pushNamedAndRemoveUntil(
+                            '/home/',
+                            (_) => false,
+                            arguments: {
+                              "isAdm": isAdm,
+                              "student": student,
+                            },
+                          );
                         },
                         child: const Text(
                           'Matricular-se',

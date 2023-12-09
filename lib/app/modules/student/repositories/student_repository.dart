@@ -35,8 +35,14 @@ class StudentRepository {
     store.remove(student.cod);
   }
 
-  Future<void> addCourserToStudent(CourseEntity course,
+  Future<bool> addCourserToStudent(CourseEntity course,
       {StudentEntity? student}) async {
-    student!.addCourseToStudent(course);
+    return student!.addCourseToStudent(course);
+  }
+
+  Future<List<CourseEntity>> getCoursesByStudent(StudentEntity student) async {
+    final store = await getStudent();
+    final studentEntity = store.get(student.cod) as StudentEntity;
+    return studentEntity.courses.toList();
   }
 }
