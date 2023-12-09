@@ -25,7 +25,7 @@ class CourseList extends StatelessWidget {
                 final color = courses[index].isNotEmpty
                     ? int.parse(
                         course['color'].toString().replaceAll('#', '0xFF'))
-                    : 0xFF000000;
+                    : 0xFFFFFFFF;
                 final courseNameChecked =
                     _checkCourseName(course['name'].toString());
                 final fullName = course['name'].toString();

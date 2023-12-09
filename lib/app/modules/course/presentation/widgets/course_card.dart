@@ -75,6 +75,13 @@ class CardCourse extends StatelessWidget {
                           ),
                         ),
                         Text(
+                          "${course.hours} horas",
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        Text(
                           course.level.toString(),
                           style: const TextStyle(
                             fontSize: 14,

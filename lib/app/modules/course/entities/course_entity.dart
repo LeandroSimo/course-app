@@ -13,6 +13,7 @@ class CourseEntity {
   String description;
   String schedule;
   String level;
+  String hours;
 
   final students = ToMany<StudentEntity>();
 
@@ -22,6 +23,7 @@ class CourseEntity {
     required this.description,
     required this.schedule,
     required this.level,
+    required this.hours,
   });
 
   bool isFullClass() {

@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:teste_vrsoft/app/modules/course/stores/course_store.dart';
+import 'package:teste_vrsoft/app/modules/course_student/presentation/widgets/list_course_home.dart';
 import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
 import 'package:teste_vrsoft/app/modules/student/presentation/widgets/course_list_student.dart';
 import 'package:teste_vrsoft/app/modules/student/presentation/widgets/list_view_courses_progress.dart';
 
 class CourseStudentPage extends StatefulWidget {
   final StudentEntity student;
+  final CourseStore courseStore;
   const CourseStudentPage({
     super.key,
     required this.student,
+    required this.courseStore,
   });
 
   @override
@@ -16,7 +20,8 @@ class CourseStudentPage extends StatefulWidget {
 }
 
 class _CourseStudentPageState extends State<CourseStudentPage> {
-  // final arguments = Modular.args.data;
+  CourseStore get courseStore => widget.courseStore;
+
   final List<Map> _courses = [
     {
       "name": "Java Script",
@@ -93,7 +98,7 @@ class _CourseStudentPageState extends State<CourseStudentPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Cursos matriculados",
+                      "Seus cursos",
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
@@ -133,7 +138,10 @@ class _CourseStudentPageState extends State<CourseStudentPage> {
                   ],
                 ),
                 const SizedBox(height: 16),
-                CourseList(size: _size, courses: _courses),
+                ListCourseHome(
+                  courseStore: courseStore,
+                  size: _size,
+                ),
                 const SizedBox(height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,

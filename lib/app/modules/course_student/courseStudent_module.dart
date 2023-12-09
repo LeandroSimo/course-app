@@ -19,6 +19,7 @@ class CourseStudentModule extends Module {
     r.child('/',
         child: (_) => CourseStudentPage(
               student: r.args.data,
+              courseStore: Modular.get(),
             ));
     r.module('/course', module: CourseModule());
   }

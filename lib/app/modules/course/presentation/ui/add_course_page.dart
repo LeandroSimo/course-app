@@ -21,6 +21,7 @@ class _AddCoursePageState extends State<AddCoursePage> {
   TextEditingController descriptionController = TextEditingController();
   TextEditingController scheduleController = TextEditingController();
   TextEditingController levelController = TextEditingController();
+  TextEditingController hoursController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -134,6 +135,23 @@ class _AddCoursePageState extends State<AddCoursePage> {
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
+                      controller: hoursController,
+                      decoration: const InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black),
+                        ),
+                        labelText: 'Carga horária',
+                        labelStyle: TextStyle(color: Colors.black),
+                      ),
+                      cursorColor: Colors.black,
+                      style: const TextStyle(color: Colors.black),
+                      // validator: (value) => firstNameValidate(value),
+                    ),
+                    const SizedBox(height: 16),
+                    TextFormField(
                       controller: levelController,
                       decoration: const InputDecoration(
                         enabledBorder: OutlineInputBorder(
@@ -171,6 +189,7 @@ class _AddCoursePageState extends State<AddCoursePage> {
                                 description: descriptionController.text,
                                 schedule: scheduleController.text,
                                 level: levelController.text,
+                                hours: hoursController.text,
                               ),
                             );
                             Modular.to.pushNamedAndRemoveUntil(

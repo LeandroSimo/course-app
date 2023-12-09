@@ -16,7 +16,7 @@ class _CourseDetailsState extends State<CourseDetails> {
   @override
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size;
-    final CourseEntity ourse = arguments["course"] as CourseEntity;
+    final CourseEntity course = arguments["course"] as CourseEntity;
     final bool isAdm = arguments["isAdm"] as bool;
 
     return SafeArea(
@@ -68,7 +68,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                 ),
                 const SizedBox(height: 15),
                 Text(
-                  ourse.name,
+                  course.name,
                   style: const TextStyle(
                     fontSize: 27,
                     fontWeight: FontWeight.w600,
@@ -76,10 +76,35 @@ class _CourseDetailsState extends State<CourseDetails> {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  ourse.description,
+                  course.description,
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w400,
+                  ),
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Carga horária',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    isAdm
+                        ? IconButton(
+                            onPressed: () {},
+                            icon: const Icon(Icons.edit),
+                          )
+                        : const SizedBox(),
+                  ],
+                ),
+                Text(
+                  "${course.hours.toString()}h",
+                  style: const TextStyle(
+                    fontSize: 18,
                   ),
                 ),
                 const SizedBox(height: 5),
@@ -103,7 +128,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                 ),
                 // const SizedBox(height: 5),
                 Text(
-                  ourse.schedule,
+                  course.schedule,
                   style: const TextStyle(
                     fontSize: 18,
                   ),
@@ -128,7 +153,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                   ],
                 ),
                 Text(
-                  ourse.level,
+                  course.level,
                   style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w400,
