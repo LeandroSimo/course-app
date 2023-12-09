@@ -7,19 +7,19 @@ import 'package:teste_vrsoft/app/modules/student/presentation/widgets/student_ca
 import 'package:teste_vrsoft/app/modules/student/stores/student_store.dart';
 import 'package:flutter/material.dart';
 
-class StudentPage extends StatefulWidget {
+class StudenListtPage extends StatefulWidget {
   final StudentStore controller;
   final String title;
-  StudentPage({
+  StudenListtPage({
     this.title = 'Alunos',
     required this.controller,
   });
 
   @override
-  StudentPageState createState() => StudentPageState();
+  StudenListtPageState createState() => StudenListtPageState();
 }
 
-class StudentPageState extends State<StudentPage> {
+class StudenListtPageState extends State<StudenListtPage> {
   StudentStore get controller => widget.controller;
 
   TextEditingController firstNameController = TextEditingController();
@@ -35,6 +35,7 @@ class StudentPageState extends State<StudentPage> {
   @override
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size;
+    final bool isAdm = arguments["isAdm"];
     return SafeArea(
       child: Observer(
         builder: (context) {
@@ -115,10 +116,10 @@ class StudentPageState extends State<StudentPage> {
                           lastNameEditController: lastNameEditController,
                           controller: controller,
                           func: () {
-                            Modular.to.navigate(
-                              "/student/details",
-                              arguments: student,
-                            );
+                            Modular.to.navigate("/student/details", arguments: {
+                              "student": student,
+                              "isAdm": isAdm,
+                            });
                           },
                         );
                       },
@@ -139,7 +140,7 @@ class StudentPageState extends State<StudentPage> {
                   context: context,
                   delegate: StudentSearchDelegate(controller: controller),
                 );
-                // print para com o valor retorna do showSearch
+                // print com o valor retorna do showSearch
                 print("VALOR DE ENTITY: ${entity!.firstName}");
               },
               child: const Icon(Icons.search),
