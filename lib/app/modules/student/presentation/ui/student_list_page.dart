@@ -30,12 +30,9 @@ class StudenListtPageState extends State<StudenListtPage> {
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final arguments = Modular.args.data;
-
   @override
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size;
-    final bool isAdm = arguments["isAdm"];
     return SafeArea(
       child: Observer(
         builder: (context) {
@@ -49,7 +46,9 @@ class StudenListtPageState extends State<StudenListtPage> {
                   Modular.to.pushNamedAndRemoveUntil(
                     "/redirect",
                     (_) => false,
-                    arguments: arguments,
+                    arguments: {
+                      "isAdm": true,
+                    },
                   );
                 },
                 icon: const Icon(
@@ -116,10 +115,10 @@ class StudenListtPageState extends State<StudenListtPage> {
                           lastNameEditController: lastNameEditController,
                           controller: controller,
                           func: () {
-                            Modular.to.navigate("/student/details", arguments: {
-                              "student": student,
-                              "isAdm": isAdm,
-                            });
+                            Modular.to.navigate(
+                              "/student/details",
+                              arguments: student,
+                            );
                           },
                         );
                       },
