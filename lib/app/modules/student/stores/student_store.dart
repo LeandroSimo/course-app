@@ -49,7 +49,13 @@ abstract class _StudentStoreBase with Store {
   }
 
   @action
-  Future<void> addCourseToStudent(CourseEntity course) async {
-    await _studentRepository!.addCourserToStudent(course);
+  Future<bool> addCourseToStudent(CourseEntity course,
+      {StudentEntity? studentEntity}) async {
+    return await _studentRepository!.addCourserToStudent(course);
+  }
+
+  @action
+  Future<List<CourseEntity>> getCoursesByStudent(StudentEntity student) async {
+    return await _studentRepository!.getCoursesByStudent(student);
   }
 }
