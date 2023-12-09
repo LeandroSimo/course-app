@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class GridViewCoursesProgress extends StatelessWidget {
-  const GridViewCoursesProgress({
+class ListViewCoursesProgress extends StatelessWidget {
+  const ListViewCoursesProgress({
     super.key,
     required this.size,
     required this.coursesProgress,
@@ -12,13 +12,11 @@ class GridViewCoursesProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 8,
-          mainAxisSpacing: 8,
-        ),
+    return SizedBox(
+      height: size.height * 0.22,
+      child: ListView.builder(
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
         itemCount: coursesProgress.length,
         itemBuilder: (_, index) {
           final course = coursesProgress[index];
@@ -33,7 +31,7 @@ class GridViewCoursesProgress extends StatelessWidget {
           return Card(
             elevation: 4,
             child: Container(
-              width: size.width * 0.22,
+              width: size.width * 0.35,
               height: size.height * 0.12,
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(

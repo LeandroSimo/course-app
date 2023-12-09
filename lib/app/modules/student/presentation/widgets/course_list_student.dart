@@ -12,7 +12,7 @@ class CourseList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: size.height * 0.19,
       child: courses.isNotEmpty
           ? ListView.builder(
