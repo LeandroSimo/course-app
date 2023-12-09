@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:teste_vrsoft/app/modules/course/stores/course_store.dart';
 import 'package:teste_vrsoft/app/modules/home/presentation/widgets/list_course_home.dart';
 import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
 import 'package:teste_vrsoft/app/modules/student/presentation/widgets/course_list_student.dart';
 import 'package:teste_vrsoft/app/modules/student/presentation/widgets/list_view_courses_progress.dart';
+import 'package:teste_vrsoft/app/modules/student/stores/student_store.dart';
 
 class HomePage extends StatefulWidget {
   final StudentEntity student;
   final CourseStore courseStore;
+  final StudentStore studentStore;
   const HomePage({
     super.key,
     required this.student,
     required this.courseStore,
+    required this.studentStore,
   });
 
   @override
@@ -21,6 +25,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   CourseStore get courseStore => widget.courseStore;
+  StudentStore get studentStore => widget.studentStore;
 
   final List<Map> _courses = [
     {
@@ -73,6 +78,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size;
+    StudentEntity student = widget.student;
 
     return SafeArea(
       child: Scaffold(
@@ -81,7 +87,7 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Colors.transparent,
           centerTitle: true,
           title: Text(
-            widget.student.firstName,
+            student.firstName,
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.w800,
@@ -89,80 +95,82 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
-        body: Container(
-          padding: const EdgeInsets.all(16),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Seus cursos",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.purple.shade900,
+        body: Observer(builder: (context) {
+          return Container(
+            padding: const EdgeInsets.all(16),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Seus cursos",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.purple.shade900,
+                        ),
                       ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        Modular.to.navigate(
-                          '/course/',
-                          arguments: {
-                            "student": widget.student,
-                            "isAdm": true,
-                          },
-                        );
-                      },
-                      icon: const Icon(
-                        Icons.add_box,
-                        color: Colors.purple,
+                      IconButton(
+                        onPressed: () {
+                          Modular.to.navigate(
+                            '/course/',
+                            arguments: {
+                              "student": student,
+                              "isAdm": false,
+                            },
+                          );
+                        },
+                        icon: const Icon(
+                          Icons.add_box,
+                          color: Colors.purple,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                CourseList(size: _size, courses: widget.student.courses),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Alguns dos nossos cursos",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.purple.shade900,
+                    ],
+                  ),
+                  CourseList(size: _size, courses: student.courses),
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Alguns dos nossos cursos",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.purple.shade900,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                ListCourseHome(
-                  courseStore: courseStore,
-                  size: _size,
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Seu progesso",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.purple.shade900,
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  ListCourseHome(
+                    courseStore: courseStore,
+                    size: _size,
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Seu progesso",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.purple.shade900,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                ListViewCoursesProgress(
-                    size: _size, coursesProgress: coursesProgress)
-              ],
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  ListViewCoursesProgress(
+                      size: _size, coursesProgress: coursesProgress)
+                ],
+              ),
             ),
-          ),
-        ),
+          );
+        }),
       ),
     );
   }

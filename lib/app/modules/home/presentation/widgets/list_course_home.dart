@@ -84,16 +84,24 @@ class ListCourseHome extends StatelessWidget {
                   course.students.length < 5
                       ? DecoratedBox(
                           decoration: BoxDecoration(
-                            color: Colors.yellow.shade800,
+                            color: course.students.length < 1
+                                ? Colors.green.shade500
+                                : course.students.length < 5
+                                    ? Colors.yellow.shade800
+                                    : Colors.red.shade600,
                             borderRadius: BorderRadius.circular(5),
                           ),
                           child: SizedBox(
                             height: size.height * 0.05,
                             width: size.width * 0.3,
-                            child: const Center(
+                            child: Center(
                               child: Text(
-                                'Turma disponível',
-                                style: TextStyle(
+                                course.students.length < 1
+                                    ? 'Turma disponível'
+                                    : course.students.length < 5
+                                        ? 'Últimas vagas'
+                                        : 'Turma fechada',
+                                style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.white,

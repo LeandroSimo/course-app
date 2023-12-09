@@ -35,6 +35,7 @@ class LoginPageState extends State<LoginPage> with LoginValidator {
         firstName: _controllerFirstNameRegister.text,
         lastName: _controllerLastNameRegister.text,
       );
+
       if (isAdm) {
         if (_controllerUser.text == "admin" &&
             _controllerPassword.text == "admin") {
@@ -44,6 +45,7 @@ class LoginPageState extends State<LoginPage> with LoginValidator {
           clearTextEditingControllers();
         }
       }
+
       if (!isRegistered) {
         studentStore.createStudent(student);
         Modular.to.pushNamedAndRemoveUntil(
@@ -55,6 +57,7 @@ class LoginPageState extends State<LoginPage> with LoginValidator {
       } else {
         final isStudent = studentStore.studentList
             .any((student) => student.firstName == _controllerUser.text);
+
         if (isStudent) {
           Modular.to.pushNamedAndRemoveUntil(
             '/home/',

@@ -6,14 +6,24 @@ import 'package:teste_vrsoft/app/modules/course/stores/course_store.dart';
 
 class CourseModule extends Module {
   @override
+  void exportedBinds(Injector i) {
+    i.addInstance(CourseStore.new);
+  }
+
+  @override
   void binds(Injector i) {
     i.add(CourseStore.new);
   }
 
   @override
   void routes(RouteManager r) {
-    r.child(Modular.initialRoute,
-        child: (_) => CourseListPage(courseStore: Modular.get()));
+    r.child(
+      Modular.initialRoute,
+      child: (_) => CourseListPage(
+        courseStore: Modular.get(),
+        studentStore: Modular.get(),
+      ),
+    );
     r.child('/add', child: (_) => AddCoursePage(courseStore: Modular.get()));
     r.child('/details', child: (_) => const CourseDetails());
   }

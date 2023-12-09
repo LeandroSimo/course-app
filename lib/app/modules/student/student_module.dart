@@ -1,10 +1,14 @@
-import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
 import 'package:teste_vrsoft/app/modules/student/presentation/ui/student_details_page.dart';
 import 'package:teste_vrsoft/app/modules/student/presentation/ui/student_list_page.dart';
 import 'package:teste_vrsoft/app/modules/student/stores/student_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class StudentModule extends Module {
+  @override
+  void exportedBinds(Injector i) {
+    i.addInstance(StudentStore.new);
+  }
+
   @override
   void binds(Injector i) {
     i.add(StudentStore.new);
