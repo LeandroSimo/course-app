@@ -31,33 +31,40 @@ class LoginPageState extends State<LoginPage> with LoginValidator {
 
   loginAndRegister() {
     if (form.currentState!.validate()) {
+      final student = StudentEntity(
+        firstName: _controllerFirstNameRegister.text,
+        lastName: _controllerLastNameRegister.text,
+      );
       if (isAdm) {
         if (_controllerUser.text == "admin" &&
             _controllerPassword.text == "admin") {
-          Modular.to.navigate('/redirect', arguments: true);
+          Modular.to.navigate('/redirect', arguments: {
+            "isAdm": isAdm,
+          });
           clearTextEditingControllers();
         }
       }
       if (!isRegistered) {
-        final student = StudentEntity(
-          firstName: _controllerFirstNameRegister.text,
-          lastName: _controllerLastNameRegister.text,
-        );
         studentStore.createStudent(student);
-        Modular.to.pushNamedAndRemoveUntil('/home/', (_) => false,
-            arguments: student);
+        Modular.to.pushNamedAndRemoveUntil(
+          '/home/',
+          (_) => false,
+          arguments: student,
+        );
         clearTextEditingControllers();
+      } else {
+        final isStudent = studentStore.studentList
+            .any((student) => student.firstName == _controllerUser.text);
+        if (isStudent) {
+          Modular.to.pushNamedAndRemoveUntil(
+            '/home/',
+            (_) => false,
+            arguments: studentStore.studentList.firstWhere(
+                (student) => student.firstName == _controllerUser.text),
+          );
+          clearTextEditingControllers();
+        }
       }
-      // else {
-      //   if (studentStore.studentList.any(
-      //     (student) =>
-      //         student.firstName == _controllerFirstNameRegister.text &&
-      //         student.lastName == _controllerLastNameRegister.text,
-      //   )) {
-      //     Navigator.pushNamed(context, '/home');
-      //     clearTextEditingControllers();
-      //   }
-      // }
     }
   }
 
@@ -211,7 +218,10 @@ class LoginPageState extends State<LoginPage> with LoginValidator {
                   ),
                   onPressed: !isRegistered
                       ? null
-                      : () => setState(() => isAdm = !isAdm),
+                      : () {
+                          setState(() => isAdm = !isAdm);
+                          clearTextEditingControllers();
+                        },
                 ),
               ],
             ),

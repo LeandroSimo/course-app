@@ -37,7 +37,7 @@ class _AddCoursePageState extends State<AddCoursePage> {
               Modular.to.pushNamedAndRemoveUntil(
                 "/course/",
                 (_) => false,
-                arguments: true,
+                arguments: {"isAdm": true},
               );
             },
             icon: const Icon(
@@ -176,7 +176,7 @@ class _AddCoursePageState extends State<AddCoursePage> {
                             Modular.to.pushNamedAndRemoveUntil(
                               '/course/',
                               (_) => false,
-                              arguments: true,
+                              arguments: {"isAdm": true},
                             );
                             // if (form.currentState!.validate()) {
                             // }

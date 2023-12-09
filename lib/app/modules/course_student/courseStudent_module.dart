@@ -16,7 +16,10 @@ class CourseStudentModule extends Module {
 
   @override
   void routes(RouteManager r) {
-    r.child('/', child: (_) => CourseStudentPage());
+    r.child('/',
+        child: (_) => CourseStudentPage(
+              student: r.args.data,
+            ));
     r.module('/course', module: CourseModule());
   }
 }

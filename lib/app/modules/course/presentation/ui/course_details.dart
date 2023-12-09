@@ -16,8 +16,8 @@ class _CourseDetailsState extends State<CourseDetails> {
   @override
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size;
-    final CourseEntity _course = arguments["course"] as CourseEntity;
-    final bool _isTrue = arguments["isTrue"] as bool;
+    final CourseEntity ourse = arguments["course"] as CourseEntity;
+    final bool isAdm = arguments["isAdm"] as bool;
 
     return SafeArea(
       child: Scaffold(
@@ -27,7 +27,7 @@ class _CourseDetailsState extends State<CourseDetails> {
               Modular.to.pushNamedAndRemoveUntil(
                 '/course/',
                 (_) => false,
-                arguments: _isTrue,
+                arguments: {"isAdm": isAdm},
               );
             },
             icon: const Icon(
@@ -68,7 +68,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                 ),
                 const SizedBox(height: 15),
                 Text(
-                  _course.name,
+                  ourse.name,
                   style: const TextStyle(
                     fontSize: 27,
                     fontWeight: FontWeight.w600,
@@ -76,7 +76,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  _course.description,
+                  ourse.description,
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w400,
@@ -93,7 +93,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    _isTrue
+                    isAdm
                         ? IconButton(
                             onPressed: () {},
                             icon: const Icon(Icons.edit),
@@ -103,7 +103,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                 ),
                 // const SizedBox(height: 5),
                 Text(
-                  _course.schedule,
+                  ourse.schedule,
                   style: const TextStyle(
                     fontSize: 18,
                   ),
@@ -119,7 +119,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    _isTrue
+                    isAdm
                         ? IconButton(
                             onPressed: () {},
                             icon: Icon(Icons.edit),
@@ -128,7 +128,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                   ],
                 ),
                 Text(
-                  _course.level,
+                  ourse.level,
                   style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w400,

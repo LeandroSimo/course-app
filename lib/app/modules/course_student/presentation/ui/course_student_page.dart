@@ -5,10 +5,10 @@ import 'package:teste_vrsoft/app/modules/student/presentation/widgets/course_lis
 import 'package:teste_vrsoft/app/modules/student/presentation/widgets/grid_view_courses_progress.dart';
 
 class CourseStudentPage extends StatefulWidget {
-  final StudentEntity? student;
+  final StudentEntity student;
   const CourseStudentPage({
     super.key,
-    this.student,
+    required this.student,
   });
 
   @override
@@ -16,6 +16,7 @@ class CourseStudentPage extends StatefulWidget {
 }
 
 class _CourseStudentPageState extends State<CourseStudentPage> {
+  // final arguments = Modular.args.data;
   final List<Map> _courses = [
     {
       "name": "Java Script",
@@ -67,6 +68,7 @@ class _CourseStudentPageState extends State<CourseStudentPage> {
   @override
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size;
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -74,7 +76,7 @@ class _CourseStudentPageState extends State<CourseStudentPage> {
           backgroundColor: Colors.transparent,
           centerTitle: true,
           title: Text(
-            'Perfil',
+            widget.student.firstName,
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.w800,
@@ -100,8 +102,11 @@ class _CourseStudentPageState extends State<CourseStudentPage> {
                   IconButton(
                     onPressed: () {
                       Modular.to.navigate(
-                        '/home/course/',
-                        arguments: false,
+                        '/course/',
+                        arguments: {
+                          "student": widget.student,
+                          "isAdm": true,
+                        },
                       );
                     },
                     icon: const Icon(

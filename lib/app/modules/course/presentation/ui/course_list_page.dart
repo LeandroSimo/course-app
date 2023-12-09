@@ -21,6 +21,7 @@ class CourseListPageState extends State<CourseListPage> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isAdm = arguments["isAdm"];
     final _size = MediaQuery.of(context).size;
 
     return SafeArea(
@@ -29,22 +30,34 @@ class CourseListPageState extends State<CourseListPage> {
           automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
           elevation: 2,
-          centerTitle: !arguments,
-          leading: arguments
+          centerTitle: !isAdm,
+          leading: isAdm
               ? IconButton(
                   onPressed: () {
                     Modular.to.pushNamedAndRemoveUntil(
                       '/redirect',
                       (_) => false,
-                      arguments: arguments,
+                      arguments: {"isAdm": isAdm},
                     );
                   },
                   icon: const Icon(
-                    Icons.login_outlined,
+                    Icons.arrow_back_ios,
                     color: Colors.purple,
                   ),
                 )
-              : const SizedBox(),
+              : IconButton(
+                  onPressed: () {
+                    Modular.to.pushNamedAndRemoveUntil(
+                      '/home',
+                      (_) => false,
+                      arguments: {"isAdm": isAdm},
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.purple,
+                  ),
+                ),
           title: Text(
             "Cursos",
             style: TextStyle(
@@ -54,7 +67,7 @@ class CourseListPageState extends State<CourseListPage> {
             ),
           ),
           actions: [
-            arguments
+            isAdm
                 ? Padding(
                     padding: const EdgeInsets.only(right: 8),
                     child: ElevatedButton(
@@ -89,7 +102,7 @@ class CourseListPageState extends State<CourseListPage> {
                               "/course/details",
                               arguments: {
                                 "course": course,
-                                "isTrue": arguments,
+                                "isAdm": isAdm,
                               },
                             );
                           },
