@@ -1,6 +1,6 @@
 import 'package:teste_vrsoft/app/modules/course/course_module.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:teste_vrsoft/app/modules/home/presentation/ui/course_student_page.dart';
+import 'package:teste_vrsoft/app/modules/home/presentation/ui/home_page.dart';
 import 'package:teste_vrsoft/app/modules/home/stores/home_store.dart';
 
 class HomeModule extends Module {
