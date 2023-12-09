@@ -128,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Cursos disponíveis",
+                      "Alguns dos nossos cursos",
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,

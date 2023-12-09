@@ -14,7 +14,7 @@ class ListCourseHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: size.height * 0.40,
+      height: size.height * 0.46,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: courseStore.courseList.length,
@@ -80,6 +80,29 @@ class ListCourseHome extends StatelessWidget {
                       color: Colors.purple.shade900,
                     ),
                   ),
+                  const SizedBox(height: 8),
+                  course.students.length < 5
+                      ? DecoratedBox(
+                          decoration: BoxDecoration(
+                            color: Colors.yellow.shade800,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: SizedBox(
+                            height: size.height * 0.05,
+                            width: size.width * 0.3,
+                            child: const Center(
+                              child: Text(
+                                'Turma disponível',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                      : const SizedBox(),
                 ],
               ),
             ),
