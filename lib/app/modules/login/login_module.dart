@@ -1,4 +1,3 @@
-import 'package:teste_vrsoft/app/modules/course_student/courseStudent_module.dart';
 import 'package:teste_vrsoft/app/modules/login/presentation/ui/login_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:teste_vrsoft/app/modules/login/presentation/ui/redirect_admin_register.dart';

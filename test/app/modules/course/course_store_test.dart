@@ -23,6 +23,7 @@ void main() {
       description: "Curso de Java Script",
       schedule: "Segunda a Sexta",
       level: "Básico",
+      hours: "40",
     );
     when(() => store.createCourse(course)).thenAnswer((_) async => 1);
     expect(await store.createCourse(course), isA<int>());
@@ -34,6 +35,7 @@ void main() {
       description: "Curso de Java Script",
       schedule: "Segunda a Sexta",
       level: "Básico",
+      hours: "40",
     );
     when(() => store.updateCourse(course)).thenAnswer((_) async => 1);
     expect(await store.updateCourse(course), isA<int>());
@@ -45,6 +47,7 @@ void main() {
       description: "Curso de Java Script",
       schedule: "Segunda a Sexta",
       level: "Básico",
+      hours: "40",
     );
     store.removeCourse(course);
   });

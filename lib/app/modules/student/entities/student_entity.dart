@@ -1,7 +1,7 @@
 import 'package:objectbox/objectbox.dart';
+import 'package:teste_vrsoft/app/database/entities/couse_student_entity.dart';
 import 'package:teste_vrsoft/app/database/objectbox.g.dart';
 import 'package:teste_vrsoft/app/modules/course/entities/course_entity.dart';
-import 'package:teste_vrsoft/app/modules/course_student/entities/couse_student_entity.dart';
 
 Store _store = Store(getObjectBoxModel());
 

@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:teste_vrsoft/app/modules/course/stores/course_store.dart';
-import 'package:teste_vrsoft/app/modules/course_student/presentation/widgets/list_course_home.dart';
+import 'package:teste_vrsoft/app/modules/home/presentation/widgets/list_course_home.dart';
 import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
 import 'package:teste_vrsoft/app/modules/student/presentation/widgets/course_list_student.dart';
 import 'package:teste_vrsoft/app/modules/student/presentation/widgets/list_view_courses_progress.dart';
 
-class CourseStudentPage extends StatefulWidget {
+class HomePage extends StatefulWidget {
   final StudentEntity student;
   final CourseStore courseStore;
-  const CourseStudentPage({
+  const HomePage({
     super.key,
     required this.student,
     required this.courseStore,
   });
 
   @override
-  State<CourseStudentPage> createState() => _CourseStudentPageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _CourseStudentPageState extends State<CourseStudentPage> {
+class _HomePageState extends State<HomePage> {
   CourseStore get courseStore => widget.courseStore;
 
   final List<Map> _courses = [
