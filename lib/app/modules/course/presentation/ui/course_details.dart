@@ -190,7 +190,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                   children: [
                     SizedBox(
                       height: size.height * 0.09,
-                      width: size.width * 0.95,
+                      width: size.width * 0.93,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.purple.shade900,
