@@ -34,8 +34,8 @@ class CourseList extends StatelessWidget {
                     Card(
                       elevation: 4,
                       child: Container(
-                        width: size.width * 0.22,
-                        height: size.height * 0.12,
+                        width: size.width * 0.23,
+                        height: size.height * 0.13,
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
                           color: Colors.white,
