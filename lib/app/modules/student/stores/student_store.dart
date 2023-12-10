@@ -1,6 +1,5 @@
 import 'package:mobx/mobx.dart';
 import 'package:teste_vrsoft/app/modules/course/entities/course_entity.dart';
-import 'package:teste_vrsoft/app/modules/student/dto/student_dto.dart';
 import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
 import 'package:teste_vrsoft/app/modules/student/repositories/student_repository.dart';
 
@@ -20,26 +19,11 @@ abstract class _StudentStoreBase with Store {
   ObservableList<StudentEntity> studentList = ObservableList<StudentEntity>();
   ObservableList<CourseEntity> courseListStudent =
       ObservableList<CourseEntity>();
-  // ObservableList<StudentDto> studentDtoList = ObservableList<StudentDto>();
 
   @action
   Future<List<StudentEntity>> getAllStudent() async {
     return await _studentRepository!.readStudent();
   }
-
-  // @action
-  // Future<List<StudentDto>> getAllStudentDto() async {
-  //   List<StudentDto> studentDtoList = [];
-  //   List<StudentEntity> studentList = await _studentRepository!.readStudent();
-  //   studentList.forEach((element) {
-  //     studentDtoList.add(StudentDto(
-  //       cod: element.cod,
-  //       firstName: element.firstName,
-  //       lastName: element.lastName,
-  //     ));
-  //   });
-  //   return studentDtoList;
-  // }
 
   @action
   Future<int> createStudent(StudentEntity student) async {
@@ -73,14 +57,19 @@ abstract class _StudentStoreBase with Store {
         await _studentRepository!.addCourserToStudent(student, course);
     if (result != -1) {
       courseListStudent.add(course);
+      final value = student.courses.firstWhere(
+        (element) => element.cod == student.cod,
+        orElse: () => course,
+      );
+
+      print("VALOR DO VALUE: ${value.students.length}");
+      // print(
+      //     "VALOR DO VALUE: ${value.students.firstWhere((element) => element.cod == student.cod)}");
+
+      if (value.cod == student.cod) {
+        studentList.add(student);
+      }
     }
     return result;
-  }
-
-  @action
-  Future<List<CourseEntity>> getCoursesByStudent(StudentEntity student) async {
-    final listCourse = await _studentRepository!.getCoursesByStudent(student);
-    courseListStudent.addAll(listCourse);
-    return listCourse;
   }
 }

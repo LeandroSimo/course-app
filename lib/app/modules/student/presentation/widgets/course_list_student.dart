@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:teste_vrsoft/app/modules/course/entities/course_entity.dart';
-import 'package:teste_vrsoft/app/modules/student/stores/student_store.dart';
 
 class CourseList extends StatelessWidget {
   const CourseList({

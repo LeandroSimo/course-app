@@ -35,8 +35,12 @@ class CourseRepository {
     store.remove(course.cod);
   }
 
-  Future<void> addStudentToCourse(StudentEntity student,
-      {CourseEntity? course}) async {
-    course!.addStudentToCourse(student);
+  Future<int> addStudentToCourse(
+    CourseEntity course,
+    StudentEntity student,
+  ) async {
+    final store = await getCourse();
+    course.addStudentToCourse(student);
+    return store.put(course);
   }
 }

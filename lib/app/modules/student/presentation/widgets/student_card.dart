@@ -20,7 +20,7 @@ class StudentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: func,
       child: Card(
@@ -55,7 +55,7 @@ class StudentCard extends StatelessWidget {
                   );
                   lastNameEditController.value =
                       TextEditingValue(text: student.lastName);
-                  _showAlertDialog(context, _size);
+                  _showAlertDialog(context, size);
                 },
               ),
               IconButton(
@@ -76,7 +76,7 @@ class StudentCard extends StatelessWidget {
       context: context,
       builder: (context) {
         return AlertDialog(
-          content: Container(
+          content: SizedBox(
             height: size.height * 0.4,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

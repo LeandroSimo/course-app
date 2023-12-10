@@ -25,7 +25,7 @@ class _AddCoursePageState extends State<AddCoursePage> {
 
   @override
   Widget build(BuildContext context) {
-    final _size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
 
     return SafeArea(
       child: Scaffold(
@@ -56,7 +56,7 @@ class _AddCoursePageState extends State<AddCoursePage> {
           ),
         ),
         body: Container(
-          height: _size.height,
+          height: size.height,
           padding: const EdgeInsets.all(10),
           color: Theme.of(context).colorScheme.primaryContainer,
           child: Container(
@@ -170,7 +170,7 @@ class _AddCoursePageState extends State<AddCoursePage> {
                     Padding(
                       padding: const EdgeInsets.only(top: 40),
                       child: SizedBox(
-                        height: _size.height * 0.08,
+                        height: size.height * 0.08,
                         child: ElevatedButton(
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(

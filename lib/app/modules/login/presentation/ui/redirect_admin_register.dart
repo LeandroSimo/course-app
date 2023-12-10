@@ -16,7 +16,7 @@ class _RedirectAdminRegisterState extends State<RedirectAdminRegister> {
   @override
   Widget build(BuildContext context) {
     final bool isAdm = arguments["isAdm"];
-    final _size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -47,12 +47,12 @@ class _RedirectAdminRegisterState extends State<RedirectAdminRegister> {
         ),
         body: Container(
           padding: const EdgeInsets.all(20),
-          width: _size.width,
+          width: size.width,
           child: ListView(
             children: [
               const Gap(50),
               CardAdm(
-                size: _size,
+                size: size,
                 title: 'Cursos',
                 onTap: () => Modular.to.navigate(
                   "/course/",
@@ -65,7 +65,7 @@ class _RedirectAdminRegisterState extends State<RedirectAdminRegister> {
               ),
               const Gap(20),
               CardAdm(
-                size: _size,
+                size: size,
                 title: 'Alunos',
                 onTap: () => Modular.to.navigate("/student/"),
                 srcImg:

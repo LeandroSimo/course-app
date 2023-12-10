@@ -11,10 +11,10 @@ class CourseListPage extends StatefulWidget {
   final CourseStore courseStore;
   final StudentStore studentStore;
   const CourseListPage({
-    Key? key,
+    super.key,
     required this.courseStore,
     required this.studentStore,
-  }) : super(key: key);
+  });
   @override
   CourseListPageState createState() => CourseListPageState();
 }
@@ -26,7 +26,7 @@ class CourseListPageState extends State<CourseListPage> {
 
   @override
   Widget build(BuildContext context) {
-    final _size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
 
     final bool isAdm = arguments["isAdm"];
     final StudentEntity studentEntity = arguments["student"] ??
@@ -87,7 +87,6 @@ class CourseListPageState extends State<CourseListPage> {
                 ? Padding(
                     padding: const EdgeInsets.only(right: 8),
                     child: ElevatedButton(
-                      child: const Text("Adicionar"),
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(6),
@@ -96,6 +95,7 @@ class CourseListPageState extends State<CourseListPage> {
                       onPressed: () {
                         Modular.to.navigate("/course/add");
                       },
+                      child: const Text("Adicionar"),
                     ),
                   )
                 : const SizedBox(),
@@ -112,7 +112,7 @@ class CourseListPageState extends State<CourseListPage> {
                         final course = _courseStore.courseList[index];
                         return CardCourse(
                           course: course,
-                          size: _size,
+                          size: size,
                           onTap: () {
                             Modular.to.navigate(
                               "/course/details",

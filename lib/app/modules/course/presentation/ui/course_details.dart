@@ -20,7 +20,7 @@ class _CourseDetailsState extends State<CourseDetails> {
   final arguments = Modular.args.data;
   @override
   Widget build(BuildContext context) {
-    final _size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
 
     final CourseEntity course = arguments["course"] as CourseEntity;
     final bool isAdm = arguments["isAdm"] as bool;
@@ -65,23 +65,23 @@ class _CourseDetailsState extends State<CourseDetails> {
           ],
         ),
         body: Container(
-          height: _size.height,
-          width: _size.width,
+          height: size.height,
+          width: size.width,
           padding: const EdgeInsets.all(10),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  height: _size.height * 0.3,
-                  width: _size.width,
+                  height: size.height * 0.3,
+                  width: size.width,
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey.shade400),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(
                     Icons.play_arrow_rounded,
-                    size: _size.height * 0.1,
+                    size: size.height * 0.1,
                     color: Colors.purple.shade900,
                   ),
                 ),
@@ -166,7 +166,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                     isAdm
                         ? IconButton(
                             onPressed: () {},
-                            icon: Icon(Icons.edit),
+                            icon: const Icon(Icons.edit),
                           )
                         : const SizedBox(),
                   ],
@@ -183,8 +183,8 @@ class _CourseDetailsState extends State<CourseDetails> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: _size.height * 0.09,
-                      width: _size.width * 0.95,
+                      height: size.height * 0.09,
+                      width: size.width * 0.95,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.purple.shade900,

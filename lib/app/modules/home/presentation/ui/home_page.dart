@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:teste_vrsoft/app/modules/course/entities/course_entity.dart';
 import 'package:teste_vrsoft/app/modules/course/stores/course_store.dart';
 import 'package:teste_vrsoft/app/modules/home/presentation/widgets/list_course_home.dart';
 import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
@@ -10,6 +11,7 @@ import 'package:teste_vrsoft/app/modules/student/stores/student_store.dart';
 
 class HomePage extends StatefulWidget {
   final StudentEntity student;
+  final CourseEntity? course;
   final CourseStore courseStore;
   final StudentStore studentStore;
   const HomePage({
@@ -17,6 +19,7 @@ class HomePage extends StatefulWidget {
     required this.student,
     required this.courseStore,
     required this.studentStore,
+    this.course,
   });
 
   @override
@@ -60,7 +63,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final _size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
     StudentEntity student = widget.student;
 
     return SafeArea(
@@ -122,8 +125,7 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   CourseList(
-                    size: _size,
-                    // studentStore: studentStore,
+                    size: size,
                     listCourses: widget.student.courses,
                   ),
                   const SizedBox(height: 16),
@@ -143,7 +145,7 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(height: 16),
                   ListCourseHome(
                     courseStore: courseStore,
-                    size: _size,
+                    size: size,
                   ),
                   const SizedBox(height: 16),
                   Row(
@@ -161,7 +163,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   const SizedBox(height: 16),
                   ListViewCoursesProgress(
-                      size: _size, coursesProgress: coursesProgress)
+                      size: size, coursesProgress: coursesProgress)
                 ],
               ),
             ),

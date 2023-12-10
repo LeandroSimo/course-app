@@ -37,9 +37,17 @@ mixin _$CourseStore on _CourseStoreBase, Store {
       AsyncAction('_CourseStoreBase.addStudentToCourse', context: context);
 
   @override
-  Future<void> addStudentToCourse(StudentEntity student) {
+  Future<int> addStudentToCourse(CourseEntity course, StudentEntity student) {
     return _$addStudentToCourseAsyncAction
-        .run(() => super.addStudentToCourse(student));
+        .run(() => super.addStudentToCourse(course, student));
+  }
+
+  late final _$refreshCourseListAsyncAction =
+      AsyncAction('_CourseStoreBase.refreshCourseList', context: context);
+
+  @override
+  Future<void> refreshCourseList() {
+    return _$refreshCourseListAsyncAction.run(() => super.refreshCourseList());
   }
 
   late final _$_CourseStoreBaseActionController =

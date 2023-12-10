@@ -42,15 +42,6 @@ mixin _$StudentStore on _StudentStoreBase, Store {
         .run(() => super.addCourseToStudent(student, course));
   }
 
-  late final _$getCoursesByStudentAsyncAction =
-      AsyncAction('_StudentStoreBase.getCoursesByStudent', context: context);
-
-  @override
-  Future<List<CourseEntity>> getCoursesByStudent(StudentEntity student) {
-    return _$getCoursesByStudentAsyncAction
-        .run(() => super.getCoursesByStudent(student));
-  }
-
   late final _$_StudentStoreBaseActionController =
       ActionController(name: '_StudentStoreBase', context: context);
 

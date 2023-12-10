@@ -6,11 +6,10 @@ class AddStudentpage extends StatefulWidget {
   final TextEditingController firstNameController;
   final TextEditingController lastNameController;
   const AddStudentpage(
-      {Key? key,
+      {super.key,
       required this.func,
       required this.firstNameController,
-      required this.lastNameController})
-      : super(key: key);
+      required this.lastNameController});
 
   @override
   State<AddStudentpage> createState() => _AddStudentpageState();
@@ -21,11 +20,11 @@ class _AddStudentpageState extends State<AddStudentpage> with StudentValidator {
 
   @override
   Widget build(BuildContext context) {
-    final _size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
     return SafeArea(
       top: false,
       child: Container(
-        height: _size.height * 0.5,
+        height: size.height * 0.5,
         padding: const EdgeInsets.all(24.0),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.primary,

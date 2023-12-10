@@ -84,7 +84,7 @@ class ListCourseHome extends StatelessWidget {
                   course.students.length < 5
                       ? DecoratedBox(
                           decoration: BoxDecoration(
-                            color: course.students.length < 1
+                            color: course.students.isEmpty
                                 ? Colors.green.shade500
                                 : course.students.length < 5
                                     ? Colors.yellow.shade800
@@ -96,7 +96,7 @@ class ListCourseHome extends StatelessWidget {
                             width: size.width * 0.3,
                             child: Center(
                               child: Text(
-                                course.students.length < 1
+                                course.students.isEmpty
                                     ? 'Turma disponível'
                                     : course.students.length < 5
                                         ? 'Últimas vagas'

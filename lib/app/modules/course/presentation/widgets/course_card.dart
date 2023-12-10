@@ -14,7 +14,7 @@ class CardCourse extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _courseName = _checkCourseName(course.name.toString().toUpperCase());
+    final courseName = _checkCourseName(course.name.toString().toUpperCase());
     return GestureDetector(
       onTap: onTap,
       child: Column(
@@ -43,7 +43,7 @@ class CardCourse extends StatelessWidget {
                     ),
                     child: Center(
                       child: Text(
-                        _courseName,
+                        courseName,
                         style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,

@@ -27,7 +27,7 @@ class _StudentDetailsPageState extends State<StudentDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final _size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
 
     final studentEntity = controller.studentList.firstWhere(
       (element) => element.cod == widget.student.cod,
@@ -63,7 +63,7 @@ class _StudentDetailsPageState extends State<StudentDetailsPage> {
                     TextEditingValue(text: studentEntity.firstName);
                 lastNameEditController.value =
                     TextEditingValue(text: studentEntity.lastName);
-                _showAlertDialog(context, _size, widget.student);
+                _showAlertDialog(context, size, widget.student);
               },
               icon: const Icon(
                 Icons.edit,
@@ -73,7 +73,7 @@ class _StudentDetailsPageState extends State<StudentDetailsPage> {
           ],
         ),
         body: SizedBox(
-          width: _size.width,
+          width: size.width,
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -122,9 +122,9 @@ class _StudentDetailsPageState extends State<StudentDetailsPage> {
                     const Gap(20),
                     Container(
                       height: widget.student.courses.isNotEmpty
-                          ? _size.height
-                          : _size.height * 0.3,
-                      width: _size.width,
+                          ? size.height
+                          : size.height * 0.3,
+                      width: size.width,
                       padding: const EdgeInsets.all(10),
                       color: Colors.grey.shade200,
                       child: widget.student.courses.isNotEmpty
@@ -193,7 +193,7 @@ class _StudentDetailsPageState extends State<StudentDetailsPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          content: Container(
+          content: SizedBox(
             height: size.height * 0.4,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

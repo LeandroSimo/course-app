@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 class StudenListtPage extends StatefulWidget {
   final StudentStore controller;
   final String title;
-  StudenListtPage({
+  const StudenListtPage({super.key, 
     this.title = 'Alunos',
     required this.controller,
   });
@@ -32,7 +32,7 @@ class StudenListtPageState extends State<StudenListtPage> {
 
   @override
   Widget build(BuildContext context) {
-    final _size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Observer(
         builder: (context) {
@@ -68,7 +68,6 @@ class StudenListtPageState extends State<StudenListtPage> {
                 Padding(
                   padding: const EdgeInsets.only(right: 8),
                   child: ElevatedButton(
-                    child: const Text("Adicionar"),
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6),
@@ -93,13 +92,14 @@ class StudenListtPageState extends State<StudenListtPage> {
                         ),
                       );
                     },
+                    child: const Text("Adicionar"),
                   ),
                 ),
               ],
             ),
             body: Container(
               padding: EdgeInsets.only(
-                top: _size.height * 0.02,
+                top: size.height * 0.02,
                 left: 2,
                 right: 2,
               ),

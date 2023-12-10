@@ -46,9 +46,9 @@ void main() {
       lastName: "Novo",
     );
 
-    when(() => studentStore.getCoursesByStudent(studentEntity))
-        .thenAnswer((_) async => []);
-    expect(await studentStore.getCoursesByStudent(studentEntity), isA<List>());
+    // when(() => studentStore.getCoursesByStudent(studentEntity))
+    //     .thenAnswer((_) async => []);
+    // expect(await studentStore.getCoursesByStudent(studentEntity), isA<List>());
   });
 
   test('Adicionando curso ao aluno com o repository', () {

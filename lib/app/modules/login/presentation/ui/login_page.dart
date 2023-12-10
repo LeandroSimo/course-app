@@ -8,9 +8,9 @@ import 'package:teste_vrsoft/app/modules/student/stores/student_store.dart';
 class LoginPage extends StatefulWidget {
   final StudentStore studentStore;
   const LoginPage({
-    Key? key,
+    super.key,
     required this.studentStore,
-  }) : super(key: key);
+  });
   @override
   LoginPageState createState() => LoginPageState();
 }
@@ -23,11 +23,11 @@ class LoginPageState extends State<LoginPage> with LoginValidator {
 
   final form = GlobalKey<FormState>();
 
-  TextEditingController _controllerUser = TextEditingController();
-  TextEditingController _controllerPassword = TextEditingController();
+  final TextEditingController _controllerUser = TextEditingController();
+  final TextEditingController _controllerPassword = TextEditingController();
 
-  TextEditingController _controllerFirstNameRegister = TextEditingController();
-  TextEditingController _controllerLastNameRegister = TextEditingController();
+  final TextEditingController _controllerFirstNameRegister = TextEditingController();
+  final TextEditingController _controllerLastNameRegister = TextEditingController();
 
   loginAndRegister() {
     if (form.currentState!.validate()) {
@@ -80,7 +80,7 @@ class LoginPageState extends State<LoginPage> with LoginValidator {
 
   @override
   Widget build(BuildContext context) {
-    final _size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(20),
@@ -90,7 +90,7 @@ class LoginPageState extends State<LoginPage> with LoginValidator {
           children: [
             Flexible(
               child: Container(
-                height: _size.height * 0.5,
+                height: size.height * 0.5,
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -109,7 +109,7 @@ class LoginPageState extends State<LoginPage> with LoginValidator {
                               ),
                         Text(
                           !isRegistered ? 'Cadastrar' : 'Entrar',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.w900,
                           ),
@@ -127,7 +127,7 @@ class LoginPageState extends State<LoginPage> with LoginValidator {
                                 validator: validator,
                                 controller: _controllerUser,
                                 decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
+                                  border: const OutlineInputBorder(),
                                   labelText:
                                       isAdm ? 'Administrador' : 'Usuário',
                                 ),
@@ -135,7 +135,7 @@ class LoginPageState extends State<LoginPage> with LoginValidator {
                             : TextFormField(
                                 validator: validator,
                                 controller: _controllerFirstNameRegister,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                   labelText: "Nome",
                                 ),
@@ -162,16 +162,8 @@ class LoginPageState extends State<LoginPage> with LoginValidator {
                                 : const SizedBox(),
                         const SizedBox(height: 30),
                         SizedBox(
-                          height: _size.height * 0.08,
+                          height: size.height * 0.08,
                           child: ElevatedButton(
-                            child: Text(
-                              isRegistered ? 'Entra' : 'Cadastrar',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w900,
-                                color: Colors.white,
-                              ),
-                            ),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.purple.shade900,
                               textStyle: const TextStyle(
@@ -180,6 +172,14 @@ class LoginPageState extends State<LoginPage> with LoginValidator {
                               ),
                             ),
                             onPressed: loginAndRegister,
+                            child: Text(
+                              isRegistered ? 'Entra' : 'Cadastrar',
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w900,
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
                         ),
                         const SizedBox(height: 10),
@@ -209,6 +209,12 @@ class LoginPageState extends State<LoginPage> with LoginValidator {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 TextButton(
+                  onPressed: !isRegistered
+                      ? null
+                      : () {
+                          setState(() => isAdm = !isAdm);
+                          clearTextEditingControllers();
+                        },
                   child: Text(
                     !isAdm
                         ? 'Entrar como administrador'
@@ -219,12 +225,6 @@ class LoginPageState extends State<LoginPage> with LoginValidator {
                       color: isRegistered ? Colors.white : Colors.grey,
                     ),
                   ),
-                  onPressed: !isRegistered
-                      ? null
-                      : () {
-                          setState(() => isAdm = !isAdm);
-                          clearTextEditingControllers();
-                        },
                 ),
               ],
             ),
