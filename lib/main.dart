@@ -27,16 +27,23 @@ Future<void> initObjectBox() async {
     lastName: 'Simoes',
   );
 
-  final courseEntity = CourseEntity(
+  final course1 = CourseEntity(
     name: 'Programming 101',
     description: 'Introduction to Programming',
     schedule: 'Mon-Wed-Fri 10:00 AM',
     level: 'Beginner',
     hours: '30',
   );
+  final course2 = CourseEntity(
+    name: 'Java Essentials',
+    description: 'Java Programming',
+    schedule: 'Mon-Wed-Fri 10:00 AM',
+    level: 'Beginner',
+    hours: '30',
+  );
 
   // // Adiciona o curso ao aluno
-  // bool added = studentEntity.addCourseToStudent(courseEntity);
+  studentEntity.addCourseToStudent(course2);
 
   // final courseStudentEntity = CourseStudentEntity(
   //   student: ToOne<StudentEntity>()..target = studentEntity,
@@ -44,6 +51,7 @@ Future<void> initObjectBox() async {
   // );
 
   _store.box<StudentEntity>().put(studentEntity);
-  _store.box<CourseEntity>().put(courseEntity);
+  _store.box<CourseEntity>().put(course1);
+  _store.box<CourseEntity>().put(course2);
   // _store.box<CourseStudentEntity>().put(courseStudentEntity);
 }

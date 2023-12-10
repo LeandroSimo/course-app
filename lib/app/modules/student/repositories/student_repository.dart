@@ -45,7 +45,7 @@ class StudentRepository {
   Future<int> addCourserToStudent(
       StudentEntity student, CourseEntity course) async {
     final store = await getStudent();
-    student.courses.add(course);
+    student.addCourseToStudent(course);
     return store.put(student);
   }
 }

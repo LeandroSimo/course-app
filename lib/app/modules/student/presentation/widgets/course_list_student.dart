@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:teste_vrsoft/app/modules/course/entities/course_entity.dart';
 import 'package:teste_vrsoft/app/modules/student/stores/student_store.dart';
 
 class CourseList extends StatelessWidget {
   const CourseList({
     super.key,
     required this.size,
-    required this.studentStore,
+    required this.listCourses,
   });
 
   final Size size;
-  final StudentStore studentStore;
+  final List<CourseEntity> listCourses;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: size.height * 0.22,
-      child: studentStore.courseListStudent.isNotEmpty
+      child: listCourses.isNotEmpty
           ? ListView.builder(
               itemExtent: size.width * 0.30,
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
-              itemCount: studentStore.courseListStudent.length,
+              itemCount: listCourses.length,
               itemBuilder: (_, index) {
-                final course = studentStore.courseListStudent[index];
+                final course = listCourses[index];
 
                 final courseNameChecked = _checkCourseName(course.name);
                 final courseFullName = _checkFullName(course.name);
