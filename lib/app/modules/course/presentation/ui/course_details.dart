@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:teste_vrsoft/app/modules/course/entities/course_entity.dart';
+import 'package:teste_vrsoft/app/modules/course/stores/course_store.dart';
 import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
 import 'package:teste_vrsoft/app/modules/student/stores/student_store.dart';
 
@@ -17,7 +18,9 @@ class CourseDetails extends StatefulWidget {
 
 class _CourseDetailsState extends State<CourseDetails> {
   StudentStore get _studentStore => widget.studentStore;
+
   final arguments = Modular.args.data;
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -193,11 +196,9 @@ class _CourseDetailsState extends State<CourseDetails> {
                           ),
                         ),
                         onPressed: () async {
-                          final succsess =
-                              await _studentStore.addCourseToStudent(
-                            student,
-                            course,
-                          );
+                          final succsess = await _studentStore
+                              .addCourseToStudent(student, course);
+
                           succsess != -1 ? onSuccsess() : onError();
 
                           Modular.to.pushNamedAndRemoveUntil(

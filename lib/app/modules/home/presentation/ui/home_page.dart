@@ -11,7 +11,6 @@ import 'package:teste_vrsoft/app/modules/student/stores/student_store.dart';
 
 class HomePage extends StatefulWidget {
   final StudentEntity student;
-  final CourseEntity? course;
   final CourseStore courseStore;
   final StudentStore studentStore;
   const HomePage({
@@ -19,7 +18,6 @@ class HomePage extends StatefulWidget {
     required this.student,
     required this.courseStore,
     required this.studentStore,
-    this.course,
   });
 
   @override
@@ -65,6 +63,15 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     StudentEntity student = widget.student;
+
+    final value = courseStore.courseList.where((element) {
+      final index = element.students.indexWhere((element) {
+        return element.cod == student.cod;
+      });
+      return index != -1;
+    }).toList();
+
+    print("VALOR DE ALUNOS NO CURSO: ${value.length}");
 
     return SafeArea(
       child: Scaffold(

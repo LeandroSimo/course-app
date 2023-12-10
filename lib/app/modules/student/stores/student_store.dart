@@ -57,18 +57,6 @@ abstract class _StudentStoreBase with Store {
         await _studentRepository!.addCourserToStudent(student, course);
     if (result != -1) {
       courseListStudent.add(course);
-      final value = student.courses.firstWhere(
-        (element) => element.cod == student.cod,
-        orElse: () => course,
-      );
-
-      print("VALOR DO VALUE: ${value.students.length}");
-      // print(
-      //     "VALOR DO VALUE: ${value.students.firstWhere((element) => element.cod == student.cod)}");
-
-      if (value.cod == student.cod) {
-        studentList.add(student);
-      }
     }
     return result;
   }

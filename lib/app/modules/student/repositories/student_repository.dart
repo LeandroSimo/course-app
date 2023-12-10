@@ -41,7 +41,6 @@ class StudentRepository {
     return studentEntity.courses.toList();
   }
 
-  // adicionando curso ao aluno e salvando os dados no BD
   Future<int> addCourserToStudent(
       StudentEntity student, CourseEntity course) async {
     final store = await getStudent();

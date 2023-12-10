@@ -28,10 +28,6 @@ class CourseEntity {
     return students.length >= 10;
   }
 
-  bool isClosedClass() {
-    return students.length < 5;
-  }
-
   bool addStudentToCourse(StudentEntity student) {
     if (!isFullClass() &&
         !students.contains(student) &&

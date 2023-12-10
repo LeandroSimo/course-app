@@ -9,16 +9,10 @@ class CourseStore = _CourseStoreBase with _$CourseStore;
 
 abstract class _CourseStoreBase with Store {
   CourseRepository? _courseRepository;
-  CourseEntity? course;
 
   _CourseStoreBase() {
     _courseRepository = CourseRepository();
-    getAllCourse().then((value) {
-      courseList.addAll(value);
-      if (value.first.students.isNotEmpty) {
-        refreshCourseList();
-      }
-    });
+    getAllCourse().then((value) => courseList.addAll(value));
   }
   ObservableList<CourseEntity> courseList = ObservableList<CourseEntity>();
 
@@ -59,14 +53,6 @@ abstract class _CourseStoreBase with Store {
 
     if (result != 0) {
       course.students.add(student);
-
-      // final listCourse = await _courseRepository!.readCourse();
-      // listCourse.forEach((element) {
-      //   if (element.cod == course.cod) {
-      //     courseList.remove(element);
-      //     courseList.add(element);
-      //   }
-      // });
     }
 
     return result;
