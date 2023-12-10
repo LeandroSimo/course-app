@@ -14,14 +14,32 @@ abstract class _StudentStoreBase with Store {
   _StudentStoreBase() {
     _studentRepository = StudentRepository();
     getAllStudent().then((value) => studentList.addAll(value));
+    courseListStudent = ObservableList<CourseEntity>();
   }
 
   ObservableList<StudentEntity> studentList = ObservableList<StudentEntity>();
+  ObservableList<CourseEntity> courseListStudent =
+      ObservableList<CourseEntity>();
+  // ObservableList<StudentDto> studentDtoList = ObservableList<StudentDto>();
 
   @action
   Future<List<StudentEntity>> getAllStudent() async {
     return await _studentRepository!.readStudent();
   }
+
+  // @action
+  // Future<List<StudentDto>> getAllStudentDto() async {
+  //   List<StudentDto> studentDtoList = [];
+  //   List<StudentEntity> studentList = await _studentRepository!.readStudent();
+  //   studentList.forEach((element) {
+  //     studentDtoList.add(StudentDto(
+  //       cod: element.cod,
+  //       firstName: element.firstName,
+  //       lastName: element.lastName,
+  //     ));
+  //   });
+  //   return studentDtoList;
+  // }
 
   @action
   Future<int> createStudent(StudentEntity student) async {
@@ -49,13 +67,20 @@ abstract class _StudentStoreBase with Store {
   }
 
   @action
-  Future<bool> addCourseToStudent(CourseEntity course,
-      {StudentEntity? studentEntity}) async {
-    return await _studentRepository!.addCourserToStudent(course);
+  Future<int> addCourseToStudent(
+      StudentEntity student, CourseEntity course) async {
+    final result =
+        await _studentRepository!.addCourserToStudent(student, course);
+    if (result != -1) {
+      courseListStudent.add(course);
+    }
+    return result;
   }
 
   @action
   Future<List<CourseEntity>> getCoursesByStudent(StudentEntity student) async {
-    return await _studentRepository!.getCoursesByStudent(student);
+    final listCourse = await _studentRepository!.getCoursesByStudent(student);
+    courseListStudent.addAll(listCourse);
+    return listCourse;
   }
 }

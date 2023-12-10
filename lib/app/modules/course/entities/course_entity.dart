@@ -1,9 +1,7 @@
 import 'package:objectbox/objectbox.dart';
-import 'package:teste_vrsoft/app/database/entities/couse_student_entity.dart';
 import 'package:teste_vrsoft/app/database/objectbox.g.dart';
+import 'package:teste_vrsoft/app/database/repositories/course_student_repository.dart';
 import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
-
-Store _store = Store(getObjectBoxModel());
 
 @Entity()
 class CourseEntity {
@@ -46,11 +44,8 @@ class CourseEntity {
     return false;
   }
 
-  void saveToCourseStudentTable(StudentEntity student) {
-    final courseStudentEntity = CourseStudentEntity(
-      student: ToOne<StudentEntity>()..target = student,
-      course: ToOne<CourseEntity>()..target = this,
-    );
-    _store.box<CourseStudentEntity>().put(courseStudentEntity);
+  Future<void> saveToCourseStudentTable(StudentEntity student) async {
+    final courseStudentEntity = CourseStudentRepository();
+    courseStudentEntity.createCourseStudent(student, this);
   }
 }

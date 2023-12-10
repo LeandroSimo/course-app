@@ -37,10 +37,9 @@ mixin _$StudentStore on _StudentStoreBase, Store {
       AsyncAction('_StudentStoreBase.addCourseToStudent', context: context);
 
   @override
-  Future<bool> addCourseToStudent(CourseEntity course,
-      {StudentEntity? studentEntity}) {
-    return _$addCourseToStudentAsyncAction.run(
-        () => super.addCourseToStudent(course, studentEntity: studentEntity));
+  Future<int> addCourseToStudent(StudentEntity student, CourseEntity course) {
+    return _$addCourseToStudentAsyncAction
+        .run(() => super.addCourseToStudent(student, course));
   }
 
   late final _$getCoursesByStudentAsyncAction =

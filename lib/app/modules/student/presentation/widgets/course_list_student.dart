@@ -1,37 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:teste_vrsoft/app/modules/student/stores/student_store.dart';
 
 class CourseList extends StatelessWidget {
   const CourseList({
     super.key,
-    required this.courses,
     required this.size,
+    required this.studentStore,
   });
 
   final Size size;
-  final List courses;
+  final StudentStore studentStore;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: size.height * 0.19,
-      child: courses.isNotEmpty
+      height: size.height * 0.22,
+      child: studentStore.courseListStudent.isNotEmpty
           ? ListView.builder(
               itemExtent: size.width * 0.30,
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
-              itemCount: courses.length,
+              itemCount: studentStore.courseListStudent.length,
               itemBuilder: (_, index) {
-                final course = courses[index];
-                final color = courses[index].isNotEmpty
-                    ? int.parse(
-                        course['color'].toString().replaceAll('#', '0xFF'))
-                    : 0xFFFFFFFF;
-                final courseNameChecked =
-                    _checkCourseName(course['name'].toString());
-                final fullName = course['name'].toString();
-                final level = course['level'].toString();
+                final course = studentStore.courseListStudent[index];
+
+                final courseNameChecked = _checkCourseName(course.name);
+                final courseFullName = _checkFullName(course.name);
+                final level = _checkLevelName(course.level);
                 return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Card(
@@ -41,7 +38,7 @@ class CourseList extends StatelessWidget {
                         height: size.height * 0.12,
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: Color(color),
+                          color: Colors.white,
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Center(
@@ -57,7 +54,7 @@ class CourseList extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      fullName,
+                      courseFullName,
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
@@ -99,6 +96,25 @@ class CourseList extends StatelessWidget {
     if (originalName.length > 4) {
       return originalName.substring(0, 4);
     }
+    return originalName;
+  }
+
+  String _checkFullName(String originalName) {
+    if (originalName.length > 4) {
+      return originalName.substring(0, 11);
+    }
+    return originalName;
+  }
+
+  String _checkLevelName(String originalName) {
+    if (originalName.length > 4) {
+      List<String> partes = originalName.split(RegExp(r'\s|-|/'));
+
+      if (partes.length >= 2) {
+        return '${partes[0]}\n${partes.sublist(1).join(" ")}';
+      }
+    }
+
     return originalName;
   }
 }

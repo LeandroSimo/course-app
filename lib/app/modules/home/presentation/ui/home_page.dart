@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:teste_vrsoft/app/modules/course/entities/course_entity.dart';
 import 'package:teste_vrsoft/app/modules/course/stores/course_store.dart';
 import 'package:teste_vrsoft/app/modules/home/presentation/widgets/list_course_home.dart';
 import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
@@ -26,6 +27,32 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   CourseStore get courseStore => widget.courseStore;
   StudentStore get studentStore => widget.studentStore;
+
+  List<CourseEntity> _coursesStudent = [];
+
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  //     WidgetsBinding.instance.addPostFrameCallback((_) async {
+  //     _coursesStudent = await studentStore.getCoursesByStudent(widget.student);
+  //     // .then((value) => studentStore.courseListStudent.addAll(value)
+  //     //     as List<CourseEntity>);
+
+  //     print("VALOR DA LISTA DE CURSO DO ALUNO: ${_coursesStudent.length}");
+  //   });
+  // }
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      _coursesStudent = await studentStore.getCoursesByStudent(widget.student);
+      studentStore.courseListStudent.addAll(_coursesStudent);
+
+      print("VALOR DA LISTA DE CURSO DO ALUNO: ${_coursesStudent.length}");
+    });
+  }
 
   final List<Map> _courses = [
     {
@@ -80,6 +107,10 @@ class _HomePageState extends State<HomePage> {
     final _size = MediaQuery.of(context).size;
     StudentEntity student = widget.student;
 
+    final courses = widget.student.courses.toList();
+
+    print("CURSOS DO ALUNO: ${courses.length}");
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -121,6 +152,7 @@ class _HomePageState extends State<HomePage> {
                               "isAdm": false,
                             },
                           );
+                          print("CURSOS DO ALUNO 2: ${courses.length}");
                         },
                         icon: const Icon(
                           Icons.add_box,
@@ -129,7 +161,10 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
-                  CourseList(size: _size, courses: student.courses),
+                  CourseList(
+                    size: _size,
+                    studentStore: studentStore,
+                  ),
                   const SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

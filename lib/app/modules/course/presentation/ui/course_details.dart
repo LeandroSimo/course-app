@@ -192,15 +192,18 @@ class _CourseDetailsState extends State<CourseDetails> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        onPressed: () {
-                          _studentStore.addCourseToStudent(course);
+                        onPressed: () async {
+                          final succsess =
+                              await _studentStore.addCourseToStudent(
+                            student,
+                            course,
+                          );
+                          succsess != -1 ? onSuccsess() : onError();
+
                           Modular.to.pushNamedAndRemoveUntil(
                             '/home/',
                             (_) => false,
-                            arguments: {
-                              "isAdm": isAdm,
-                              "student": student,
-                            },
+                            arguments: student,
                           );
                         },
                         child: const Text(
@@ -219,6 +222,36 @@ class _CourseDetailsState extends State<CourseDetails> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  onSuccsess() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text(
+          "Matriculado com sucesso",
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        backgroundColor: Colors.green,
+      ),
+    );
+  }
+
+  onError() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text(
+          "Erro ao matricular-se",
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        backgroundColor: Colors.red,
       ),
     );
   }
