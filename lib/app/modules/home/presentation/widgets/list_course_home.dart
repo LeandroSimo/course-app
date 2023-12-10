@@ -86,7 +86,7 @@ class ListCourseHome extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: course.students.isEmpty
                                 ? Colors.green.shade500
-                                : course.students.length < 5
+                                : course.students.length <= 9
                                     ? Colors.yellow.shade800
                                     : Colors.red.shade600,
                             borderRadius: BorderRadius.circular(5),
@@ -98,7 +98,7 @@ class ListCourseHome extends StatelessWidget {
                               child: Text(
                                 course.students.isEmpty
                                     ? 'Turma disponível'
-                                    : course.students.length < 5
+                                    : course.students.length <= 9
                                         ? 'Últimas vagas'
                                         : 'Turma fechada',
                                 style: const TextStyle(

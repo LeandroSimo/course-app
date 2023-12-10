@@ -22,7 +22,10 @@ class CourseModule extends Module {
     r.child('/add', child: (_) => AddCoursePage(courseStore: Modular.get()));
     r.child(
       '/details',
-      child: (_) => CourseDetails(studentStore: Modular.get()),
+      child: (_) => CourseDetails(
+        studentStore: Modular.get(),
+        courseStore: Modular.get(),
+      ),
     );
   }
 }

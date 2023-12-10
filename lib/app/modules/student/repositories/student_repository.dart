@@ -44,7 +44,18 @@ class StudentRepository {
   Future<int> addCourserToStudent(
       StudentEntity student, CourseEntity course) async {
     final store = await getStudent();
-    student.addCourseToStudent(course);
+
+    bool isExceeded = student.courses.length > 3;
+
+    if (!isExceeded &&
+        !student.courses.contains(course) &&
+        !course.students.contains(student)) {
+      student.courses.add(course);
+
+      if (!course.students.contains(student)) {
+        course.students.add(student);
+      }
+    }
     return store.put(student);
   }
 }

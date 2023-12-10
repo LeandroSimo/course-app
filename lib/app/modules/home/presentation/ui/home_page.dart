@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:teste_vrsoft/app/modules/course/entities/course_entity.dart';
 import 'package:teste_vrsoft/app/modules/course/stores/course_store.dart';
 import 'package:teste_vrsoft/app/modules/home/presentation/widgets/list_course_home.dart';
 import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
@@ -60,18 +59,25 @@ class _HomePageState extends State<HomePage> {
   ];
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    courseStore.getAllCourse().then((value) {
+      studentStore.studentList.forEach((student) {
+        student.courses.forEach((course) {
+          var index = value.indexWhere((element) => element.cod == course.cod);
+          if (index != -1) {
+            student.courses[index] = value[index];
+          }
+        });
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     StudentEntity student = widget.student;
-
-    final value = courseStore.courseList.where((element) {
-      final index = element.students.indexWhere((element) {
-        return element.cod == student.cod;
-      });
-      return index != -1;
-    }).toList();
-
-    print("VALOR DE ALUNOS NO CURSO: ${value.length}");
 
     return SafeArea(
       child: Scaffold(

@@ -57,11 +57,4 @@ abstract class _CourseStoreBase with Store {
 
     return result;
   }
-
-  @action
-  Future<void> refreshCourseList() async {
-    courseList.clear();
-    final listCourse = await _courseRepository!.readCourse();
-    courseList.addAll(listCourse);
-  }
 }

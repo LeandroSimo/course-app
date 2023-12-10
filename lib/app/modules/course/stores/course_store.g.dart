@@ -42,14 +42,6 @@ mixin _$CourseStore on _CourseStoreBase, Store {
         .run(() => super.addStudentToCourse(course, student));
   }
 
-  late final _$refreshCourseListAsyncAction =
-      AsyncAction('_CourseStoreBase.refreshCourseList', context: context);
-
-  @override
-  Future<void> refreshCourseList() {
-    return _$refreshCourseListAsyncAction.run(() => super.refreshCourseList());
-  }
-
   late final _$_CourseStoreBaseActionController =
       ActionController(name: '_CourseStoreBase', context: context);
 

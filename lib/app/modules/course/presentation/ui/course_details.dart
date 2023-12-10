@@ -7,9 +7,11 @@ import 'package:teste_vrsoft/app/modules/student/stores/student_store.dart';
 
 class CourseDetails extends StatefulWidget {
   final StudentStore studentStore;
+  final CourseStore courseStore;
   const CourseDetails({
     super.key,
     required this.studentStore,
+    required this.courseStore,
   });
 
   @override
@@ -18,6 +20,7 @@ class CourseDetails extends StatefulWidget {
 
 class _CourseDetailsState extends State<CourseDetails> {
   StudentStore get _studentStore => widget.studentStore;
+  CourseStore get _courseStore => widget.courseStore;
 
   final arguments = Modular.args.data;
 
@@ -198,6 +201,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                         onPressed: () async {
                           final succsess = await _studentStore
                               .addCourseToStudent(student, course);
+                          _courseStore.addStudentToCourse(course, student);
 
                           succsess != -1 ? onSuccsess() : onError();
 

@@ -40,7 +40,11 @@ class CourseRepository {
     StudentEntity student,
   ) async {
     final store = await getCourse();
-    course.addStudentToCourse(student);
+
+    if (course.students.length <= 10) {
+      course.students.add(student);
+    }
+
     return store.put(course);
   }
 }
