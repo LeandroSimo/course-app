@@ -94,14 +94,18 @@ class CourseList extends StatelessWidget {
       }
     }
     if (originalName.length > 4) {
-      return originalName.substring(0, 4);
+      return originalName.substring(0, 3);
     }
     return originalName;
   }
 
   String _checkFullName(String originalName) {
     if (originalName.length > 4) {
-      return originalName.substring(0, 11);
+      int endIndex = originalName.length > 11 ? 11 : originalName.length;
+
+      if (originalName.substring(0, endIndex).length.isEven) {
+        return originalName.substring(0, endIndex);
+      }
     }
     return originalName;
   }

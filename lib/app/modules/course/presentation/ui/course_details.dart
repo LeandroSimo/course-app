@@ -199,11 +199,25 @@ class _CourseDetailsState extends State<CourseDetails> {
                           ),
                         ),
                         onPressed: () async {
-                          final succsess = await _studentStore
-                              .addCourseToStudent(student, course);
-                          _courseStore.addStudentToCourse(course, student);
-
-                          succsess != -1 ? onSuccsess() : onError();
+                          if (_studentStore.courseListStudent.length < 3) {
+                            final succsess = await _studentStore
+                                .addCourseToStudent(student, course);
+                            _courseStore.addStudentToCourse(course, student);
+                            succsess != -1 ? onSuccsess() : onError();
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                  "Você não pode se matricular em mais de 3 cursos",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                backgroundColor: Colors.red,
+                              ),
+                            );
+                          }
 
                           Modular.to.pushNamedAndRemoveUntil(
                             '/home/',

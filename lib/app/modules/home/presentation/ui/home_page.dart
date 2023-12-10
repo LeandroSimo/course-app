@@ -59,22 +59,6 @@ class _HomePageState extends State<HomePage> {
   ];
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    courseStore.getAllCourse().then((value) {
-      studentStore.studentList.forEach((student) {
-        student.courses.forEach((course) {
-          var index = value.indexWhere((element) => element.cod == course.cod);
-          if (index != -1) {
-            student.courses[index] = value[index];
-          }
-        });
-      });
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     StudentEntity student = widget.student;

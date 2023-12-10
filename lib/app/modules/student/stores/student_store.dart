@@ -55,7 +55,9 @@ abstract class _StudentStoreBase with Store {
       StudentEntity student, CourseEntity course) async {
     final result =
         await _studentRepository!.addCourserToStudent(student, course);
-    if (result != -1) {
+    if (result != -1 &&
+        !courseListStudent.contains(course) &&
+        courseListStudent.length < 3) {
       courseListStudent.add(course);
     }
     return result;

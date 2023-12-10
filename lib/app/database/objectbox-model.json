@@ -72,7 +72,7 @@
       ],
       "relations": [
         {
-          "id": "1:50995270637901096",
+          "id": "3:8919958807803420276",
           "name": "students",
           "targetId": "1:4710541964586809286"
         }
@@ -111,7 +111,7 @@
   ],
   "lastEntityId": "3:8638969203700481255",
   "lastIndexId": "2:610353064531817816",
-  "lastRelationId": "2:7834042361211088917",
+  "lastRelationId": "3:8919958807803420276",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
@@ -126,6 +126,8 @@
     5834540609625901730,
     6491293214278941938
   ],
-  "retiredRelationUids": [],
+  "retiredRelationUids": [
+    50995270637901096
+  ],
   "version": 1
 }
