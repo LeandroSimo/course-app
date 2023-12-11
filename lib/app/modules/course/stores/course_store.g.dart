@@ -9,6 +9,22 @@ part of 'course_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$CourseStore on _CourseStoreBase, Store {
+  late final _$courseListAtom =
+      Atom(name: '_CourseStoreBase.courseList', context: context);
+
+  @override
+  List<CourseEntity> get courseList {
+    _$courseListAtom.reportRead();
+    return super.courseList;
+  }
+
+  @override
+  set courseList(List<CourseEntity> value) {
+    _$courseListAtom.reportWrite(value, super.courseList, () {
+      super.courseList = value;
+    });
+  }
+
   late final _$getAllCourseAsyncAction =
       AsyncAction('_CourseStoreBase.getAllCourse', context: context);
 
@@ -59,7 +75,7 @@ mixin _$CourseStore on _CourseStoreBase, Store {
   @override
   String toString() {
     return '''
-
+courseList: ${courseList}
     ''';
   }
 }

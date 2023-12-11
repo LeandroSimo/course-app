@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:teste_vrsoft/app/modules/course/stores/course_store.dart';
+import 'package:teste_vrsoft/app/modules/course/entities/course_entity.dart';
 
 class ListCourseHome extends StatelessWidget {
   const ListCourseHome({
     super.key,
-    required this.courseStore,
     required this.size,
+    required this.courses,
   });
 
-  final CourseStore courseStore;
   final Size size;
+  final List<CourseEntity> courses;
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +17,9 @@ class ListCourseHome extends StatelessWidget {
       height: size.height * 0.46,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: courseStore.courseList.length,
+        itemCount: courses.length,
         itemBuilder: (_, index) {
-          final course = courseStore.courseList[index];
+          final course = courses[index];
           return Card(
             elevation: 4,
             child: Container(

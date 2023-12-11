@@ -233,7 +233,7 @@ class _CourseDetailsState extends State<CourseDetails> {
       final succsess = await _studentStore.addCourseToStudent(student, course);
 
       _courseStore.addStudentToCourse(course, student);
-      _courseStore.updateCourse(course);
+
       succsess != -1 ? onSuccsess() : onError();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(

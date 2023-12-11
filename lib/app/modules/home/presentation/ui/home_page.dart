@@ -59,6 +59,20 @@ class _HomePageState extends State<HomePage> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    courseStore.getAllCourse().then((value) {
+      value.forEach((element) {
+        if (element.students.contains(widget.student) &&
+            !courseStore.courseList.contains(element)) {
+          courseStore.courseList.clear();
+          courseStore.courseList.add(element);
+        }
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     StudentEntity student = widget.student;
@@ -141,7 +155,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   const SizedBox(height: 16),
                   ListCourseHome(
-                    courseStore: courseStore,
+                    courses: courseStore.courseList,
                     size: size,
                   ),
                   const SizedBox(height: 16),
