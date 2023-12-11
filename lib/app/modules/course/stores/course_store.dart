@@ -63,4 +63,19 @@ abstract class _CourseStoreBase with Store {
 
     return result;
   }
+
+  @action
+  Future<int> addStudentToCourses(
+      List<CourseEntity> courses, StudentEntity student) async {
+    final result =
+        await _courseRepository!.addStudentToCourses(courses, student);
+
+    if (result != 0) {
+      for (var course in courses) {
+        course.students.add(student);
+      }
+    }
+
+    return result;
+  }
 }

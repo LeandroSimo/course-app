@@ -47,4 +47,20 @@ class CourseRepository {
 
     return store.put(course);
   }
+
+  Future<int> addStudentToCourses(
+    List<CourseEntity> courses,
+    StudentEntity student,
+  ) async {
+    final store = await getCourse();
+
+    for (var course in courses) {
+      if (course.students.length <= 10) {
+        course.students.add(student);
+        store.put(course);
+      }
+    }
+
+    return courses.length;
+  }
 }

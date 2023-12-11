@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:teste_vrsoft/app/modules/course/entities/course_entity.dart';
 import 'package:teste_vrsoft/app/modules/course/presentation/widgets/course_card.dart';
 import 'package:teste_vrsoft/app/modules/course/stores/course_store.dart';
 import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
@@ -150,6 +149,7 @@ class CourseListPageState extends State<CourseListPage> {
                     .map((e) => _courseStore.courseList[e])
                     .toList();
                 _studentStore.addAllCourseToStudent(student, list);
+                _courseStore.addStudentToCourses(list, student);
                 Modular.to.pushNamedAndRemoveUntil(
                   '/home/',
                   (_) => false,
