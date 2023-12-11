@@ -32,3 +32,6 @@ flutter:
 
 objectbox:
   output_dir: /app/database
+
+assets:
+  - assets/images/
