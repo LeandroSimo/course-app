@@ -111,7 +111,8 @@ class CourseListPageState extends State<CourseListPage> {
                       itemBuilder: (_, index) {
                         final course = _courseStore.courseList[index];
                         return CardCourse(
-                          key: ValueKey(course.cod),
+                          key: UniqueKey(),
+                          // key: ValueKey(course.cod),
                           studentStore: _studentStore,
                           courseStore: _courseStore,
                           course: course,
@@ -141,24 +142,24 @@ class CourseListPageState extends State<CourseListPage> {
             );
           },
         ),
-        floatingActionButton: Observer(
-          builder: (context) {
-            return FloatingActionButton(
-              onPressed: () {
-                final list = _studentStore.selectedIndices
-                    .map((e) => _courseStore.courseList[e])
-                    .toList();
-                _studentStore.addAllCourseToStudent(student, list);
-                _courseStore.addStudentToCourses(list, student);
-                Modular.to.pushNamedAndRemoveUntil(
-                  '/home/',
-                  (_) => false,
-                  arguments: student,
-                );
-              },
-              child: const Icon(Icons.add),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.purple.shade900,
+          onPressed: () {
+            final list = _studentStore.selectedIndices
+                .map((e) => _courseStore.courseList[e])
+                .toList();
+            _studentStore.addAllCourseToStudent(student, list);
+            _courseStore.addStudentToCourses(list, student);
+            Modular.to.pushNamedAndRemoveUntil(
+              '/home/',
+              (_) => false,
+              arguments: student,
             );
           },
+          child: const Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
         ),
       ),
     );
