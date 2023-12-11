@@ -75,7 +75,7 @@ class CourseList extends StatelessWidget {
             )
           : Center(
               child: Text(
-                'Nenhum curso matriculado',
+                'Você não tem matrícula em cursos',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w600,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:teste_vrsoft/app/modules/course/stores/course_store.dart';
+import 'package:teste_vrsoft/app/modules/home/presentation/widgets/body_drawer.dart';
 import 'package:teste_vrsoft/app/modules/home/presentation/widgets/custom_app_bar.dart';
 import 'package:teste_vrsoft/app/modules/home/presentation/widgets/list_course_home.dart';
 import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
@@ -80,6 +81,10 @@ class _HomePageState extends State<HomePage> {
 
     return SafeArea(
       child: Scaffold(
+        drawer: Drawer(
+            child: BodyDrawer(
+          student: student,
+        )),
         appBar: CustomAppBar(
           title: student.firstName,
         ),
@@ -110,9 +115,9 @@ class _HomePageState extends State<HomePage> {
                             },
                           );
                         },
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.add_box,
-                          color: Colors.purple,
+                          color: Colors.purple.shade900,
                         ),
                       ),
                     ],
