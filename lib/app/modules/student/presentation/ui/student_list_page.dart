@@ -90,36 +90,38 @@ class StudenListtPageState extends State<StudenListtPage> {
                 ),
               ),
               actions: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                    ),
-                    onPressed: () {
-                      scaffoldKey.currentState!.showBottomSheet<void>(
-                        (BuildContext context) => AddStudentpage(
-                          firstNameController: firstNameController,
-                          lastNameController: lastNameController,
-                          func: () {
-                            controller.createStudent(
-                              StudentEntity(
-                                firstName: firstNameController.text,
-                                lastName: lastNameController.text,
+                isAdm
+                    ? Padding(
+                        padding: const EdgeInsets.only(right: 8),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                          ),
+                          onPressed: () {
+                            scaffoldKey.currentState!.showBottomSheet<void>(
+                              (BuildContext context) => AddStudentpage(
+                                firstNameController: firstNameController,
+                                lastNameController: lastNameController,
+                                func: () {
+                                  controller.createStudent(
+                                    StudentEntity(
+                                      firstName: firstNameController.text,
+                                      lastName: lastNameController.text,
+                                    ),
+                                  );
+                                  Navigator.pop(context);
+                                  lastNameController.clear();
+                                  firstNameController.clear();
+                                },
                               ),
                             );
-                            Navigator.pop(context);
-                            lastNameController.clear();
-                            firstNameController.clear();
                           },
+                          child: const Text("Adicionar"),
                         ),
-                      );
-                    },
-                    child: const Text("Adicionar"),
-                  ),
-                ),
+                      )
+                    : const SizedBox(),
               ],
             ),
             body: Container(
@@ -135,6 +137,7 @@ class StudenListtPageState extends State<StudenListtPage> {
                       itemBuilder: (_, index) {
                         final student = controller.studentList[index];
                         return StudentCard(
+                          isAdm: isAdm,
                           student: student,
                           firstNameEditController: firstNameEditController,
                           lastNameEditController: lastNameEditController,

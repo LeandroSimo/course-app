@@ -38,144 +38,167 @@ class _StudentDetailsPageState extends State<StudentDetailsPage> {
         );
 
     return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.transparent,
-          leading: IconButton(
-            onPressed: () {
-              Modular.to.pushReplacementNamed('/student',
-                  arguments: {'isAdm': isAdm});
-            },
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: Colors.purple,
-            ),
-          ),
-          title: Text(
-            "Conta",
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.w800,
-              color: Colors.purple.shade900,
-            ),
-          ),
-          actions: [
-            IconButton(
+      child: Observer(builder: (context) {
+        return Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            backgroundColor: Colors.transparent,
+            leading: IconButton(
               onPressed: () {
-                firstNameEditController.value =
-                    TextEditingValue(text: studentEntity.firstName);
-                lastNameEditController.value =
-                    TextEditingValue(text: studentEntity.lastName);
-                _showAlertDialog(context, size, studentEntity, isAdm);
+                Modular.to.pushReplacementNamed('/student', arguments: {
+                  'student': studentEntity,
+                  'isAdm': isAdm,
+                });
               },
               icon: const Icon(
-                Icons.edit,
+                Icons.arrow_back_ios,
                 color: Colors.purple,
               ),
             ),
-          ],
-        ),
-        body: SizedBox(
-          width: size.width,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  radius: 50,
-                  child: Text(
-                    _checkName(studentEntity.firstName),
-                    style: const TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.w900,
+            title: Text(
+              "Conta",
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.w800,
+                color: Colors.purple.shade900,
+              ),
+            ),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  firstNameEditController.value =
+                      TextEditingValue(text: studentEntity.firstName);
+                  lastNameEditController.value =
+                      TextEditingValue(text: studentEntity.lastName);
+                  _showAlertDialog(context, size, studentEntity, isAdm);
+                },
+                icon: const Icon(
+                  Icons.edit,
+                  color: Colors.purple,
+                ),
+              ),
+            ],
+          ),
+          body: SizedBox(
+            width: size.width,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CircleAvatar(
+                    radius: 50,
+                    child: Text(
+                      _checkName(studentEntity.firstName),
+                      style: const TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.w900,
+                      ),
                     ),
                   ),
-                ),
-                const Gap(20),
-                Observer(builder: (context) {
-                  return Text(
+                  const Gap(20),
+                  Text(
                     "${studentEntity.firstName} ${studentEntity.lastName}",
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w800,
                       color: Colors.purple.shade900,
                     ),
-                  );
-                }),
-                const Gap(20),
-                Divider(
-                  color: Colors.grey.shade400,
-                  thickness: 1,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "Cursos matriculados",
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w800,
-                          color: Colors.purple.shade900,
+                  ),
+                  const Gap(20),
+                  Divider(
+                    color: Colors.grey.shade400,
+                    thickness: 1,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "Cursos matriculados",
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w800,
+                            color: Colors.purple.shade900,
+                          ),
                         ),
                       ),
-                    ),
-                    const Gap(20),
-                    Container(
-                      height: studentEntity.courses.isNotEmpty
-                          ? size.height
-                          : size.height * 0.3,
-                      width: size.width,
-                      padding: const EdgeInsets.all(10),
-                      color: Colors.grey.shade200,
-                      child: studentEntity.courses.isNotEmpty
-                          ? ListView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemCount: studentEntity.courses.length,
-                              itemBuilder: (context, index) {
-                                final course = studentEntity.courses[index];
-                                return ListTile(
-                                  title: Text(
-                                    course.name,
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w800,
-                                      color: Colors.purple.shade900,
+                      const Gap(20),
+                      Container(
+                        height: studentEntity.courses.isNotEmpty
+                            ? size.height
+                            : size.height * 0.3,
+                        width: size.width,
+                        color: Colors.grey.shade200,
+                        child: studentEntity.courses.isNotEmpty
+                            ? ListView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: studentEntity.courses.length,
+                                itemBuilder: (context, index) {
+                                  final course = studentEntity.courses[index];
+                                  return Container(
+                                    height: size.height * 0.15,
+                                    padding: const EdgeInsets.all(10),
+                                    margin: const EdgeInsets.only(
+                                        bottom: 2, top: 1),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          course.name,
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w800,
+                                            color: Colors.purple.shade900,
+                                          ),
+                                        ),
+                                        const Gap(10),
+                                        Text(
+                                          course.description,
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w800,
+                                            color: Colors.purple.shade900,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                  subtitle: Text(
-                                    course.description,
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w800,
-                                      color: Colors.purple.shade900,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(6),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.shade300,
+                                          blurRadius: 2,
+                                          offset: const Offset(0, 2),
+                                        ),
+                                      ],
                                     ),
+                                  );
+                                },
+                              )
+                            : Center(
+                                child: Text(
+                                  "Nenhum curso cadastrado",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w800,
+                                    color: Colors.purple.shade900,
                                   ),
-                                );
-                              },
-                            )
-                          : Center(
-                              child: Text(
-                                "Nenhum curso cadastrado",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w800,
-                                  color: Colors.purple.shade900,
                                 ),
                               ),
-                            ),
-                    ),
-                  ],
-                ),
-              ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 

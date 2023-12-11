@@ -3,13 +3,14 @@ import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
 import 'package:teste_vrsoft/app/modules/student/stores/student_store.dart';
 
 class StudentCard extends StatelessWidget {
-  const StudentCard({
+  StudentCard({
     super.key,
     required this.student,
     required this.firstNameEditController,
     required this.lastNameEditController,
     required this.controller,
     required this.func,
+    this.isAdm = false,
   });
 
   final StudentEntity student;
@@ -17,6 +18,7 @@ class StudentCard extends StatelessWidget {
   final TextEditingController lastNameEditController;
   final StudentStore controller;
   final Function() func;
+  bool isAdm;
 
   @override
   Widget build(BuildContext context) {
@@ -58,12 +60,14 @@ class StudentCard extends StatelessWidget {
                   _showAlertDialog(context, size);
                 },
               ),
-              IconButton(
-                onPressed: () {
-                  controller.removeStudent(student);
-                },
-                icon: const Icon(Icons.delete),
-              ),
+              isAdm
+                  ? IconButton(
+                      onPressed: () {
+                        controller.removeStudent(student);
+                      },
+                      icon: const Icon(Icons.delete),
+                    )
+                  : const SizedBox(),
             ],
           ),
         ),
