@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:teste_vrsoft/app/modules/course/entities/course_entity.dart';
 import 'package:teste_vrsoft/app/modules/course/presentation/widgets/course_card.dart';
 import 'package:teste_vrsoft/app/modules/course/stores/course_store.dart';
 import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
@@ -64,7 +65,7 @@ class CourseListPageState extends State<CourseListPage> {
               : IconButton(
                   onPressed: () {
                     Modular.to.pushNamedAndRemoveUntil(
-                      '/home',
+                      '/home/',
                       (_) => false,
                       arguments: student,
                     );
@@ -111,6 +112,9 @@ class CourseListPageState extends State<CourseListPage> {
                       itemBuilder: (_, index) {
                         final course = _courseStore.courseList[index];
                         return CardCourse(
+                          key: ValueKey(course.cod),
+                          studentStore: _studentStore,
+                          courseStore: _courseStore,
                           course: course,
                           size: size,
                           onTap: () {
@@ -135,6 +139,24 @@ class CourseListPageState extends State<CourseListPage> {
                         ),
                       ),
                     ),
+            );
+          },
+        ),
+        floatingActionButton: Observer(
+          builder: (context) {
+            return FloatingActionButton(
+              onPressed: () {
+                final list = _studentStore.selectedIndices
+                    .map((e) => _courseStore.courseList[e])
+                    .toList();
+                _studentStore.addAllCourseToStudent(student, list);
+                Modular.to.pushNamedAndRemoveUntil(
+                  '/home/',
+                  (_) => false,
+                  arguments: student,
+                );
+              },
+              child: const Icon(Icons.add),
             );
           },
         ),

@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:teste_vrsoft/app/database/objectbox.g.dart';
 import 'package:teste_vrsoft/app/database/student_objectbox.dart';
+import 'package:teste_vrsoft/app/modules/course/entities/course_entity.dart';
 import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/services.dart';
@@ -53,6 +54,18 @@ class MockTest extends Mock {
     final store = await getStudent();
     store.remove(student.cod);
   }
+
+  Future<int> addAllCoursesToStudent(
+      StudentEntity student, List<CourseEntity> courses) async {
+    final store = await getStudent();
+
+    bool isExceeded = student.courses.length > 3;
+
+    if (!isExceeded) {
+      student.courses.addAll(courses);
+    }
+    return store.put(student);
+  }
 }
 
 void main() async {
@@ -92,6 +105,44 @@ void main() async {
           duplicateStudent, () => debugPrint("Usuário já existe"));
 
       expect(callback, isA<Function>());
+    });
+
+    test("Adding Courses to student", () async {
+      final List<CourseEntity> courses = [
+        CourseEntity(
+          cod: 1,
+          name: "Curso",
+          description: "Descrição",
+          schedule: "Horário",
+          level: "Nível",
+          hours: "Horas",
+        ),
+        CourseEntity(
+          cod: 2,
+          name: "Curso",
+          description: "Descrição",
+          schedule: "Horário",
+          level: "Nível",
+          hours: "Horas",
+        ),
+      ];
+
+      final StudentEntity studentEntity = StudentEntity(
+        cod: 1,
+        firstName: "Estudante",
+        lastName: "Novo",
+      );
+
+      // when(() => studentStore.addAllCourseToStudent(studentEntity, courses))
+      //     .thenAnswer((_) async => 3);
+
+      // expect(studentRepository.addAllCoursesToStudent(studentEntity, courses),
+      //     isA<Future<int>>());
+
+      final result =
+          await mockTest.addAllCoursesToStudent(studentEntity, courses);
+
+      expect(result, isA<int>());
     });
   });
 }

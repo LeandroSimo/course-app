@@ -17,8 +17,12 @@ abstract class _StudentStoreBase with Store {
   }
 
   ObservableList<StudentEntity> studentList = ObservableList<StudentEntity>();
-  ObservableList<CourseEntity> courseListStudent =
-      ObservableList<CourseEntity>();
+
+  @observable
+  List<CourseEntity> courseListStudent = [];
+
+  @observable
+  List<int> selectedIndices = [];
 
   @action
   Future<List<StudentEntity>> getAllStudent() async {
@@ -59,6 +63,17 @@ abstract class _StudentStoreBase with Store {
         !courseListStudent.contains(course) &&
         courseListStudent.length < 3) {
       courseListStudent.add(course);
+    }
+    return result;
+  }
+
+  @action
+  Future<int> addAllCourseToStudent(
+      StudentEntity student, List<CourseEntity> courses) async {
+    final result =
+        await _studentRepository!.addAllCoursesToStudent(student, courses);
+    if (result != -1) {
+      courseListStudent.addAll(courses);
     }
     return result;
   }

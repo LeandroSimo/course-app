@@ -1,22 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:teste_vrsoft/app/modules/course/entities/course_entity.dart';
+import 'package:teste_vrsoft/app/modules/course/stores/course_store.dart';
+import 'package:teste_vrsoft/app/modules/student/stores/student_store.dart';
 
-class CardCourse extends StatelessWidget {
+class CardCourse extends StatefulWidget {
   final CourseEntity course;
+  final CourseStore courseStore;
   final Size size;
   final Function() onTap;
+  final StudentStore studentStore;
+
   const CardCourse({
     super.key,
     required this.course,
     required this.size,
     required this.onTap,
+    required this.studentStore,
+    required this.courseStore,
   });
 
   @override
+  State<CardCourse> createState() => _CardCourseState();
+}
+
+class _CardCourseState extends State<CardCourse> {
+  @override
   Widget build(BuildContext context) {
-    final courseName = _checkCourseName(course.name.toString().toUpperCase());
+    final courseName =
+        _checkCourseName(widget.course.name.toString().toUpperCase());
     return GestureDetector(
-      onTap: onTap,
+      onTap: widget.onTap,
       child: Column(
         children: [
           Container(
@@ -35,8 +48,8 @@ class CardCourse extends StatelessWidget {
                 Card(
                   elevation: 4,
                   child: Container(
-                    width: size.width * 0.13,
-                    height: size.height * 0.07,
+                    width: widget.size.width * 0.13,
+                    height: widget.size.height * 0.07,
                     decoration: BoxDecoration(
                       color: Colors.purple.shade900,
                       borderRadius: BorderRadius.circular(6),
@@ -61,35 +74,35 @@ class CardCourse extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          course.name,
+                          widget.course.name,
                           style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w900,
                           ),
                         ),
                         Text(
-                          course.schedule.toString(),
+                          widget.course.schedule.toString(),
                           style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                         Text(
-                          "${course.hours} horas",
+                          "${widget.course.hours} horas",
                           style: const TextStyle(
                             fontSize: 14,
                             color: Colors.grey,
                           ),
                         ),
                         Text(
-                          course.level.toString(),
+                          widget.course.level.toString(),
                           style: const TextStyle(
                             fontSize: 14,
                             color: Colors.grey,
                           ),
                         ),
                         Text(
-                          "${course.students.length.toString()} Alunos matriculados",
+                          "${widget.course.students.length.toString()} Alunos matriculados",
                           style: const TextStyle(
                             fontSize: 14,
                             color: Colors.grey,
@@ -105,6 +118,26 @@ class CardCourse extends StatelessWidget {
                       ],
                     ),
                   ),
+                ),
+                Checkbox(
+                  value: widget.studentStore.selectedIndices.contains(
+                      widget.key.hashCode %
+                          widget.courseStore.courseList.length),
+                  onChanged: (bool? value) {
+                    setState(() {
+                      int index = widget.key.hashCode %
+                          widget.courseStore.courseList.length;
+                      index = index >= 0
+                          ? index
+                          : index + widget.courseStore.courseList.length;
+
+                      if (value != null && value) {
+                        widget.studentStore.selectedIndices.add(index);
+                      } else {
+                        widget.studentStore.selectedIndices.remove(index);
+                      }
+                    });
+                  },
                 ),
               ],
             ),
