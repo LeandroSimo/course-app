@@ -26,8 +26,10 @@ class LoginPageState extends State<LoginPage> with LoginValidator {
   final TextEditingController _controllerUser = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
 
-  final TextEditingController _controllerFirstNameRegister = TextEditingController();
-  final TextEditingController _controllerLastNameRegister = TextEditingController();
+  final TextEditingController _controllerFirstNameRegister =
+      TextEditingController();
+  final TextEditingController _controllerLastNameRegister =
+      TextEditingController();
 
   loginAndRegister() {
     if (form.currentState!.validate()) {
@@ -83,36 +85,104 @@ class LoginPageState extends State<LoginPage> with LoginValidator {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.all(20),
-        color: Colors.purple.shade900,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/course.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Flexible(
+            Expanded(
               child: Container(
-                height: size.height * 0.5,
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
+                width: size.width,
+                height: size.height,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/course.jpg'),
+                    fit: BoxFit.cover,
+                  ),
                 ),
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.6),
+                  ),
+                  child: const Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'DevAPP',
+                        style: TextStyle(
+                          fontSize: 50,
+                          fontWeight: FontWeight.w900,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Gap(10),
+                      Text(
+                        'Cursos',
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.w900,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 2,
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                    )),
                 child: SingleChildScrollView(
                   child: Form(
                     key: form,
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
+                        const Gap(30),
                         isRegistered
                             ? const SizedBox(height: 20)
                             : const SizedBox(
                                 height: 5,
                               ),
-                        Text(
-                          !isRegistered ? 'Cadastrar' : 'Entrar',
-                          style: const TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.w900,
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              !isRegistered ? 'Cadastrar' : 'Entrar',
+                              style: const TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                            !isAdm
+                                ? TextButton(
+                                    child: Text(
+                                      isRegistered
+                                          ? 'Cadastre-se'
+                                          : "Já tenho conta",
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w900,
+                                        color: Colors.purple.shade900,
+                                      ),
+                                    ),
+                                    onPressed: () => setState(
+                                        () => isRegistered = !isRegistered),
+                                  )
+                                : const SizedBox(),
+                          ],
                         ),
                         isRegistered
                             ? const SizedBox()
@@ -182,51 +252,37 @@ class LoginPageState extends State<LoginPage> with LoginValidator {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 10),
-                        !isAdm
-                            ? TextButton(
-                                child: Text(
-                                  isRegistered
-                                      ? 'Cadastre-se'
-                                      : "Já tenho conta",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w900,
-                                    color: Colors.purple.shade900,
-                                  ),
+                        Gap(10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            TextButton(
+                              onPressed: !isRegistered
+                                  ? null
+                                  : () {
+                                      setState(() => isAdm = !isAdm);
+                                      clearTextEditingControllers();
+                                    },
+                              child: Text(
+                                !isAdm
+                                    ? 'Entrar como administrador'
+                                    : 'Entrar como usuário',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w900,
+                                  color: isRegistered
+                                      ? Colors.purple.shade900
+                                      : Colors.grey,
                                 ),
-                                onPressed: () => setState(
-                                    () => isRegistered = !isRegistered),
-                              )
-                            : const SizedBox(),
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),
                 ),
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                TextButton(
-                  onPressed: !isRegistered
-                      ? null
-                      : () {
-                          setState(() => isAdm = !isAdm);
-                          clearTextEditingControllers();
-                        },
-                  child: Text(
-                    !isAdm
-                        ? 'Entrar como administrador'
-                        : 'Entrar como usuário',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w900,
-                      color: isRegistered ? Colors.white : Colors.grey,
-                    ),
-                  ),
-                ),
-              ],
             ),
           ],
         ),

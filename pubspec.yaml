@@ -29,9 +29,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/
 
 objectbox:
   output_dir: /app/database
-
-assets:
-  - assets/images/
