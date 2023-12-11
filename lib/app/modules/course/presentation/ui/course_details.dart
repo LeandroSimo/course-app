@@ -228,26 +228,19 @@ class _CourseDetailsState extends State<CourseDetails> {
 
   addCourse(
       BuildContext context, CourseEntity course, StudentEntity student) async {
-    if (_studentStore.courseListStudent.length < 3 &&
-        !_studentStore.courseListStudent.contains(course)) {
+    final value = _studentStore.courseListStudent
+        .where((element) => element.cod == course.cod);
+
+    if (_studentStore.courseListStudent.length < 3) {
       final succsess = await _studentStore.addCourseToStudent(student, course);
 
       _courseStore.addStudentToCourse(course, student);
 
-      succsess != -1 ? onSuccsess() : onError();
+      succsess != -1 ? onSuccsess() : onMessageError("Erro ao matricular-se");
+    } else if (value.isNotEmpty) {
+      onMessageError("Você já está matriculado nesse curso");
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(
-            "Você não pode se matricular em mais de 3 cursos",
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          backgroundColor: Colors.red,
-        ),
-      );
+      onMessageError("Você não pode se matricular em mais de 3 cursos");
     }
   }
 
@@ -266,12 +259,12 @@ class _CourseDetailsState extends State<CourseDetails> {
     );
   }
 
-  onError() {
+  onMessageError(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
+      SnackBar(
         content: Text(
-          "Erro ao matricular-se",
-          style: TextStyle(
+          message,
+          style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w600,
           ),
