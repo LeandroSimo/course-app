@@ -142,25 +142,27 @@ class CourseListPageState extends State<CourseListPage> {
             );
           },
         ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.purple.shade900,
-          onPressed: () {
-            final list = _studentStore.selectedIndices
-                .map((e) => _courseStore.courseList[e])
-                .toList();
-            _studentStore.addAllCourseToStudent(student, list);
-            _courseStore.addStudentToCourses(list, student);
-            Modular.to.pushNamedAndRemoveUntil(
-              '/home/',
-              (_) => false,
-              arguments: student,
-            );
-          },
-          child: const Icon(
-            Icons.add,
-            color: Colors.white,
-          ),
-        ),
+        floatingActionButton: !isAdm
+            ? FloatingActionButton(
+                backgroundColor: Colors.purple.shade900,
+                onPressed: () {
+                  final list = _studentStore.selectedIndices
+                      .map((e) => _courseStore.courseList[e])
+                      .toList();
+                  _studentStore.addAllCourseToStudent(student, list);
+                  _courseStore.addStudentToCourses(list, student);
+                  Modular.to.pushNamedAndRemoveUntil(
+                    '/home/',
+                    (_) => false,
+                    arguments: student,
+                  );
+                },
+                child: const Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
+              )
+            : null,
       ),
     );
   }

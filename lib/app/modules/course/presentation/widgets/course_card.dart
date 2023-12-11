@@ -81,6 +81,15 @@ class _CardCourseState extends State<CardCourse> {
                           ),
                         ),
                         Text(
+                          truncateText(widget.course.description, 13),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        Text(
                           widget.course.schedule.toString(),
                           style: const TextStyle(
                             fontSize: 14,
@@ -158,5 +167,11 @@ class _CardCourseState extends State<CardCourse> {
       return originalName.substring(0, 1);
     }
     return originalName;
+  }
+
+  String truncateText(String text, int maxLength) {
+    return text.length > maxLength
+        ? '${text.substring(0, maxLength)}...'
+        : text;
   }
 }
