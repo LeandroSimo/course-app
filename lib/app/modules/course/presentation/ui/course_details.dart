@@ -185,39 +185,41 @@ class _CourseDetailsState extends State<CourseDetails> {
                   ),
                 ),
                 const SizedBox(height: 15),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: size.height * 0.09,
-                      width: size.width * 0.93,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.purple.shade900,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                !isAdm
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: size.height * 0.09,
+                            width: size.width * 0.93,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.purple.shade900,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              onPressed: () async {
+                                addCourse(context, course, student);
+                                Modular.to.pushNamedAndRemoveUntil(
+                                  '/home/',
+                                  (_) => false,
+                                  arguments: student,
+                                );
+                              },
+                              child: const Text(
+                                'Matricular-se',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                        onPressed: () async {
-                          addCourse(context, course, student);
-                          Modular.to.pushNamedAndRemoveUntil(
-                            '/home/',
-                            (_) => false,
-                            arguments: student,
-                          );
-                        },
-                        child: const Text(
-                          'Matricular-se',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                )
+                        ],
+                      )
+                    : const SizedBox(),
               ],
             ),
           ),
