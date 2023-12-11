@@ -14,7 +14,7 @@
 
 # Sobre o App
 
-A ideia do aplicativo é o de uma plataforma de cursos. Nele, usuários podem se matricular em até 3 cursos, podendo também fazer alterações de seus dados. Para a inserção de novos cursos e exclusão de usuários, você deve ter um cadatro de administrador (username: `admin` password:`admin`). Usuários e administradores podem pesquisar por alunos na tela de alunos. Alguns recursos ficam privados a depender da forma de login, admins tem acesso a recursos que usuários básicos não têm.
+A ideia do aplicativo é o de uma plataforma de cursos. Nele, usuários podem se matricular em até 3 cursos, podendo também fazer alterações de seus dados. Para a inserção de novos cursos e exclusão de usuários, você deve acessar como administrador (username: `admin` password:`admin`). Usuários e administradores podem pesquisar por alunos na tela de alunos. Alguns recursos ficam privados a depender da forma de login, admins tem acesso a recursos que usuários básicos não têm.
 
 <br>
 
