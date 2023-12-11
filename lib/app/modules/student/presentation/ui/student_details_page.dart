@@ -7,12 +7,10 @@ import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
 import 'package:teste_vrsoft/app/modules/student/stores/student_store.dart';
 
 class StudentDetailsPage extends StatefulWidget {
-  final StudentEntity student;
   final StudentStore studentStore;
   const StudentDetailsPage({
     super.key,
     required this.studentStore,
-    required this.student,
   });
 
   @override
@@ -25,14 +23,19 @@ class _StudentDetailsPageState extends State<StudentDetailsPage> {
   TextEditingController firstNameEditController = TextEditingController();
   TextEditingController lastNameEditController = TextEditingController();
 
+  final arguments = Modular.args.data;
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final bool isAdm = arguments["isAdm"];
 
-    final studentEntity = controller.studentList.firstWhere(
-      (element) => element.cod == widget.student.cod,
-      orElse: () => widget.student,
-    );
+    final StudentEntity studentEntity = arguments["student"] ??
+        StudentEntity(
+          firstName: "",
+          lastName: "",
+          cod: 0,
+        );
 
     return SafeArea(
       child: Scaffold(
@@ -41,7 +44,8 @@ class _StudentDetailsPageState extends State<StudentDetailsPage> {
           backgroundColor: Colors.transparent,
           leading: IconButton(
             onPressed: () {
-              Modular.to.pushReplacementNamed('/student/');
+              Modular.to.pushReplacementNamed('/student',
+                  arguments: {'isAdm': isAdm});
             },
             icon: const Icon(
               Icons.arrow_back_ios,
@@ -63,7 +67,7 @@ class _StudentDetailsPageState extends State<StudentDetailsPage> {
                     TextEditingValue(text: studentEntity.firstName);
                 lastNameEditController.value =
                     TextEditingValue(text: studentEntity.lastName);
-                _showAlertDialog(context, size, widget.student);
+                _showAlertDialog(context, size, studentEntity, isAdm);
               },
               icon: const Icon(
                 Icons.edit,
@@ -82,7 +86,7 @@ class _StudentDetailsPageState extends State<StudentDetailsPage> {
                 CircleAvatar(
                   radius: 50,
                   child: Text(
-                    _checkName(widget.student.firstName),
+                    _checkName(studentEntity.firstName),
                     style: const TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.w900,
@@ -121,19 +125,19 @@ class _StudentDetailsPageState extends State<StudentDetailsPage> {
                     ),
                     const Gap(20),
                     Container(
-                      height: widget.student.courses.isNotEmpty
+                      height: studentEntity.courses.isNotEmpty
                           ? size.height
                           : size.height * 0.3,
                       width: size.width,
                       padding: const EdgeInsets.all(10),
                       color: Colors.grey.shade200,
-                      child: widget.student.courses.isNotEmpty
+                      child: studentEntity.courses.isNotEmpty
                           ? ListView.builder(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
-                              itemCount: widget.student.courses.length,
+                              itemCount: studentEntity.courses.length,
                               itemBuilder: (context, index) {
-                                final course = widget.student.courses[index];
+                                final course = studentEntity.courses[index];
                                 return ListTile(
                                   title: Text(
                                     course.name,
@@ -188,7 +192,8 @@ class _StudentDetailsPageState extends State<StudentDetailsPage> {
     return originalName.toUpperCase();
   }
 
-  _showAlertDialog(BuildContext context, Size size, StudentEntity student) {
+  _showAlertDialog(
+      BuildContext context, Size size, StudentEntity student, bool isAdm) {
     showDialog(
       context: context,
       builder: (context) {
@@ -259,7 +264,8 @@ class _StudentDetailsPageState extends State<StudentDetailsPage> {
                         lastName: lastNameEditController.text,
                       ),
                     );
-                    Modular.to.pop(context);
+                    Modular.to.pushReplacementNamed('/student',
+                        arguments: {'isAdm': isAdm});
                   },
                   child: const Text("Editar Aluno"),
                 ),

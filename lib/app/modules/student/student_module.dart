@@ -16,7 +16,6 @@ class StudentModule extends Module {
       '/details',
       child: (_) => StudentDetailsPage(
         studentStore: Modular.get(),
-        student: r.args.data,
       ),
     );
   }

@@ -10,7 +10,8 @@ import 'package:flutter/material.dart';
 class StudenListtPage extends StatefulWidget {
   final StudentStore controller;
   final String title;
-  const StudenListtPage({super.key, 
+  const StudenListtPage({
+    super.key,
     this.title = 'Alunos',
     required this.controller,
   });
@@ -30,9 +31,19 @@ class StudenListtPageState extends State<StudenListtPage> {
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
+  final arguments = Modular.args.data;
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final bool isAdm = arguments["isAdm"];
+    final StudentEntity studentEntity = arguments["student"] ??
+        StudentEntity(
+          firstName: "",
+          lastName: "",
+          cod: 0,
+        );
+
     return SafeArea(
       child: Observer(
         builder: (context) {
@@ -41,21 +52,35 @@ class StudenListtPageState extends State<StudenListtPage> {
             appBar: AppBar(
               automaticallyImplyLeading: false,
               backgroundColor: Colors.transparent,
-              leading: IconButton(
-                onPressed: () {
-                  Modular.to.pushNamedAndRemoveUntil(
-                    "/redirect",
-                    (_) => false,
-                    arguments: {
-                      "isAdm": true,
-                    },
-                  );
-                },
-                icon: const Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.purple,
-                ),
-              ),
+              leading: isAdm
+                  ? IconButton(
+                      onPressed: () {
+                        Modular.to.pushNamedAndRemoveUntil(
+                          "/redirect",
+                          (_) => false,
+                          arguments: {
+                            "isAdm": isAdm,
+                          },
+                        );
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.purple,
+                      ),
+                    )
+                  : IconButton(
+                      onPressed: () {
+                        Modular.to.pushNamedAndRemoveUntil(
+                          "/home/",
+                          (_) => false,
+                          arguments: studentEntity,
+                        );
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.purple,
+                      ),
+                    ),
               title: Text(
                 widget.title,
                 style: TextStyle(
@@ -117,7 +142,10 @@ class StudenListtPageState extends State<StudenListtPage> {
                           func: () {
                             Modular.to.navigate(
                               "/student/details",
-                              arguments: student,
+                              arguments: {
+                                "student": student,
+                                "isAdm": isAdm,
+                              },
                             );
                           },
                         );

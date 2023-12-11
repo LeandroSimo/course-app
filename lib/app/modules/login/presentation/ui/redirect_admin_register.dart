@@ -67,7 +67,12 @@ class _RedirectAdminRegisterState extends State<RedirectAdminRegister> {
               CardAdm(
                 size: size,
                 title: 'Alunos',
-                onTap: () => Modular.to.navigate("/student/"),
+                onTap: () => Modular.to.navigate(
+                  "/student/",
+                  arguments: {
+                    "isAdm": isAdm,
+                  },
+                ),
                 srcImg:
                     "https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
               ),
