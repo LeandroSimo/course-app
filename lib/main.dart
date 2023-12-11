@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:teste_vrsoft/app/database/entities/couse_student_entity.dart';
 import 'package:teste_vrsoft/app/database/objectbox.g.dart';
 import 'package:teste_vrsoft/app/database/student_objectbox.dart';
 import 'package:teste_vrsoft/app/modules/course/entities/course_entity.dart';
@@ -42,13 +43,13 @@ Future<void> initObjectBox() async {
     hours: '30',
   );
 
-  // final courseStudentEntity = CourseStudentEntity(
-  //   student: ToOne<StudentEntity>()..target = studentEntity,
-  //   course: ToOne<CourseEntity>()..target = courseEntity,
-  // );
+  final courseStudentEntity = CourseStudentEntity(
+    student: ToOne<StudentEntity>()..target = studentEntity,
+    course: ToOne<CourseEntity>()..target = course1,
+  );
 
   _store.box<StudentEntity>().put(studentEntity);
   _store.box<CourseEntity>().put(course1);
   _store.box<CourseEntity>().put(course2);
-  // _store.box<CourseStudentEntity>().put(courseStudentEntity);
+  _store.box<CourseStudentEntity>().put(courseStudentEntity);
 }
