@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:teste_vrsoft/app/modules/course/stores/course_store.dart';
+import 'package:teste_vrsoft/app/modules/home/presentation/widgets/custom_app_bar.dart';
 import 'package:teste_vrsoft/app/modules/home/presentation/widgets/list_course_home.dart';
 import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
 import 'package:teste_vrsoft/app/modules/student/presentation/widgets/course_list_student.dart';
@@ -79,27 +80,8 @@ class _HomePageState extends State<HomePage> {
 
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.transparent,
-          centerTitle: true,
-          leading: IconButton(
-            onPressed: () {
-              Modular.to.pushReplacementNamed(Modular.initialRoute);
-            },
-            icon: const Icon(
-              Icons.menu,
-              color: Colors.purple,
-            ),
-          ),
-          title: Text(
-            student.firstName,
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.w800,
-              color: Colors.purple.shade900,
-            ),
-          ),
+        appBar: CustomAppBar(
+          title: student.firstName,
         ),
         body: Observer(builder: (context) {
           return Container(
