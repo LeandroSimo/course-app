@@ -1,13 +1,16 @@
 import 'package:teste_vrsoft/app/database/objectbox.g.dart';
+import 'package:teste_vrsoft/app/database/repositories/course_student_repository.dart';
 import 'package:teste_vrsoft/app/database/student_objectbox.dart';
 import 'package:teste_vrsoft/app/modules/course/entities/course_entity.dart';
 import 'package:teste_vrsoft/app/modules/student/entities/student_entity.dart';
 
 class StudentRepository {
   late CourseStudentObjectBox _studentObjectBox;
+  late CourseStudentRepository _courseStudentRepository;
 
   StudentRepository() {
     _studentObjectBox = CourseStudentObjectBox();
+    _courseStudentRepository = CourseStudentRepository();
   }
 
   Future<Box> getStudent() async {
@@ -51,6 +54,7 @@ class StudentRepository {
         !student.courses.contains(course) &&
         !course.students.contains(student)) {
       student.courses.add(course);
+      _courseStudentRepository.createCourseStudent(student, course);
     }
     return store.put(student);
   }
