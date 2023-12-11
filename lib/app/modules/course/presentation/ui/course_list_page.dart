@@ -145,12 +145,29 @@ class CourseListPageState extends State<CourseListPage> {
         floatingActionButton: !isAdm
             ? FloatingActionButton(
                 backgroundColor: Colors.purple.shade900,
-                onPressed: () {
+                onPressed: () async {
                   final list = _studentStore.selectedIndices
                       .map((e) => _courseStore.courseList[e])
                       .toList();
-                  _studentStore.addAllCourseToStudent(student, list);
-                  _courseStore.addStudentToCourses(list, student);
+
+                  final courses = _studentStore.courseListStudent
+                      .map((e) => list[e.cod])
+                      .toList();
+
+                  final index = _studentStore.courseListStudent
+                      .indexWhere((element) => element.cod == list[0].cod);
+
+                  if (courses.length < 3) {
+                    _studentStore.addAllCourseToStudent(student, list);
+                    _courseStore.addStudentToCourses(list, student);
+                    onSuccsess();
+                  } else if (index != -1) {
+                    onMessageError("Você já está matriculado nesse curso");
+                  } else if (courses.length >= 3) {
+                    onMessageError(
+                        "Você não pode se matricular em mais de 3 cursos");
+                  }
+
                   Modular.to.pushNamedAndRemoveUntil(
                     '/home/',
                     (_) => false,
@@ -163,6 +180,36 @@ class CourseListPageState extends State<CourseListPage> {
                 ),
               )
             : null,
+      ),
+    );
+  }
+
+  onMessageError(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          message,
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        backgroundColor: Colors.red,
+      ),
+    );
+  }
+
+  onSuccsess() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text(
+          "Matriculado com sucesso",
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        backgroundColor: Colors.green,
       ),
     );
   }

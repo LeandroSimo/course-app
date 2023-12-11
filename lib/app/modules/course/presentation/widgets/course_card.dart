@@ -129,19 +129,15 @@ class _CardCourseState extends State<CardCourse> {
                   ),
                 ),
                 Checkbox(
-                  value: widget.studentStore.selectedIndices.contains(
-                      widget.key.hashCode %
-                          widget.courseStore.courseList.length),
+                  value: widget.studentStore.selectedIndices
+                      .contains(_getCourseIndex()),
                   onChanged: (bool? value) {
                     setState(() {
-                      int index = widget.key.hashCode %
-                          widget.courseStore.courseList.length;
-                      index = index >= 0
-                          ? index
-                          : index + widget.courseStore.courseList.length;
-
+                      int index = _getCourseIndex();
                       if (value != null && value) {
-                        widget.studentStore.selectedIndices.add(index);
+                        if (index < widget.courseStore.courseList.length) {
+                          widget.studentStore.selectedIndices.add(index);
+                        }
                       } else {
                         widget.studentStore.selectedIndices.remove(index);
                       }
@@ -154,6 +150,12 @@ class _CardCourseState extends State<CardCourse> {
         ],
       ),
     );
+  }
+
+  int _getCourseIndex() {
+    int index = widget.key.hashCode % widget.courseStore.courseList.length;
+    index = index >= 0 ? index : index + widget.courseStore.courseList.length;
+    return index;
   }
 
   String _checkCourseName(String originalName) {
