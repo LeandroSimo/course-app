@@ -199,26 +199,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                           ),
                         ),
                         onPressed: () async {
-                          if (_studentStore.courseListStudent.length < 3) {
-                            final succsess = await _studentStore
-                                .addCourseToStudent(student, course);
-                            _courseStore.addStudentToCourse(course, student);
-                            succsess != -1 ? onSuccsess() : onError();
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text(
-                                  "Você não pode se matricular em mais de 3 cursos",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                backgroundColor: Colors.red,
-                              ),
-                            );
-                          }
-
+                          addCourse(context, course, student);
                           Modular.to.pushNamedAndRemoveUntil(
                             '/home/',
                             (_) => false,
@@ -243,6 +224,31 @@ class _CourseDetailsState extends State<CourseDetails> {
         ),
       ),
     );
+  }
+
+  addCourse(
+      BuildContext context, CourseEntity course, StudentEntity student) async {
+    if (_studentStore.courseListStudent.length < 3 &&
+        !_studentStore.courseListStudent.contains(course)) {
+      final succsess = await _studentStore.addCourseToStudent(student, course);
+
+      _courseStore.addStudentToCourse(course, student);
+      _courseStore.updateCourse(course);
+      succsess != -1 ? onSuccsess() : onError();
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            "Você não pode se matricular em mais de 3 cursos",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 
   onSuccsess() {

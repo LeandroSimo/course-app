@@ -51,10 +51,6 @@ class StudentRepository {
         !student.courses.contains(course) &&
         !course.students.contains(student)) {
       student.courses.add(course);
-
-      if (!course.students.contains(student)) {
-        course.students.add(student);
-      }
     }
     return store.put(student);
   }
